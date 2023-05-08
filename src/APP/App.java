@@ -7,7 +7,7 @@ package APP;
 import View.DangNhap;
 
 /**
- *
+ *    
  * @author hiep0
  */      
 public class App {
