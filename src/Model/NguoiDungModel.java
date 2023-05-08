@@ -83,7 +83,10 @@ public class NguoiDungModel extends CSDL {
     }
 // check dang nhap
 // add người dùng
-    public 
+
+    public Boolean addNguoiDung(NguoiDungModel nd) {
+        return false;
+    }
 // add người dùng
 
     public String getHoTen() {
