@@ -4,8 +4,10 @@
  */
 package View;
 
+import Controller.NguoiDungController;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 
 /**
@@ -21,6 +23,15 @@ public class NguoiDung extends javax.swing.JFrame {
      */
     public NguoiDung() {
         initComponents();
+        this.txtName.setText(NguoiDungController.ndOn.getHoTen());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.txtDOB.setText(formatter.format(NguoiDungController.ndOn.getNgaySinh()));
+        this.txtSDT.setText(NguoiDungController.ndOn.getSdt());
+        this.txtCMND.setText(NguoiDungController.ndOn.getCMND());
+        this.txtMail.setText(NguoiDungController.ndOn.getEmail());
+        System.out.println(NguoiDungController.ndOn.getGioiTinh());
+        String gioitinh = (NguoiDungController.ndOn.getGioiTinh() == true) ? "Nam" : "Nữ";
+        this.txtSex.setText(gioitinh);
     }
 
     /**
@@ -41,11 +52,13 @@ public class NguoiDung extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtDOB = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
+        txtCMND = new javax.swing.JTextField();
+        txtMail = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtSex = new javax.swing.JTextField();
         btnDoi = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnDoiTT = new javax.swing.JButton();
@@ -73,15 +86,19 @@ public class NguoiDung extends javax.swing.JFrame {
 
         jLabel7.setText("Ngày sinh");
 
-        jTextField1.setText("Nguyễn Duy Hiệp");
+        txtName.setText("Nguyễn Duy Hiệp");
 
-        jTextField2.setText("06/11/2003");
+        txtDOB.setText("06/11/2003");
 
-        jTextField3.setText("0357854906");
+        txtSDT.setText("0357854906");
 
-        jTextField4.setText("0123456789");
+        txtCMND.setText("0123456789");
 
-        jTextField5.setText("hiep0189166@nuce.edu.vn");
+        txtMail.setText("hiep0189166@nuce.edu.vn");
+
+        jLabel8.setText("Giới tính");
+
+        txtSex.setText("....");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -97,11 +114,16 @@ public class NguoiDung extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                    .addComponent(txtName)
+                    .addComponent(txtSDT)
+                    .addComponent(txtCMND)
+                    .addComponent(txtMail, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSex)))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -110,23 +132,25 @@ public class NguoiDung extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -163,7 +187,7 @@ public class NguoiDung extends javax.swing.JFrame {
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,11 +266,11 @@ public class NguoiDung extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDoiActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-this.setVisible(false);        // TODO add your handling code here:
+        this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnDoiTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiTTActionPerformed
-if (btnQL != null) {
+        if (btnQL != null) {
             btnQL.setBackground(Color.white);
             btnQL.setForeground(Color.black);
         }
@@ -280,12 +304,14 @@ if (btnQL != null) {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtCMND;
+    private javax.swing.JTextField txtDOB;
+    private javax.swing.JTextField txtMail;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtSex;
     // End of variables declaration//GEN-END:variables
 }

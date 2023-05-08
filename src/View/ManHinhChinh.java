@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.NguoiDungController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -22,9 +23,11 @@ public class ManHinhChinh extends javax.swing.JFrame {
      */
     public ManHinhChinh() {
         this.setTitle("Màn hình chính");
-        
         initComponents();
+     this.btnTT.setText(NguoiDungController.ndOn.getHoTen());
     }
+
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,7 +48,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
         khachBtn = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         datPhongBtn = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btnTT = new javax.swing.JToggleButton();
         content = new javax.swing.JPanel();
 
         jPopupMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -121,14 +124,14 @@ public class ManHinhChinh extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setBackground(new java.awt.Color(0, 204, 255));
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/666201 (1).png"))); // NOI18N
-        jToggleButton1.setText("Nguyễn Duy Hiệp");
-        jToggleButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTT.setBackground(new java.awt.Color(0, 204, 255));
+        btnTT.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btnTT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/666201 (1).png"))); // NOI18N
+        btnTT.setText("Nguyễn Duy Hiệp");
+        btnTT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                btnTTActionPerformed(evt);
             }
         });
 
@@ -147,12 +150,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(datPhongBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+            .addComponent(btnTT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jToggleButton1)
+                .addComponent(btnTT)
                 .addGap(30, 30, 30)
                 .addComponent(phongBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -215,7 +218,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         JOptionPane.showConfirmDialog(this, "Xác nhận đăng xuất", "Thông báo", JOptionPane.YES_NO_OPTION);
-        
+
         this.setVisible(false);
         new DangNhap().setVisible(true);
         // TODO add your handling code here:
@@ -241,7 +244,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
     }//GEN-LAST:event_khachBtnActionPerformed
 
     private void phongBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phongBtnActionPerformed
-if (btnQL != null) {
+        if (btnQL != null) {
             btnQL.setBackground(Color.white);
             btnQL.setForeground(Color.black);
         }
@@ -278,15 +281,16 @@ if (btnQL != null) {
 // TODO add your handling code here:
     }//GEN-LAST:event_datPhongBtnActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void btnTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTActionPerformed
         NguoiDung n1 = new NguoiDung();
         n1.setLocationRelativeTo(null);
         n1.setVisible(true);
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_btnTTActionPerformed
 
     private void HoaDonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HoaDonBtnActionPerformed
-if (btnQL != null) {
+        if (btnQL != null) {
             btnQL.setBackground(Color.white);
             btnQL.setForeground(Color.black);
         }
@@ -304,7 +308,7 @@ if (btnQL != null) {
     }//GEN-LAST:event_HoaDonBtnActionPerformed
 
     private void dichVuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dichVuBtnActionPerformed
-if (btnQL != null) {
+        if (btnQL != null) {
             btnQL.setBackground(Color.white);
             btnQL.setForeground(Color.black);
         }
@@ -322,7 +326,7 @@ if (btnQL != null) {
     }//GEN-LAST:event_dichVuBtnActionPerformed
 
     private void thongKeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thongKeBtnActionPerformed
-      if (btnQL != null) {
+        if (btnQL != null) {
             btnQL.setBackground(Color.white);
             btnQL.setForeground(Color.black);
         }
@@ -339,12 +343,41 @@ if (btnQL != null) {
         btnQL = thongKeBtn;  // TODO add your handling code here:
     }//GEN-LAST:event_thongKeBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    public static void run() {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            new ManHinhChinh().setVisible(true);
+
+        });
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton HoaDonBtn;
+    private javax.swing.JToggleButton btnTT;
     private javax.swing.JPanel content;
     private javax.swing.JButton datPhongBtn;
     private javax.swing.JButton dichVuBtn;
@@ -352,7 +385,6 @@ if (btnQL != null) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton khachBtn;
     private javax.swing.JButton phongBtn;
     private javax.swing.JButton thongKeBtn;
