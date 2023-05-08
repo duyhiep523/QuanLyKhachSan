@@ -85,6 +85,16 @@ public class NguoiDungModel extends CSDL {
 // add người dùng
 
     public Boolean addNguoiDung(NguoiDungModel nd) {
+        Connection conn = this.getConnection();
+        try {
+            Statement statement = conn.createStatement();
+            String query = "insert into QuanLy value '(" + nd.getHoTen() + "','" + nd.getNgaySinh() + "','" + nd.getEmail() + "','" + nd.getSdt() + "','" + nd.getCMND() + "','" + nd.getTaiKhoan() + "','" + nd.getMatKhau() + "'," + nd.getGioiTinh();
+            statement.executeUpdate(query);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(NguoiDungModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return false;
     }
 // add người dùng

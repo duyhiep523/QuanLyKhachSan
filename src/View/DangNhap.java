@@ -29,7 +29,7 @@ public class DangNhap extends javax.swing.JFrame {
     }
 
     public NguoiDungModel getUserLogin() {
-        NguoiDungModel userLogin = new NguoiDungModel(txtTaiKhoan.getText(),String.valueOf(txtMatKhau.getPassword()));
+        NguoiDungModel userLogin = new NguoiDungModel(txtTaiKhoan.getText(), String.valueOf(txtMatKhau.getPassword()));
         return userLogin;
     }
 
