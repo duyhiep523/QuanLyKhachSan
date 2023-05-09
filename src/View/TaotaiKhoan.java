@@ -6,6 +6,9 @@ package View;
 
 import Controller.NguoiDungController;
 import Model.NguoiDungModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -309,19 +312,26 @@ public class TaotaiKhoan extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);      // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-    public NguoiDungModel getNDMD() {
-        String hoTen = this.txtHoten;
-        String CMND = this.txtCMND;
-        String DOB = this.txtDOB;
-        String Mail = this.txtMail;
-        String pass1 = this.txtPass1;
-        String pass2 = this.txtPass2;
-        String SDT = this.txtSDT;
-        String taiKhoan = this.txtUser;
-        String sex = this.txtSex;
+// lấy dữ liệu từ form
 
-        return new NguoiDungModel;
+    public NguoiDungModel getNDMD() throws ParseException {
+        String hoTen = this.txtHoten.getText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = dateFormat.parse(this.txtDOB.getText());
+        String Mail = this.txtMail.getText();
+        String SDT = this.txtSDT.getText();
+        String CMND = this.txtCMND.getText();
+        String taiKhoan = this.txtUser.getText();
+        char[] pass1 = this.txtPass1.getPassword();
+        String passw1 = String.valueOf(pass1);
+        char[] pass2 = this.txtPass2.getPassword();
+        String passw2 = String.valueOf(pass2);
+        String passw = (passw1.equals(passw2)) ? passw1 : passw2;
+        String value = (String) txtSex.getSelectedItem();
+        boolean sex = value.equals("Nam");
+        return new NguoiDungModel(hoTen, date, Mail, SDT, CMND, taiKhoan, passw, sex);
     }
+// lấy dữ liệu từ form
 
     /**
      * @param args the command line arguments

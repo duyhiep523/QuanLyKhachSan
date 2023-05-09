@@ -22,10 +22,12 @@ public class NguoiDungController {
     public NguoiDungController(DangNhap view) {
         NguoiDungController.dnview = view;
     }
-      public NguoiDungController(TaotaiKhoan view) {
+
+    public NguoiDungController(TaotaiKhoan view) {
         NguoiDungController.ttk = view;
     }
 // dang nhap
+
     public void doLogin() {
         {
             NguoiDungModel nd = dnview.getUserLogin();
@@ -34,7 +36,6 @@ public class NguoiDungController {
             } else {
                 NguoiDungModel ndc = new NguoiDungModel().checkLogin(nd.getTaiKhoan(), nd.getMatKhau());
                 if (ndc.getEmail() != null) {
-
                     ManHinhChinh.run();
                     ndOn = ndc;
                     dnview.dispose();
@@ -47,21 +48,12 @@ public class NguoiDungController {
     }
 // dang nhap
 // them nguoi dung
-    
-    public void addNguoiDung(){
-        
+
+    public void addNguoiDung() {
+
     }
-    
-    
+
 // them nguoi dung
-    
-    
-    
-    
-    
-    
-    
-    
     public static DangNhap getDnview() {
         return dnview;
     }

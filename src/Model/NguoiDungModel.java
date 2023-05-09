@@ -29,10 +29,11 @@ public class NguoiDungModel extends CSDL {
     private Boolean gioiTinh;
     private String sdt;
 
-    public NguoiDungModel(String hoTen, Date ngaySinh, String email, String CMND, String taiKhoan, String matKhau, Boolean gioiTinh) {
+    public NguoiDungModel(String hoTen, Date ngaySinh, String email, String sdt, String CMND, String taiKhoan, String matKhau, Boolean gioiTinh) {
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.email = email;
+        this.sdt = sdt;
         this.CMND = CMND;
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
