@@ -70,7 +70,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jCheckBox1" min="-2" pref="228" max="-2" attributes="0"/>
+                  <Component id="checkDieuKhoan" min="-2" pref="228" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -85,7 +85,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkDieuKhoan" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -285,10 +285,9 @@
             <Component class="javax.swing.JComboBox" name="txtSex">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value=""/>
-                    <StringItem index="1" value="Nam"/>
-                    <StringItem index="2" value="N&#x1eef;"/>
+                  <StringArray count="2">
+                    <StringItem index="0" value="Nam"/>
+                    <StringItem index="1" value="N&#x1eef;"/>
                   </StringArray>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -395,7 +394,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="checkDieuKhoan">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="10" style="3"/>
@@ -403,7 +402,7 @@
             <Property name="text" type="java.lang.String" value="T&#xf4;i &#x111;&#xe3; &#x111;&#x1ecd;c k&#x129; &#x111;i&#x1ec1;u kho&#x1ea3;n v&#xe0; d&#x1ecb;ch v&#x1ee5;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkDieuKhoanActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

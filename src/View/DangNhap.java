@@ -25,16 +25,19 @@ public class DangNhap extends javax.swing.JFrame {
     }
 // thông báo
 
+    
     public void showMessageLogin(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
 // thông báo
 // lấy dữ liệu nhập vào
+
     public NguoiDungModel getUserLogin() {
         NguoiDungModel userLogin = new NguoiDungModel(txtTaiKhoan.getText(), String.valueOf(txtMatKhau.getPassword()));
         return userLogin;
     }
 // lấy dữ liệu nhập vào
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -270,12 +273,7 @@ public class DangNhap extends javax.swing.JFrame {
         });
     }
 
-    
-    
-    
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADD;
     private javax.swing.JButton jButton2;

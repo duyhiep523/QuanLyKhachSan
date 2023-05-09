@@ -88,6 +88,14 @@ public class NguoiDungModel extends CSDL {
         Connection conn = this.getConnection();
         try {
             Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("select count(*) from QuanLy where taiKhoan='" + nd.getTaiKhoan()+"'");
+            int n = 0;
+            while (result.next()) {
+                n = result.getInt(1);
+            }
+            if (n > 0) {
+                return false;
+            }
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String strDate = formatter.format(nd.getNgaySinh());
             String sex = nd.getGioiTinh().equals(true) ? "1" : "0";
@@ -99,8 +107,8 @@ public class NguoiDungModel extends CSDL {
         }
         return false;
     }
-// add người dùng
 
+// add người dùng
     public String getHoTen() {
         return hoTen;
     }

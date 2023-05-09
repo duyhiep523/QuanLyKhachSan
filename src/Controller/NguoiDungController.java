@@ -9,6 +9,8 @@ import View.DangNhap;
 import View.ManHinhChinh;
 import View.TaotaiKhoan;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -47,7 +49,17 @@ public class NguoiDungController {
         }
     }
 // dang nhap
+
 // them nguoi dung
+    public String regexMail = "^[a-z][a-z0-9_\\.]{2,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
+    public String regexSDT = "^[0-9]{8,}$";
+    public String regexTND = "^[a-zA-Z]+$";
+
+    public boolean Regex(String input, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
 
     public void addNguoiDung() {
         NguoiDungModel nd = ttk.getNDMD();
@@ -65,41 +77,57 @@ public class NguoiDungController {
             ttk.showMessage("Số điện thoại không được bỏ trống");
             return;
         }
+        if (!Regex(nd.getSdt(), regexSDT)) {
+            ttk.showMessage("Sai định dạng số điện thoại");
+            return;
+        }
+        if (nd.getCMND().equals("")) {
+            ttk.showMessage("Chứng minh nhân dân không được bỏ trống");
+            return;
+        }
+          if (!Regex(nd.getSdt(), regexSDT)) {
+            ttk.showMessage("Sai định dạng chứng minh nhân dân");
+            return;
+        }
         if (nd.getEmail().equals("")) {
             ttk.showMessage("Email không được bỏ trống");
             return;
         }
-        if (nd.getCMND().equals("")) {
-            ttk.showMessage("Cứng minh nhân dân không được bỏ trống");
+        if (!Regex(nd.getEmail(), regexMail)) {
+            ttk.showMessage("Email sai định dạng");
             return;
+
         }
         if (nd.getTaiKhoan().equals("")) {
             ttk.showMessage("Tài khoản không được bỏ trống");
             return;
         }
+        if (!Regex(nd.getTaiKhoan(), regexTND)) {
+            ttk.showMessage("Tên người dùng phải viết liền không dấu");
+            return;
+
+        }
         if (nd.getMatKhau().equals("")) {
             ttk.showMessage("Mật khẩu không được bỏ trống");
             return;
         }
-        String sex = nd.getGioiTinh() ? "1" : "0";
-        if (sex.equals("")) {
-            ttk.showMessage("Giới tính không được bỏ trống");
-            return;
-        }
-        if (ttk.checkDOB == false) {
+        if (!ttk.checkDOB) {
             ttk.showMessage("nhập sai ngày sinh");
+            ttk.checkDOB = true;
+            return;
         }
         if (ttk.checkPass == false) {
             ttk.showMessage("mật khẩu nhập lại không đúng");
             return;
         }
+
         boolean test = new NguoiDungModel().addNguoiDung(nd);
         if (test) {
-            ttk.showMessage("Tạo thành công");
+            ttk.showMessageOK("Tạo thành công");
+            ttk.resetForm();
         } else {
             ttk.showMessage("người dùng đã tồn tại");
         }
-
     }
 
 // them nguoi dung
@@ -118,5 +146,4 @@ public class NguoiDungController {
     public static void setTtk(TaotaiKhoan ttk) {
         NguoiDungController.ttk = ttk;
     }
-
 }

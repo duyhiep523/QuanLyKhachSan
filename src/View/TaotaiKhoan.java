@@ -61,7 +61,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
         txtPass1 = new javax.swing.JPasswordField();
         txtPass2 = new javax.swing.JPasswordField();
         jLabel11 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        checkDieuKhoan = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,7 +110,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
 
         jLabel12.setText("Giới tính");
 
-        txtSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Nam", "Nữ" }));
+        txtSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
         txtSex.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -228,11 +228,11 @@ public class TaotaiKhoan extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 3, 10)); // NOI18N
-        jCheckBox1.setText("Tôi đã đọc kĩ điều khoản và dịch vụ");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkDieuKhoan.setFont(new java.awt.Font("Segoe UI", 3, 10)); // NOI18N
+        checkDieuKhoan.setText("Tôi đã đọc kĩ điều khoản và dịch vụ");
+        checkDieuKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkDieuKhoanActionPerformed(evt);
             }
         });
 
@@ -257,7 +257,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
                 .addGap(117, 117, 117))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(checkDieuKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(156, 156, 156))
         );
         jPanel1Layout.setVerticalGroup(
@@ -270,7 +270,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(checkDieuKhoan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -296,33 +296,38 @@ public class TaotaiKhoan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        if (jCheckBox1.isSelected()) {
+    private void checkDieuKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDieuKhoanActionPerformed
+        if (checkDieuKhoan.isSelected()) {
             jButton1.setEnabled(true);
-
+            
         } else {
             jButton1.setEnabled(false);
-
+            
         }
 //        System.out.println(jCheckBox1.isSelected());
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_checkDieuKhoanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         new NguoiDungController(this).addNguoiDung();        // TODO add your handling code here:
 
     }//GEN-LAST:event_jButton1ActionPerformed
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public void showMessageOK(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);      // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 // lấy dữ liệu từ form
     public boolean checkPass = true;
     public boolean checkDOB = true;
-
+    
     public NguoiDungModel getNDMD() {
         String hoTen = this.txtHoten.getText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -332,12 +337,12 @@ public class TaotaiKhoan extends javax.swing.JFrame {
             date = dateFormat.parse(this.txtDOB.getText());
             checkDOB = true;
         } catch (ParseException ex) {
+            checkDOB = false;
             try {
                 date = dateFormat.parse("2222-12-22");
             } catch (ParseException ex1) {
-                System.out.println("sos");
+                System.out.println("lỗi sâu");
             }
-            checkDOB = false;
             System.out.println("loi o tao tai khoan");
         }
         String Mail = this.txtMail.getText();
@@ -351,10 +356,24 @@ public class TaotaiKhoan extends javax.swing.JFrame {
         checkPass = passw1.equals(passw2);
         String value = (String) txtSex.getSelectedItem();
         boolean sex = value.equals("Nam");
-
         return new NguoiDungModel(hoTen, date, Mail, SDT, CMND, taiKhoan, passw1, sex);
     }
+
 // lấy dữ liệu từ form
+// làm mới form
+    public void resetForm() {
+        txtHoten.setText("");
+        txtSex.setSelectedIndex(0);
+        txtDOB.setText("");
+        txtSDT.setText("");
+        txtCMND.setText("");
+        txtMail.setText("");
+        txtUser.setText("");
+        txtPass1.setText("");
+        txtPass2.setText("");
+        checkDieuKhoan.setSelected(false);
+    }
+// làm mới form    
 
     /**
      * @param args the command line arguments
@@ -392,9 +411,9 @@ public class TaotaiKhoan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox checkDieuKhoan;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
