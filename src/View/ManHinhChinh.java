@@ -374,7 +374,9 @@ public class ManHinhChinh extends javax.swing.JFrame {
         });
     }
 
-
+    public static void main(String[] args) {
+        new ManHinhChinh().setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton HoaDonBtn;
     private javax.swing.JToggleButton btnTT;

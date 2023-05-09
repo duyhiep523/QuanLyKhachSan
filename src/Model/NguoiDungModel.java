@@ -11,8 +11,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -77,8 +75,9 @@ public class NguoiDungModel extends CSDL {
             }
             return nd;
         } catch (SQLException e) {
+            System.out.println("lỗi ở người dùng model đăng nhập");
         } catch (ParseException ex) {
-            Logger.getLogger(NguoiDungModel.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         return nd;
     }
@@ -89,13 +88,15 @@ public class NguoiDungModel extends CSDL {
         Connection conn = this.getConnection();
         try {
             Statement statement = conn.createStatement();
-            String query = "insert into QuanLy value '(" + nd.getHoTen() + "','" + nd.getNgaySinh() + "','" + nd.getEmail() + "','" + nd.getSdt() + "','" + nd.getCMND() + "','" + nd.getTaiKhoan() + "','" + nd.getMatKhau() + "'," + nd.getGioiTinh();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String strDate = formatter.format(nd.getNgaySinh());
+            String sex = nd.getGioiTinh().equals(true) ? "1" : "0";
+            String query = "insert into QuanLy value ('" + nd.getHoTen() + "'  ,'" + strDate + "'  ,'" + nd.getEmail() + "'  ,'" + nd.getSdt() + "'  ,'" + nd.getCMND() + "'  ,'" + nd.getTaiKhoan() + "'  ,'" + nd.getMatKhau() + "'," + sex + ")";
             statement.executeUpdate(query);
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(NguoiDungModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("lỗi ở người dùng model thêm người dùng");
         }
-
         return false;
     }
 // add người dùng

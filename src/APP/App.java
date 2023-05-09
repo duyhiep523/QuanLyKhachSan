@@ -9,8 +9,9 @@ import View.DangNhap;
 /**
  *
  * @author hiep0
- */      
+ */
 public class App {
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

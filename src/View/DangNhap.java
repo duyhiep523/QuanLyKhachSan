@@ -53,7 +53,7 @@ public class DangNhap extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtMatKhau = new javax.swing.JPasswordField();
-        jButton3 = new javax.swing.JButton();
+        ADD = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -100,13 +100,13 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel3.setText("Quản lý Khách Sạn");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Tạo tài khoản");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        ADD.setBackground(new java.awt.Color(255, 255, 0));
+        ADD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ADD.setText("Tạo tài khoản");
+        ADD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ADD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ADDActionPerformed(evt);
             }
         });
 
@@ -132,7 +132,7 @@ public class DangNhap extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addGap(32, 32, 32)
-                                .addComponent(jButton3)
+                                .addComponent(ADD)
                                 .addGap(29, 29, 29)
                                 .addComponent(loginBtn)
                                 .addContainerGap())))
@@ -155,7 +155,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(loginBtn)
-                    .addComponent(jButton3))
+                    .addComponent(ADD))
                 .addGap(30, 30, 30))
         );
 
@@ -231,11 +231,11 @@ public class DangNhap extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDActionPerformed
         TaotaiKhoan t = new TaotaiKhoan();        // TODO add your handling code here:
         t.setLocation(500, 90);
         t.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ADDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,8 +277,8 @@ public class DangNhap extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ADD;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

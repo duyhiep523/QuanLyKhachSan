@@ -8,6 +8,7 @@ import Model.NguoiDungModel;
 import View.DangNhap;
 import View.ManHinhChinh;
 import View.TaotaiKhoan;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -35,11 +36,10 @@ public class NguoiDungController {
                 dnview.showMessageLogin("Vui lòng điền đầy đủ thông tin \n");
             } else {
                 NguoiDungModel ndc = new NguoiDungModel().checkLogin(nd.getTaiKhoan(), nd.getMatKhau());
-                if (ndc.getEmail() != null) {
+                if (ndc.getCMND() != null) {
                     ManHinhChinh.run();
                     ndOn = ndc;
                     dnview.dispose();
-
                 } else {
                     dnview.showMessageLogin("Sai thông tin đăng nhập \n");
                 }
@@ -50,6 +50,55 @@ public class NguoiDungController {
 // them nguoi dung
 
     public void addNguoiDung() {
+        NguoiDungModel nd = ttk.getNDMD();
+        if (nd.getHoTen().equals("")) {
+            ttk.showMessage("Tên không được bỏ trống");
+            return;
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = formatter.format(nd.getNgaySinh());
+        if (strDate.equals("")) {
+            ttk.showMessage("Ngày sinh không được bỏ trống");
+            return;
+        }
+        if (nd.getSdt().equals("")) {
+            ttk.showMessage("Số điện thoại không được bỏ trống");
+            return;
+        }
+        if (nd.getEmail().equals("")) {
+            ttk.showMessage("Email không được bỏ trống");
+            return;
+        }
+        if (nd.getCMND().equals("")) {
+            ttk.showMessage("Cứng minh nhân dân không được bỏ trống");
+            return;
+        }
+        if (nd.getTaiKhoan().equals("")) {
+            ttk.showMessage("Tài khoản không được bỏ trống");
+            return;
+        }
+        if (nd.getMatKhau().equals("")) {
+            ttk.showMessage("Mật khẩu không được bỏ trống");
+            return;
+        }
+        String sex = nd.getGioiTinh() ? "1" : "0";
+        if (sex.equals("")) {
+            ttk.showMessage("Giới tính không được bỏ trống");
+            return;
+        }
+        if (ttk.checkDOB == false) {
+            ttk.showMessage("nhập sai ngày sinh");
+        }
+        if (ttk.checkPass == false) {
+            ttk.showMessage("mật khẩu nhập lại không đúng");
+            return;
+        }
+        boolean test = new NguoiDungModel().addNguoiDung(nd);
+        if (test) {
+            ttk.showMessage("Tạo thành công");
+        } else {
+            ttk.showMessage("người dùng đã tồn tại");
+        }
 
     }
 

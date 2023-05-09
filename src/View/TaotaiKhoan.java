@@ -9,6 +9,9 @@ import Model.NguoiDungModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -306,18 +309,37 @@ public class TaotaiKhoan extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new NguoiDungController(this).addNguoiDung();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
+        new NguoiDungController(this).addNguoiDung();        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);      // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 // lấy dữ liệu từ form
+    public boolean checkPass = true;
+    public boolean checkDOB = true;
 
-    public NguoiDungModel getNDMD() throws ParseException {
+    public NguoiDungModel getNDMD() {
         String hoTen = this.txtHoten.getText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = dateFormat.parse(this.txtDOB.getText());
+        Date date = null;
+        try {
+            date = null;
+            date = dateFormat.parse(this.txtDOB.getText());
+            checkDOB = true;
+        } catch (ParseException ex) {
+            try {
+                date = dateFormat.parse("2222-12-22");
+            } catch (ParseException ex1) {
+                System.out.println("sos");
+            }
+            checkDOB = false;
+            System.out.println("loi o tao tai khoan");
+        }
         String Mail = this.txtMail.getText();
         String SDT = this.txtSDT.getText();
         String CMND = this.txtCMND.getText();
@@ -326,10 +348,11 @@ public class TaotaiKhoan extends javax.swing.JFrame {
         String passw1 = String.valueOf(pass1);
         char[] pass2 = this.txtPass2.getPassword();
         String passw2 = String.valueOf(pass2);
-        String passw = (passw1.equals(passw2)) ? passw1 : passw2;
+        checkPass = passw1.equals(passw2);
         String value = (String) txtSex.getSelectedItem();
         boolean sex = value.equals("Nam");
-        return new NguoiDungModel(hoTen, date, Mail, SDT, CMND, taiKhoan, passw, sex);
+
+        return new NguoiDungModel(hoTen, date, Mail, SDT, CMND, taiKhoan, passw1, sex);
     }
 // lấy dữ liệu từ form
 
