@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.sql.PreparedStatement;
 /**
  *
  * @author hiep0
@@ -57,8 +57,9 @@ public class NguoiDungModel extends CSDL {
     public NguoiDungModel checkLogin(String taiKhoan, String matKhau) {
         NguoiDungModel nd = new NguoiDungModel();
         try (Connection conn = this.getConnection()) {
-            Statement statement = conn.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * from quanly where taiKhoan = '" + taiKhoan + "' and matKhau='" + matKhau + "'");
+            String sql = "select *from quanly where taiKhoan = ? and matKhau = ? ";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
             if (result.next()) {
                 nd.setHoTen(result.getString(1));
                 String s = result.getString(2);
@@ -88,7 +89,7 @@ public class NguoiDungModel extends CSDL {
         Connection conn = this.getConnection();
         try {
             Statement statement = conn.createStatement();
-            ResultSet result = statement.executeQuery("select count(*) from QuanLy where taiKhoan='" + nd.getTaiKhoan()+"'");
+            ResultSet result = statement.executeQuery("select count(*) from QuanLy where taiKhoan='" + nd.getTaiKhoan() + "'");
             int n = 0;
             while (result.next()) {
                 n = result.getInt(1);
