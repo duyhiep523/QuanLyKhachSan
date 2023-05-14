@@ -297,24 +297,24 @@ public class TaotaiKhoan extends javax.swing.JFrame {
     private void checkDieuKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDieuKhoanActionPerformed
         if (checkDieuKhoan.isSelected()) {
             jButton1.setEnabled(true);
-            
+
         } else {
             jButton1.setEnabled(false);
-            
+
         }
 //        System.out.println(jCheckBox1.isSelected());
         // TODO add your handling code here:
     }//GEN-LAST:event_checkDieuKhoanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         new NguoiDungController(this).addNguoiDung();        // TODO add your handling code here:
 
     }//GEN-LAST:event_jButton1ActionPerformed
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public void showMessageOK(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -325,7 +325,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
 // lấy dữ liệu từ form
     public boolean checkPass = true;
     public boolean checkDOB = true;
-    
+
     public NguoiDungModel getNDMD() {
         String hoTen = this.txtHoten.getText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

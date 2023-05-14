@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.PreparedStatement;
+
 /**
  *
  * @author hiep0
@@ -57,8 +58,10 @@ public class NguoiDungModel extends CSDL {
     public NguoiDungModel checkLogin(String taiKhoan, String matKhau) {
         NguoiDungModel nd = new NguoiDungModel();
         try (Connection conn = this.getConnection()) {
-            String sql = "select *from quanly where taiKhoan = ? and matKhau = ? ";
+            String sql = "select *from quan_ly where taiKhoan = ? and matKhau = ? ";
             PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, taiKhoan);
+            statement.setString(2, matKhau);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 nd.setHoTen(result.getString(1));
@@ -89,7 +92,7 @@ public class NguoiDungModel extends CSDL {
         Connection conn = this.getConnection();
         try {
             Statement statement = conn.createStatement();
-            ResultSet result = statement.executeQuery("select count(*) from QuanLy where taiKhoan='" + nd.getTaiKhoan() + "'");
+            ResultSet result = statement.executeQuery("select count(*) from quan_ly where taiKhoan='" + nd.getTaiKhoan() + "'");
             int n = 0;
             while (result.next()) {
                 n = result.getInt(1);
@@ -100,7 +103,7 @@ public class NguoiDungModel extends CSDL {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String strDate = formatter.format(nd.getNgaySinh());
             String sex = nd.getGioiTinh().equals(true) ? "1" : "0";
-            String query = "insert into QuanLy value ('" + nd.getHoTen() + "'  ,'" + strDate + "'  ,'" + nd.getEmail() + "'  ,'" + nd.getSdt() + "'  ,'" + nd.getCMND() + "'  ,'" + nd.getTaiKhoan() + "'  ,'" + nd.getMatKhau() + "'," + sex + ")";
+            String query = "insert into quan_ly value ('" + nd.getHoTen() + "'  ,'" + strDate + "'  ,'" + nd.getEmail() + "'  ,'" + nd.getSdt() + "'  ,'" + nd.getCMND() + "'  ,'" + nd.getTaiKhoan() + "'  ,'" + nd.getMatKhau() + "'," + sex + ")";
             statement.executeUpdate(query);
             return true;
         } catch (SQLException ex) {
