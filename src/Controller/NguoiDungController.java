@@ -229,6 +229,7 @@ public class NguoiDungController {
         boolean test = new NguoiDungModel().updatePass(nd);
         if (test) {
             doipass.showMessageOK("đổi pass thành công");
+            NguoiDungController.ndOn = nd;
             doipass.resetForm();
         } else {
             doipass.showMessage("đã có lỗi xảy ra");
