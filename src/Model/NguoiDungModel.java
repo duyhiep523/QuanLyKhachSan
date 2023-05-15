@@ -12,6 +12,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,6 +39,15 @@ public class NguoiDungModel extends CSDL {
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
         this.gioiTinh = gioiTinh;
+    }
+
+    public NguoiDungModel(String hoTen, Date ngaySinh, String email, String sdt, String CMND, Boolean gioiTinh) {
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.email = email;
+        this.CMND = CMND;
+        this.gioiTinh = gioiTinh;
+        this.sdt = sdt;
     }
 
     public NguoiDungModel(String taiKhoan, String matKhau) {
@@ -79,6 +90,8 @@ public class NguoiDungModel extends CSDL {
             }
             return nd;
         } catch (SQLException e) {
+
+            System.out.println("");
             System.out.println("lỗi ở người dùng model đăng nhập");
         } catch (ParseException ex) {
 
@@ -113,6 +126,63 @@ public class NguoiDungModel extends CSDL {
     }
 
 // add người dùng
+// update nguoi dung
+    String ten = "1";
+    String ngaysinh = "1";
+    String mail = "1";
+    String sodienthoai = "1";
+    String chungminh = "1";
+    String gioitinh = "1";
+    String taikhoanon = "";
+
+    public Boolean updateNguoiDung(NguoiDungModel nd) {
+
+        try {
+            Connection conn = this.getConnection();
+            ten = nd.getHoTen();
+            SimpleDateFormat dinhDang = new SimpleDateFormat("yyyy-MM-dd");
+            ngaysinh = dinhDang.format(nd.getNgaySinh());
+            mail = nd.getEmail();
+            sodienthoai = nd.getSdt();
+            chungminh = nd.getCMND();
+            gioitinh = nd.getGioiTinh() ? "1" : "0";
+            taikhoanon = nd.getTaiKhoan();
+            String sql = "update quan_ly set hoTen='" + ten + "',ngaySinh='" + ngaysinh + "',email='" + mail + "',soDienThoai='" + sodienthoai + "',chungMinhNhanDan='" + chungminh + "',gioiTinh='" + gioitinh + "'where taiKhoan='" + taikhoanon + "';";
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            return true;
+        } catch (SQLException ex) {
+//            System.out.println(ten);
+//            System.out.println(ngaysinh);
+//            System.out.println(mail);
+//            System.out.println(sodienthoai);
+//            System.out.println(chungminh);
+//            System.out.println(gioitinh);
+//            System.out.println(taikhoanon);
+            System.out.println("loi nguoi dung model update");
+
+            Logger.getLogger(NguoiDungModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+// thay doi mat khau
+
+    public Boolean updatePass(NguoiDungModel nd) {
+        try {
+            Connection conn = this.getConnection();
+            String sql = "update quan_ly set matKhau='" + nd.getMatKhau() + "'where taiKhoan='" + nd.getTaiKhoan() + "';";
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(NguoiDungModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+// thay doi mat khau
+// update nguoi dung
+
     public String getHoTen() {
         return hoTen;
     }

@@ -24,10 +24,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
     public ManHinhChinh() {
         this.setTitle("Màn hình chính");
         initComponents();
-     this.btnTT.setText(NguoiDungController.ndOn.getHoTen());
+        this.btnTT.setText(NguoiDungController.ndOn.getHoTen());
     }
-
-  
 
     /**
      * This method is called from within the constructor to initialize the form.

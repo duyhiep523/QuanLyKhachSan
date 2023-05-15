@@ -6,7 +6,9 @@ package Controller;
 
 import Model.NguoiDungModel;
 import View.DangNhap;
+import View.DoiMatKhau;
 import View.ManHinhChinh;
+import View.TTUser;
 import View.TaotaiKhoan;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
@@ -21,6 +23,8 @@ public class NguoiDungController {
     private static DangNhap dnview;
     public static NguoiDungModel ndOn;
     private static TaotaiKhoan ttk;
+    private static TTUser ttus;
+    private static DoiMatKhau doipass;
 
     public NguoiDungController(DangNhap view) {
         NguoiDungController.dnview = view;
@@ -28,6 +32,14 @@ public class NguoiDungController {
 
     public NguoiDungController(TaotaiKhoan view) {
         NguoiDungController.ttk = view;
+    }
+
+    public NguoiDungController(TTUser view) {
+        NguoiDungController.ttus = view;
+    }
+
+    public NguoiDungController(DoiMatKhau view) {
+        NguoiDungController.doipass = view;
     }
 // dang nhap
 
@@ -39,6 +51,7 @@ public class NguoiDungController {
             } else {
                 NguoiDungModel ndc = new NguoiDungModel().checkLogin(nd.getTaiKhoan(), nd.getMatKhau());
                 if (ndc.getCMND() != null) {
+
                     ManHinhChinh.run();
                     ndOn = ndc;
                     dnview.dispose();
@@ -85,7 +98,7 @@ public class NguoiDungController {
             ttk.showMessage("Chứng minh nhân dân không được bỏ trống");
             return;
         }
-          if (!Regex(nd.getSdt(), regexSDT)) {
+        if (!Regex(nd.getSdt(), regexSDT)) {
             ttk.showMessage("Sai định dạng chứng minh nhân dân");
             return;
         }
@@ -131,6 +144,98 @@ public class NguoiDungController {
     }
 
 // them nguoi dung
+// update tt
+    public void updateNguoiDung() {
+        NguoiDungModel nd = ttus.getNDMD();
+        String error = "";
+        if (nd.getHoTen().equals("")) {
+            error = error.concat("Tên không được bỏ trống\n");
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = formatter.format(nd.getNgaySinh());
+        if (strDate.equals("")) {
+            error = error.concat("Ngày sinh không được bỏ trống\n");
+        }
+        if (nd.getSdt().equals("")) {
+            error = error.concat("Số điện thoại không được bỏ trống\n");
+        }
+        if (!Regex(nd.getSdt(), regexSDT)) {
+            error = error.concat("Sai định dạng số điện thoại\n");
+        }
+        if (nd.getCMND().equals("")) {
+            error = error.concat("Chứng minh nhân dân không được bỏ trống\n");
+        }
+        if (!Regex(nd.getSdt(), regexSDT)) {
+            error = error.concat("Sai định dạng chứng minh nhân dân\n");
+        }
+        if (nd.getEmail().equals("")) {
+            error = error.concat("Email không được bỏ trống\n");
+        }
+        if (!Regex(nd.getEmail(), regexMail)) {
+            error = error.concat("Email sai định dạng\n");
+        }
+
+        if (!ttus.checkDOB) {
+            error = error.concat("Nhập sai ngày sinh \n");
+            ttus.checkDOB = true;
+        }
+
+        if (error.equals("")) {
+            boolean test = new NguoiDungModel().updateNguoiDung(nd);
+            if (test) {
+                ndOn = nd;
+                ttus.showMessageOK("update thành công nhấn OK để đăng nhập lại");
+            } else {
+                ttus.showMessage("dã có lỗi sảy ra");
+            }
+        } else {
+            ttus.showMessage(error);
+        }
+    }
+
+// update tt
+// doi natkhau
+    public void updateMatKhau() {
+        NguoiDungModel nd = doipass.getMK();
+        if (DoiMatKhau.checkEmptyPassCu) {
+            doipass.showMessage("Phải điền mật khẩu hiện tại");
+            DoiMatKhau.checkEmptyPassCu = false;
+            return;
+        }
+        if (!DoiMatKhau.MKCUKI.equals(ndOn.getMatKhau())) {
+            doipass.showMessage("Sai mật khẩu");
+            return;
+        }
+        if (DoiMatKhau.checkEmptyPassMoi1) {
+            doipass.showMessage("Phải điền mật khẩu mới");
+            DoiMatKhau.checkEmptyPassMoi1 = false;
+            return;
+        }
+        if (DoiMatKhau.checkEmptyPassMoi2) {
+            doipass.showMessage("Phải điền lại mật khẩu mới");
+            DoiMatKhau.checkEmptyPassMoi2 = false;
+            return;
+        }
+        if (DoiMatKhau.change) {
+            doipass.showMessage("Mật khẩu mới phải khác với mật khẩu cũ");
+            DoiMatKhau.change = false;
+            return;
+        }
+        if (DoiMatKhau.checkPass) {
+            doipass.showMessage("Mật khẩu nhập lại không đúng");
+            DoiMatKhau.checkPass = false;
+            return;
+        }
+        boolean test = new NguoiDungModel().updatePass(nd);
+        if (test) {
+            doipass.showMessageOK("đổi pass thành công");
+            doipass.resetForm();
+        } else {
+            doipass.showMessage("đã có lỗi xảy ra");
+        }
+    }
+// doi matkhau    
+
     public static DangNhap getDnview() {
         return dnview;
     }
@@ -145,5 +250,21 @@ public class NguoiDungController {
 
     public static void setTtk(TaotaiKhoan ttk) {
         NguoiDungController.ttk = ttk;
+    }
+
+    public static TTUser getTtus() {
+        return ttus;
+    }
+
+    public static void setTtus(TTUser ttus) {
+        NguoiDungController.ttus = ttus;
+    }
+
+    public static DoiMatKhau getDoipass() {
+        return doipass;
+    }
+
+    public static void setDoipass(DoiMatKhau doipass) {
+        NguoiDungController.doipass = doipass;
     }
 }

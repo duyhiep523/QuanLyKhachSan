@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +24,18 @@ public class NguoiDung extends javax.swing.JFrame {
      */
     public NguoiDung() {
         initComponents();
+        updateNguoidung();
+    }
+
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showMessageOK(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void updateNguoidung() {
         this.txtName.setText(NguoiDungController.ndOn.getHoTen());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         this.txtDOB.setText(formatter.format(NguoiDungController.ndOn.getNgaySinh()));

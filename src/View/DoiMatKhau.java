@@ -4,6 +4,10 @@
  */
 package View;
 
+import Controller.NguoiDungController;
+import Model.NguoiDungModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hiep0
@@ -15,6 +19,56 @@ public class DoiMatKhau extends javax.swing.JPanel {
      */
     public DoiMatKhau() {
         initComponents();
+    }
+    
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void showMessageOK(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public static boolean checkPass = false;
+    public static boolean change = false;
+    public static boolean checkEmptyPassCu = false;
+    public static boolean checkEmptyPassMoi1 = false;
+    public static boolean checkEmptyPassMoi2 = false;
+    public static String MKCUKI;
+    
+    public NguoiDungModel getMK() {
+        char[] s = passCu.getPassword();
+        char[] s2 = passMoi2.getPassword();
+        char[] s1 = passMoi1.getPassword();
+        String mkCu = new String(s);
+        String mkMoi = new String(s1);
+        String mkLai = new String(s2);
+        MKCUKI = mkCu;
+        
+        if (mkCu.equals("")) {
+            checkEmptyPassCu = true;
+        }
+        if (mkMoi.equals("")) {
+            checkEmptyPassMoi1 = true;
+        }
+        if (mkLai.equals("")) {
+            checkEmptyPassMoi2 = true;
+        }
+        if (!mkMoi.equals(mkLai)) {
+            checkPass = true;
+        }
+        if (mkMoi.equals(mkCu)) {
+            if (!mkMoi.equals("")) {
+                change = true;
+            }
+        }
+        
+        return new NguoiDungModel(NguoiDungController.ndOn.getHoTen(), NguoiDungController.ndOn.getNgaySinh(), NguoiDungController.ndOn.getEmail(), NguoiDungController.ndOn.getSdt(), NguoiDungController.ndOn.getCMND(), NguoiDungController.ndOn.getTaiKhoan(), mkMoi, NguoiDungController.ndOn.getGioiTinh());
+    }
+
+    public void resetForm() {
+        passCu.setText("");
+        passMoi1.setText("");
+        passMoi2.setText("");
     }
 
     /**
@@ -33,9 +87,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        passCu = new javax.swing.JPasswordField();
+        passMoi1 = new javax.swing.JPasswordField();
+        passMoi2 = new javax.swing.JPasswordField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -51,6 +105,11 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(0, 204, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Đồng ý");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Mật khẩu cũ");
 
@@ -88,9 +147,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                                    .addComponent(jPasswordField2)
-                                    .addComponent(jPasswordField3))))
+                                    .addComponent(passCu, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                    .addComponent(passMoi1)
+                                    .addComponent(passMoi2))))
                         .addGap(103, 103, 103)))
                 .addGap(41, 41, 41))
         );
@@ -102,15 +161,15 @@ public class DoiMatKhau extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passMoi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passMoi2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -130,6 +189,11 @@ public class DoiMatKhau extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new NguoiDungController(this).updateMatKhau();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -139,8 +203,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JPasswordField passCu;
+    private javax.swing.JPasswordField passMoi1;
+    private javax.swing.JPasswordField passMoi2;
     // End of variables declaration//GEN-END:variables
 }
