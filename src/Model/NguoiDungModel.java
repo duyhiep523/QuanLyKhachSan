@@ -90,8 +90,6 @@ public class NguoiDungModel extends CSDL {
             }
             return nd;
         } catch (SQLException e) {
-
-            System.out.println("");
             System.out.println("lỗi ở người dùng model đăng nhập");
         } catch (ParseException ex) {
 
