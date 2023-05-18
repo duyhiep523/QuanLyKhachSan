@@ -19,9 +19,6 @@ public class NguoiDung extends javax.swing.JFrame {
 
     private static JButton btnQL;
 
-    /**
-     * Creates new form NguoiDung
-     */
     public NguoiDung() {
         initComponents();
         updateNguoidung();

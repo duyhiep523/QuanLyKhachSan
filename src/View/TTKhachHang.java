@@ -14,9 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class TTKhachHang extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TTKhachHang
-     */
+
     public TTKhachHang() {
         initComponents();
         this.setLocationRelativeTo(null);
