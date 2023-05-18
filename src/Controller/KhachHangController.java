@@ -4,8 +4,10 @@
  */
 package Controller;
 
+import static Controller.NguoiDungController.ndOn;
 import View.DangNhapKhach;
 import Model.*;
+import View.DoiMatKhau;
 import View.TTKhachHang;
 import View.TaoTaiKhoanKhach;
 import View.TrangCuaKhach;
@@ -148,9 +150,47 @@ public class KhachHangController {
     }
 // cap nhat thong tin nguoidung
 // đổi mật khẩu người dùng
-    
-    public void doiMatKhau(){
-        
+
+    public void doiMatKhau() {
+        KhachHangModel kh = ttKH.getMK();
+        if (TTKhachHang.checkEmptyPassCu) {
+            ttKH.showMessage("Phải điền mật khẩu hiện tại");
+            TTKhachHang.checkEmptyPassCu = false;
+            return;
+        }
+        if (!TTKhachHang.MKCUKI.equals(khOn.getMatKhau())) {
+            ttKH.showMessage("Sai mật khẩu");
+            return;
+        }
+        if (TTKhachHang.checkEmptyPassMoi1) {
+            ttKH.showMessage("Phải điền mật khẩu mới");
+            TTKhachHang.checkEmptyPassMoi1 = false;
+            return;
+        }
+        if (TTKhachHang.checkEmptyPassMoi2) {
+            ttKH.showMessage("Phải điền lại mật khẩu mới");
+            TTKhachHang.checkEmptyPassMoi2 = false;
+            return;
+        }
+
+        if (TTKhachHang.checkPass) {
+            ttKH.showMessage("Mật khẩu nhập lại không đúng");
+            TTKhachHang.checkPass = false;
+            return;
+        }
+        if (TTKhachHang.change) {
+            ttKH.showMessage("Mật khẩu mới phải khác với mật khẩu cũ");
+            TTKhachHang.change = false;
+            return;
+        }
+        boolean test = new KhachHangModel().doiMatKhau(kh);
+        if (test) {
+            ttKH.showMessageOK("đổi pass thành công");
+            khOn = kh;
+            ttKH.resetFormPass();
+        } else {
+            ttKH.showMessage("đã có lỗi xảy ra");
+        }
     }
 // đổi mật khẩu người dùng
 

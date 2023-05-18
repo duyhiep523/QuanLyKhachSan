@@ -219,14 +219,14 @@ public class NguoiDungController {
             DoiMatKhau.checkEmptyPassMoi2 = false;
             return;
         }
-        if (DoiMatKhau.change) {
-            doipass.showMessage("Mật khẩu mới phải khác với mật khẩu cũ");
-            DoiMatKhau.change = false;
-            return;
-        }
         if (DoiMatKhau.checkPass) {
             doipass.showMessage("Mật khẩu nhập lại không đúng");
             DoiMatKhau.checkPass = false;
+            return;
+        }
+        if (DoiMatKhau.change) {
+            doipass.showMessage("Mật khẩu mới phải khác với mật khẩu cũ");
+            DoiMatKhau.change = false;
             return;
         }
         boolean test = new NguoiDungModel().updatePass(nd);

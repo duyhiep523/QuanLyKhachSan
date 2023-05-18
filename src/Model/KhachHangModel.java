@@ -140,7 +140,7 @@ public class KhachHangModel extends CSDL {
     public boolean doiMatKhau(KhachHangModel kh) {
         try {
             Connection conn = this.getConnection();
-            String sql = "update khach_hang set matkhau=?  when maKhachHang=? and taiKhoan=?";
+            String sql = "update khach_hang set matkhau= ?  where maKhachHang=? and taiKhoan= ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, kh.getMatKhau());
             stm.setString(2, kh.getMaKH());

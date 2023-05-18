@@ -5,6 +5,7 @@
 package View;
 
 import Controller.KhachHangController;
+
 import Model.KhachHangModel;
 import javax.swing.JOptionPane;
 
@@ -13,7 +14,6 @@ import javax.swing.JOptionPane;
  * @author hiep0
  */
 public class TTKhachHang extends javax.swing.JFrame {
-
 
     public TTKhachHang() {
         initComponents();
@@ -57,8 +57,54 @@ public class TTKhachHang extends javax.swing.JFrame {
         return new KhachHangModel(KhachHangController.khOn.getMaKH(), textName.getText(), gioiTinh, textSDT.getText(), textCMND.getText(), KhachHangController.khOn.getTaiKhoan(), KhachHangController.khOn.getMatKhau());
     }
 // lấy thông tin để cập nhật
-// thông báo
+// lấy thông tin để đổi mật khẩu 
 
+    public static boolean checkEmptyPassCu = false;
+    public static boolean checkEmptyPassMoi1 = false;
+    public static boolean checkEmptyPassMoi2 = false;
+    public static boolean checkPass = false;
+    public static boolean change = false;
+    public static String MKCUKI;
+
+    public KhachHangModel getMK() {
+        char[] s = passHienTai.getPassword();
+        char[] s1 = passMoi.getPassword();
+        char[] s2 = passLai.getPassword();
+        String mkCu = new String(s);
+        String mkMoi = new String(s1);
+        String mkLai = new String(s2);
+        MKCUKI = mkCu;
+        if (mkCu.equals("")) {
+            checkEmptyPassCu = true;
+        }
+        if (mkMoi.equals("")) {
+            checkEmptyPassMoi1 = true;
+        }
+        if (mkLai.equals("")) {
+            checkEmptyPassMoi2 = true;
+        }
+        if (!mkMoi.equals(mkLai)) {
+            checkPass = true;
+        }
+        if (mkMoi.equals(mkCu)) {
+            if (!mkMoi.equals("")) {
+                change = true;
+            }
+        }
+        return new KhachHangModel(KhachHangController.khOn.getMaKH(), KhachHangController.khOn.getTenKH(), KhachHangController.khOn.getGioiTinh(), KhachHangController.khOn.getSDT(), KhachHangController.khOn.getCMND(), KhachHangController.khOn.getTaiKhoan(), mkMoi);
+    }
+// lấy thông tin để đổi mật khẩu
+// reset form mật khẩu
+
+    public void resetFormPass() {
+        passHienTai.setText("");
+        passLai.setText("");
+        passMoi.setText("");
+
+    }
+// reset form mật khẩu
+
+// thông báo
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
@@ -345,7 +391,7 @@ public class TTKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void updatePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePassActionPerformed
-        // TODO add your handling code here:
+        new KhachHangController(this).doiMatKhau();        // TODO add your handling code here:
     }//GEN-LAST:event_updatePassActionPerformed
 
     /**
