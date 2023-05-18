@@ -35,7 +35,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        createTT = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -69,14 +69,14 @@ public class TaotaiKhoan extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Tạo tài khoản người dùng");
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Tạo");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        createTT.setBackground(new java.awt.Color(0, 204, 255));
+        createTT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        createTT.setText("Tạo");
+        createTT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        createTT.setEnabled(false);
+        createTT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                createTTActionPerformed(evt);
             }
         });
 
@@ -242,7 +242,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(createTT)
                 .addGap(36, 36, 36))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(95, 95, 95)
@@ -271,7 +271,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
                 .addComponent(checkDieuKhoan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(createTT)
                     .addComponent(jButton2))
                 .addGap(25, 25, 25))
         );
@@ -296,21 +296,21 @@ public class TaotaiKhoan extends javax.swing.JFrame {
 
     private void checkDieuKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDieuKhoanActionPerformed
         if (checkDieuKhoan.isSelected()) {
-            jButton1.setEnabled(true);
+            createTT.setEnabled(true);
 
         } else {
-            jButton1.setEnabled(false);
+            createTT.setEnabled(false);
 
         }
 //        System.out.println(jCheckBox1.isSelected());
         // TODO add your handling code here:
     }//GEN-LAST:event_checkDieuKhoanActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void createTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTTActionPerformed
 
         new NguoiDungController(this).addNguoiDung();        // TODO add your handling code here:
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_createTTActionPerformed
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
@@ -410,7 +410,7 @@ public class TaotaiKhoan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkDieuKhoan;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton createTT;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
