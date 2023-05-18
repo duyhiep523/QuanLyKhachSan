@@ -6,6 +6,7 @@ package Controller;
 
 import View.DangNhapKhach;
 import Model.*;
+import View.TTKhachHang;
 import View.TaoTaiKhoanKhach;
 import View.TrangCuaKhach;
 import java.util.regex.Matcher;
@@ -20,9 +21,14 @@ public class KhachHangController {
     private static DangNhapKhach dangNhap;
     public static KhachHangModel khOn;
     private static TaoTaiKhoanKhach TTK;
+    private static TTKhachHang ttKH;
 
     public KhachHangController(TaoTaiKhoanKhach view) {
         KhachHangController.TTK = view;
+    }
+
+    public KhachHangController(TTKhachHang view) {
+        KhachHangController.ttKH = view;
     }
 // dang nhap
 
@@ -33,7 +39,8 @@ public class KhachHangController {
         } else {
             KhachHangModel test = new KhachHangModel().dangNhap(kh.getTaiKhoan(), kh.getMatKhau());
             if (test.getMaKH() != null) {
-                khOn = kh;
+                khOn = test;
+                System.out.println(khOn.getTenKH());
                 TrangCuaKhach.run();
                 dangNhap.dispose();
             } else {
@@ -102,6 +109,50 @@ public class KhachHangController {
         }
     }
 // tao tai khoan
+// cap nhat thong tin nguoidung
+
+    public void updateTT() {
+        KhachHangModel kh = ttKH.getTT();
+
+        if (kh.getTenKH().equals("")) {
+            ttKH.showMessage("Tên không được để rỗng");
+            return;
+        }
+        if (kh.getSDT().equals("")) {
+            ttKH.showMessage("Số điện thoại không được để rỗng");
+            return;
+        }
+        if (!Regex(kh.getSDT(), regexSDT)) {
+            ttKH.showMessage("Số điện thoại sai định dạng");
+            return;
+
+        }
+        if (kh.getCMND().equals("")) {
+            ttKH.showMessage("Chứng minh nhân dân không được để rỗng");
+            return;
+        }
+        if (!Regex(kh.getCMND(), regexSDT)) {
+            ttKH.showMessage("Chứng minh nhân dân sai định dạng");
+            return;
+        }
+        boolean test = new KhachHangModel().doiThongTin(kh);
+        if (test) {
+            System.out.println(kh.getTenKH());
+            khOn = kh;
+            ttKH.showMessageOK("Cập nhật thành công");
+//            ttKH.setTenTrangChu(khOn);
+
+        } else {
+            ttKH.showMessage("Người dùng đã tồn tại");
+        }
+    }
+// cap nhat thong tin nguoidung
+// đổi mật khẩu người dùng
+    
+    public void doiMatKhau(){
+        
+    }
+// đổi mật khẩu người dùng
 
     public KhachHangController(DangNhapKhach view) {
         KhachHangController.dangNhap = view;
@@ -121,6 +172,14 @@ public class KhachHangController {
 
     public static void setTTK(TaoTaiKhoanKhach TTK) {
         KhachHangController.TTK = TTK;
+    }
+
+    public static TTKhachHang getTtKH() {
+        return ttKH;
+    }
+
+    public static void setTtKH(TTKhachHang ttKH) {
+        KhachHangController.ttKH = ttKH;
     }
 
 }

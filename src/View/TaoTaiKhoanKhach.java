@@ -20,7 +20,6 @@ public class TaoTaiKhoanKhach extends javax.swing.JFrame {
     public TaoTaiKhoanKhach() {
         initComponents();
         this.setLocationRelativeTo(null);
-
     }
 
     public void resetForm() {
@@ -30,7 +29,6 @@ public class TaoTaiKhoanKhach extends javax.swing.JFrame {
         txtCMND.setText("");
         txtTaiKhoan.setText("");
         txtMatKhau.setText("");
-
     }
 
     public void showMessage(String msg) {

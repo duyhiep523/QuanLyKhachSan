@@ -118,7 +118,7 @@ public class KhachHangModel extends CSDL {
     public boolean doiThongTin(KhachHangModel kh) {
         try {
             Connection conn = this.getConnection();
-            String sql = "update khach_hang set tenKhachHang=? ,gioiTinh=? ,soDienThoai=?,canCuocCongDan=? when maKhachHang=? and taiKhoan=?";
+            String sql = "update khach_hang set tenKhachHang= ? ,gioiTinh= ? ,soDienThoai= ?,canCuocCongDan= ? where maKhachHang= ? and taiKhoan=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, kh.getTenKH());
             stm.setBoolean(2, kh.getGioiTinh());
@@ -126,6 +126,7 @@ public class KhachHangModel extends CSDL {
             stm.setString(4, kh.getCMND());
             stm.setString(5, kh.getMaKH());
             stm.setString(6, kh.getTaiKhoan());
+            stm.executeUpdate();
             return true;
         } catch (SQLException ex) {
             System.out.println("lỗi đổi thông tin khách hàng model");
@@ -144,6 +145,7 @@ public class KhachHangModel extends CSDL {
             stm.setString(1, kh.getMatKhau());
             stm.setString(2, kh.getMaKH());
             stm.setString(3, kh.getTaiKhoan());
+            stm.executeUpdate();
             return true;
         } catch (SQLException ex) {
             System.out.println("lỗi đổi thông tin khách hàng model");

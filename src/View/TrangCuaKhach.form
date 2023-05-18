@@ -44,7 +44,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="jButton2" min="-2" pref="168" max="-2" attributes="0"/>
+                  <Component id="kHName" min="-2" pref="168" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="97" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -58,7 +58,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton1" min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="kHName" min="-2" pref="54" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jTabbedPane2" max="32767" attributes="0"/>
@@ -1361,12 +1361,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="kHName">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nguy&#x1ec5;n Duy Hi&#x1ec7;p"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kHNameActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
