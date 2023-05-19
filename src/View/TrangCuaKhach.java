@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import javax.swing.table.TableModel;
 
 /**
  *
@@ -28,6 +27,8 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.kHName.setText(KhachHangController.khOn.getTenKH());
         taiTrang(layDSPhong());
+        taiTrangHuyDatPhong(layDSDP());
+        resetFormHuyDatPhong();
     }
 
     public void setTenTrangChu(KhachHangModel kh) {
@@ -73,18 +74,20 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         txtMDP = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbPhongDaDat = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        hdpMADP = new javax.swing.JLabel();
+        hdpMaKh = new javax.swing.JLabel();
+        hdpMaP = new javax.swing.JLabel();
+        hdpTGD = new javax.swing.JLabel();
+        hdpTGBD = new javax.swing.JLabel();
+        huyDatPhongBtn = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        hdpGP = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
@@ -297,7 +300,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbPhongDaDat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -305,59 +308,75 @@ public class TrangCuaKhach extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã phòng", "Tên phòng", "Loại phòng", "Giá phòng", "Thời gian đặt", "Tình trạng"
+                "Mã đặt phòng", "Mã khách hàng", "Mã phòng", "Thời gian đặt", "Thời gian bắt đầu sử dụng", "Giá phòng"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tbPhongDaDat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPhongDaDatMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbPhongDaDat);
 
-        jLabel15.setText("Mã phòng");
+        jLabel15.setText("Mã đặt phòng");
 
-        jLabel16.setText("Tên phòng");
+        jLabel16.setText("Mã KH");
 
-        jLabel17.setText("Loại phòng");
+        jLabel17.setText("Mã phòng");
 
-        jLabel18.setText("Giá phòng");
+        jLabel18.setText("Thời gian đặt");
 
-        jLabel19.setText("Thời gian đặt");
+        jLabel19.setText("Thời gian bắt đầu sử dụng");
 
-        jLabel20.setText("jLabel20");
+        hdpMADP.setText("jLabel20");
 
-        jLabel21.setText("Phòng 102");
+        hdpMaKh.setText("Phòng 102");
 
-        jLabel22.setText("Đơn");
+        hdpMaP.setText("Đơn");
 
-        jLabel23.setText("11111111");
+        hdpTGD.setText("11111111");
 
-        jLabel24.setText("1111-11-11");
+        hdpTGBD.setText("1111-11-11");
 
-        jButton4.setText("Hủy đặt phòng");
+        huyDatPhongBtn.setText("Hủy đặt phòng");
+        huyDatPhongBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                huyDatPhongBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Giá phòng");
+
+        hdpGP.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                        .addGap(43, 43, 43)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(93, 93, 93)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)))
+                            .addComponent(hdpMADP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hdpMaKh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hdpMaP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hdpTGD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hdpTGBD, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(hdpGP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jButton4)))
-                .addGap(0, 168, Short.MAX_VALUE))
+                        .addGap(168, 168, 168)
+                        .addComponent(huyDatPhongBtn)))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,27 +384,32 @@ public class TrangCuaKhach extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel20))
-                        .addGap(36, 36, 36)
+                            .addComponent(hdpMADP))
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel21))
+                            .addComponent(hdpMaKh))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
-                            .addComponent(jLabel22))
+                            .addComponent(hdpMaP))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel23))
+                            .addComponent(hdpTGD))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
-                            .addComponent(jLabel24))
-                        .addGap(64, 64, 64)
-                        .addComponent(jButton4))
+                            .addComponent(hdpTGBD))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(hdpGP))
+                        .addGap(41, 41, 41)
+                        .addComponent(huyDatPhongBtn))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(136, Short.MAX_VALUE))
         );
@@ -864,7 +888,6 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         txtLoaiPhong.setText("");
         txtGiaPhong.setText("");
         txtTinhTrang.setText("");
-
     }
     int hientai = 0;
     private void TBDatPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBDatPhongMouseClicked
@@ -892,7 +915,75 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     private void searchTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTinhTrangActionPerformed
         taiTrang(layDSPhong());  // TODO add your handling code here:
     }//GEN-LAST:event_searchTinhTrangActionPerformed
+    int hientaiHDP = 0;
+    private void tbPhongDaDatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhongDaDatMouseClicked
+        hientaiHDP = tbPhongDaDat.getSelectedRow();
+        DisplayHDP(hientaiHDP);     // TODO add your handling code here:
+    }//GEN-LAST:event_tbPhongDaDatMouseClicked
+
+    private void huyDatPhongBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_huyDatPhongBtnActionPerformed
+        new DatPhongController(this).huyDatPhong();        // TODO add your handling code here:
+    }//GEN-LAST:event_huyDatPhongBtnActionPerformed
+    public void DisplayHDP(int i) {
+        DatPhongModel hdp = layDSDP().get(i);
+        hdpMADP.setText(hdp.getMaDP());
+        hdpMaKh.setText(hdp.getMaKH());
+        String str1 = Float.toString(hdp.getGiaPhong());
+        hdpGP.setText(str1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String tGD = formatter.format(hdp.getThoiGianDat());
+        hdpTGD.setText(tGD);
+        tGD = formatter.format(hdp.getThoiGianBatDau());
+        hdpTGBD.setText(tGD);
+        hdpMaP.setText(hdp.getMaPhong());
+
+    }
 // đặt phòng  
+// hủy đặt phòng
+    final String headerr[] = {"Mã đặt phòng", "Mã KH", "Mã phòng", "Thời gian đặt", "Thời gian bắt đầu SD", "Giá phòng"};
+    final DefaultTableModel TBHDP = new DefaultTableModel(headerr, 0);
+
+    public final ArrayList<DatPhongModel> layDSDP() {
+        return new DatPhongModel().listDP();
+    }
+
+    public final void taiTrangHuyDatPhong(ArrayList<DatPhongModel> arr) {
+        TBHDP.getDataVector().removeAllElements();
+        for (int i = 0; i < arr.size(); i++) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String TGD = formatter.format(arr.get(i).getThoiGianDat());
+            String TGBD = formatter.format(arr.get(i).getThoiGianBatDau());
+            String giaTien = String.valueOf(arr.get(i).getGiaPhong());
+            String nd[] = {arr.get(i).getMaDP(), arr.get(i).getMaKH(), arr.get(i).getMaPhong(), TGD, TGBD, giaTien};
+            TBHDP.addRow(nd);
+        }
+        tbPhongDaDat.setModel(TBHDP);
+    }
+
+    public void resetFormHuyDatPhong() {
+        hdpMADP.setText("");
+        hdpMaKh.setText("");
+        hdpMaP.setText("");
+        hdpTGBD.setText("");
+        hdpTGD.setText("");
+        hdpGP.setText("");
+    }
+
+    public DatPhongModel getHuyDatPhong() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date thoiGianBatDau = null;
+        Date date = null;
+        try {
+            date = formatter.parse(hdpTGD.getText());
+            thoiGianBatDau = formatter.parse(hdpTGBD.getText());
+        } catch (ParseException ex) {
+            System.out.println("sai định dạng huy dp");
+        }
+        return new DatPhongModel(hdpMADP.getText(), hdpMaP.getText(), KhachHangController.khOn.getMaKH(), date, thoiGianBatDau, Float.parseFloat(hdpGP.getText()));
+
+    }
+// hủy đặt phòng    
 
     public static void run() {
         /* Set the Nimbus look and feel */
@@ -924,8 +1015,14 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DatBtn;
     private javax.swing.JTable TBDatPhong;
+    private javax.swing.JLabel hdpGP;
+    private javax.swing.JLabel hdpMADP;
+    private javax.swing.JLabel hdpMaKh;
+    private javax.swing.JLabel hdpMaP;
+    private javax.swing.JLabel hdpTGBD;
+    private javax.swing.JLabel hdpTGD;
+    private javax.swing.JButton huyDatPhongBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -941,11 +1038,6 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -975,6 +1067,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -991,7 +1084,6 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
@@ -999,6 +1091,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton kHName;
     private javax.swing.JComboBox<String> searchTinhTrang;
+    private javax.swing.JTable tbPhongDaDat;
     private javax.swing.JLabel txtGiaPhong;
     private javax.swing.JLabel txtLoaiPhong;
     private javax.swing.JTextField txtMDP;

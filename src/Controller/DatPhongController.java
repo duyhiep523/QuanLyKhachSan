@@ -47,6 +47,7 @@ public class DatPhongController {
             trangCuaKhach.showMessageOK("Đặt thành công");
             new DatPhongModel().updateMuonPhong(datphong);
             trangCuaKhach.taiTrang(trangCuaKhach.layDSPhong());
+            trangCuaKhach.taiTrangHuyDatPhong(trangCuaKhach.layDSDP());
             trangCuaKhach.resetForm();
         } else {
             trangCuaKhach.showMessage("Mã đặt phòng đã tồn tại");
@@ -54,4 +55,22 @@ public class DatPhongController {
 
     }
     // tạo mới đặt phòng
+
+    // huy dat phong
+    public void huyDatPhong() {
+        DatPhongModel datphong = trangCuaKhach.getHuyDatPhong();
+        boolean test = new DatPhongModel().huyDP(datphong);
+        if (test) {
+            trangCuaKhach.showMessageOK("xóa thành công");
+            trangCuaKhach.taiTrangHuyDatPhong(trangCuaKhach.layDSDP());
+            new DatPhongModel().updateHDP(datphong);
+            trangCuaKhach.taiTrang(trangCuaKhach.layDSPhong());
+            trangCuaKhach.resetFormHuyDatPhong();
+            trangCuaKhach.resetForm();
+        } else {
+            trangCuaKhach.showMessage("đã có lỗi xảy ra");
+        }
+    }
+
+    // huy dat phong
 }

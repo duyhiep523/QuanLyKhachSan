@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Controller.KhachHangController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.ResultSet;
 
 /**
  *
@@ -76,8 +78,71 @@ public class DatPhongModel extends CSDL {
         }
         return false;
     }
-    
+
 // them dat phong    
+// huy dat phong khach
+    public ArrayList<DatPhongModel> listDP() {
+        ArrayList<DatPhongModel> dp = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "select *from lich_dat_phong where maKhachHang= ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, KhachHangController.khOn.getMaKH());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                DatPhongModel dPhong = new DatPhongModel(rs.getString(1), rs.getString(3), rs.getString(2), rs.getDate(4), rs.getDate(5), rs.getFloat(6));
+                dp.add(dPhong);
+            }
+            return dp;
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dp;
+    }
+
+    public boolean huyDP(DatPhongModel hdp) {
+        try {
+            Connection conn = this.getConnection();
+            String sql = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.executeUpdate();
+            sql = "delete from lich_dat_phong where maDatPhong=? and maKhachHang=? and maPhong=? and thoiGianDat=?and thoiGianBatDauSuDung=? and giaPhong=?";
+            stm = conn.prepareStatement(sql);
+            stm.setString(1, hdp.getMaDP());
+            stm.setString(2, hdp.getMaKH());
+            stm.setString(3, hdp.getMaPhong());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String dateString = formatter.format(hdp.getThoiGianDat());
+            stm.setString(4, dateString);
+            dateString = formatter.format(hdp.getThoiGianBatDau());
+            stm.setString(5, dateString);
+            stm.setFloat(6, hdp.getGiaPhong());
+            stm.executeUpdate();
+            sql = "SET FOREIGN_KEY_CHECKS=1;";
+            stm = conn.prepareStatement(sql);
+            stm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatPhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean updateHDP(DatPhongModel dat) {
+        try {
+            Connection conn = this.getConnection();
+            String sql = "update phong set tinhTrang='0' where maPhong= ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, dat.getMaPhong());
+            stm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatPhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    // huy dat phong khach    
 
     public String getMaDP() {
         return maDP;

@@ -4,10 +4,8 @@
  */
 package Controller;
 
-import static Controller.NguoiDungController.ndOn;
 import View.DangNhapKhach;
 import Model.*;
-import View.DoiMatKhau;
 import View.TTKhachHang;
 import View.TaoTaiKhoanKhach;
 import View.TrangCuaKhach;
