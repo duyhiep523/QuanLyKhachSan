@@ -89,7 +89,7 @@ public class QLHoaDon extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã HD", "Mã KH", "Tên KH", "Phòng thuê", "Tiền dịch vụ", "Tiền phòng", "Ngày làm", "Tổng tiền", "Trạng thái"
+                "Mã HD", "Mã KH", "Tên KH", "Phòng thuê", "Tiền phòng", "Tiền dịch vụ", "Ngày làm", "Tổng tiền", "Trạng thái"
             }
         ));
         DanhSachHoaDon.setSelectionBackground(new java.awt.Color(255, 255, 255));
