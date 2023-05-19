@@ -13,8 +13,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.TableModel;
@@ -24,61 +22,6 @@ import javax.swing.table.DefaultTableModel;
  * @author hiep0
  */
 public class TrangCuaKhach extends javax.swing.JFrame {
-//  trang đặt phòng
-
-    final String header[] = {"Mã phòng", "Tên phòng", "Loại phòng", "Giá phòng", "Tình trạng"};
-    final DefaultTableModel tbDP = new DefaultTableModel(header, 0);
-    
-    public ArrayList<PhongModel> layDSPhong() {
-        
-        return new PhongModel().getPhong();
-        
-    }
-    
-    public void taiTrang(ArrayList<PhongModel> arr) {
-        tbDP.getDataVector().removeAllElements();
-        for (int i = 0; i < arr.size(); i++) {
-            
-            String gia = String.valueOf(arr.get(i).getGiaPhong());
-            String tinhTrang = arr.get(i).getTinhTrang() ? "Đang thuê" : "Chưa thuê";
-            
-            String nd[] = {arr.get(i).getMaPhong(), arr.get(i).getTenPhong(), arr.get(i).getLoaiPhong(), gia, tinhTrang};
-            tbDP.addRow(nd);
-        }
-        TBDatPhong.setModel(tbDP);
-    }
-// trang đặt phòng
-    public static boolean ngaySD = false;
-    public static boolean checkempty = false;
-    public static boolean checkMuon = false;
-    
-    public DatPhongModel getDatPhong() {
-        if (txtTinhTrang.getText().equals("Đang thuê")) {
-            checkMuon = true;
-        }
-        if (txtTGBD.getText().equals("")) {
-            checkempty = true;
-        }
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date thoiGianBatDau = null;
-        try {
-            thoiGianBatDau = formatter.parse(txtTGBD.getText());
-        } catch (ParseException ex) {
-            ngaySD = true;
-            
-            System.out.println("sai định dạng thôi mà");
-        }
-        
-        return new DatPhongModel(txtMDP.getText(), txtMaPhong.getText(), KhachHangController.khOn.getMaKH(), date, thoiGianBatDau, Float.parseFloat(txtGiaPhong.getText()));
-        
-    }
-
-    public void resetForm() {
-        txtTGBD.setText("");
-        txtMDP.setText("");
-    }
-// trang đặt phòng
 
     public TrangCuaKhach() {
         initComponents();
@@ -86,7 +29,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         this.kHName.setText(KhachHangController.khOn.getTenKH());
         taiTrang(layDSPhong());
     }
-    
+
     public void setTenTrangChu(KhachHangModel kh) {
         this.kHName.setText(kh.getTenKH());
     }
@@ -95,7 +38,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public void showMessageOK(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -250,7 +193,18 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         jLabel48.setText("Nhập để tìm kiếm");
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         searchTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Đang thuê", "Chưa thuê" }));
+        searchTinhTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTinhTrangActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Thời gian bắt đầu sử dụng");
 
@@ -305,32 +259,32 @@ public class TrangCuaKhach extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMaPhong))
-                .addGap(36, 36, 36)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtTenPhong))
-                .addGap(26, 26, 26)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtLoaiPhong)
                     .addComponent(DatBtn))
-                .addGap(30, 30, 30)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtGiaPhong))
-                .addGap(36, 36, 36)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtTinhTrang))
-                .addGap(28, 28, 28)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtTGBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtMDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(78, 78, 78)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -345,13 +299,13 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã phòng", "Tên phòng", "Loại phòng", "Giá phòng", "Thời gian đặt"
+                "Mã phòng", "Tên phòng", "Loại phòng", "Giá phòng", "Thời gian đặt", "Tình trạng"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -851,17 +805,72 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         new TTKhachHang().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_kHNameActionPerformed
 
-// đặt phòng    
+// đặt phòng   
+    final String header[] = {"Mã phòng", "Tên phòng", "Loại phòng", "Giá phòng", "Tình trạng"};
+    final DefaultTableModel tbDP = new DefaultTableModel(header, 0);
+
+    public final ArrayList<PhongModel> layDSPhong() {
+        int tinhtrang = -1;
+        if (searchTinhTrang.getSelectedItem().equals("Đang thuê")) {
+            tinhtrang = 1;
+        }
+        if (searchTinhTrang.getSelectedItem().equals("Chưa thuê")) {
+            tinhtrang = 0;
+        }
+        return new PhongModel().getPhongTim(txtSearch.getText(), tinhtrang);
+    }
+
+    public final void taiTrang(ArrayList<PhongModel> arr) {
+        tbDP.getDataVector().removeAllElements();
+        for (int i = 0; i < arr.size(); i++) {
+            String gia = String.valueOf(arr.get(i).getGiaPhong());
+            String tinhTrang = arr.get(i).getTinhTrang() ? "Đang thuê" : "Chưa thuê";
+            String nd[] = {arr.get(i).getMaPhong(), arr.get(i).getTenPhong(), arr.get(i).getLoaiPhong(), gia, tinhTrang};
+            tbDP.addRow(nd);
+        }
+        TBDatPhong.setModel(tbDP);
+    }
+    public static boolean ngaySD = false;
+    public static boolean checkempty = false;
+    public static boolean checkMuon = false;
+
+    public DatPhongModel getDatPhong() {
+        if (txtTinhTrang.getText().equals("Đang thuê")) {
+            checkMuon = true;
+        }
+        if (txtTGBD.getText().equals("")) {
+            checkempty = true;
+        }
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date thoiGianBatDau = null;
+        try {
+            thoiGianBatDau = formatter.parse(txtTGBD.getText());
+        } catch (ParseException ex) {
+            ngaySD = true;
+
+            System.out.println("sai định dạng thôi mà");
+        }
+
+        return new DatPhongModel(txtMDP.getText(), txtMaPhong.getText(), KhachHangController.khOn.getMaKH(), date, thoiGianBatDau, Float.parseFloat(txtGiaPhong.getText()));
+
+    }
+
+    public void resetForm() {
+        txtTGBD.setText("");
+        txtMDP.setText("");
+        txtMaPhong.setText("");
+        txtTenPhong.setText("");
+        txtLoaiPhong.setText("");
+        txtGiaPhong.setText("");
+        txtTinhTrang.setText("");
+
+    }
     int hientai = 0;
     private void TBDatPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBDatPhongMouseClicked
         hientai = TBDatPhong.getSelectedRow();
         Display(hientai);        // TODO add your handling code here:
     }//GEN-LAST:event_TBDatPhongMouseClicked
-
-    private void DatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatBtnActionPerformed
-        new DatPhongController(this).addDatPhong();        // TODO add your handling code here:
-    }//GEN-LAST:event_DatBtnActionPerformed
-    
     public void Display(int i) {
         PhongModel phong = layDSPhong().get(i);
         txtMaPhong.setText(phong.getMaPhong());
@@ -869,9 +878,21 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         txtGiaPhong.setText(String.valueOf(phong.getGiaPhong()));
         txtLoaiPhong.setText(phong.getLoaiPhong());
         txtTinhTrang.setText(phong.getTinhTrang() ? "Đang thuê" : "Chưa thuê");
-        
     }
-// đặt phòng    
+    private void DatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatBtnActionPerformed
+        new DatPhongController(this).addDatPhong();        // TODO add your handling code here:
+    }//GEN-LAST:event_DatBtnActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+
+        taiTrang(layDSPhong());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void searchTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTinhTrangActionPerformed
+        taiTrang(layDSPhong());  // TODO add your handling code here:
+    }//GEN-LAST:event_searchTinhTrangActionPerformed
+// đặt phòng  
 
     public static void run() {
         /* Set the Nimbus look and feel */
@@ -896,7 +917,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new TrangCuaKhach().setVisible(true);
-            
+
         });
     }
 

@@ -46,7 +46,7 @@ public class DatPhongController {
         if (test) {
             trangCuaKhach.showMessageOK("Đặt thành công");
             new DatPhongModel().updateMuonPhong(datphong);
-            trangCuaKhach.taiTrang(new PhongModel().getPhong());
+            trangCuaKhach.taiTrang(trangCuaKhach.layDSPhong());
             trangCuaKhach.resetForm();
         } else {
             trangCuaKhach.showMessage("Mã đặt phòng đã tồn tại");
