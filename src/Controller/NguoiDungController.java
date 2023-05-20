@@ -25,7 +25,6 @@ public class NguoiDungController {
     private static TaotaiKhoan ttk;
     private static TTUser ttus;
     private static DoiMatKhau doipass;
-//    private static ManHinhChinh MHC;
 
     public NguoiDungController(DangNhap view) {
         NguoiDungController.dnview = view;
@@ -54,8 +53,7 @@ public class NguoiDungController {
                 if (ndc.getCMND() != null) {
                     ManHinhChinh.run();
                     ndOn = ndc;
-//                    MHC = neisible(true);w ManHinhChinh();
-//                    MHC.setV
+//                    MHC.run();//
                     dnview.dispose();
                 } else {
                     dnview.showMessageLogin("Sai thông tin đăng nhập \n");
@@ -187,6 +185,7 @@ public class NguoiDungController {
             if (test) {
                 ndOn = nd;
                 ttus.showMessageOK("update thành công mời bạn đăng nhập lại");
+                ttus.setTT();
 
             } else {
                 ttus.showMessage("dã có lỗi sảy ra");
@@ -271,12 +270,4 @@ public class NguoiDungController {
     public static void setDoipass(DoiMatKhau doipass) {
         NguoiDungController.doipass = doipass;
     }
-
-//    public static ManHinhChinh getMHC() {
-//        return MHC;
-//    }
-//
-//    public static void setMHC(ManHinhChinh MHC) {
-//        NguoiDungController.MHC = MHC;
-//    }
 }

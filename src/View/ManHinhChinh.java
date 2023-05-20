@@ -24,6 +24,10 @@ public class ManHinhChinh extends javax.swing.JFrame {
         this.btnTT.setText(NguoiDungController.ndOn.getHoTen());
     }
 
+    public void updateTTAVT() {
+        this.btnTT.setText(NguoiDungController.ndOn.getHoTen());
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -221,9 +225,9 @@ public class ManHinhChinh extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         JOptionPane.showConfirmDialog(this, "Xác nhận đăng xuất", "Thông báo", JOptionPane.YES_NO_OPTION);
-
         this.setVisible(false);
         new DangNhap().setVisible(true);
+        this.dispose();//
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -281,7 +285,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
         datPhongBtn.setForeground(Color.white);
         btnQL = datPhongBtn;
         // TODO add your handling code here:        
-// TODO add your handling code here:
     }//GEN-LAST:event_datPhongBtnActionPerformed
 
     private void btnTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTActionPerformed
@@ -362,10 +365,10 @@ public class ManHinhChinh extends javax.swing.JFrame {
         DatDVBtn.setBackground(cl);
         DatDVBtn.setForeground(Color.white);
         btnQL = DatDVBtn;  // TODO add your handling code here:
-    
+
     }//GEN-LAST:event_DatDVBtnActionPerformed
 
-public static void run() {
+    public static void run() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -377,15 +380,14 @@ public static void run() {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DangNhap.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DangNhap.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -413,4 +415,5 @@ public static void run() {
     private javax.swing.JButton phongBtn;
     private javax.swing.JButton thongKeBtn;
     // End of variables declaration//GEN-END:variables
+
 }

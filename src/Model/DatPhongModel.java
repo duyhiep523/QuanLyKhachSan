@@ -46,7 +46,6 @@ public class DatPhongModel extends CSDL {
         try {
             Connection conn = this.getConnection();
             String sql = "insert into lich_dat_phong values(?,?,?,?,?,?)";
-
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, dat.getMaDP());
             stm.setString(2, dat.getMaKH());
@@ -143,7 +142,7 @@ public class DatPhongModel extends CSDL {
         return false;
     }
     // huy dat phong khach    
-
+// p
     public String getMaDP() {
         return maDP;
     }
@@ -199,5 +198,4 @@ public class DatPhongModel extends CSDL {
     public void setGiaPhong(float giaPhong) {
         this.giaPhong = giaPhong;
     }
-
 }

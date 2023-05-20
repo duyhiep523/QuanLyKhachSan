@@ -19,18 +19,6 @@ public class TTUser extends javax.swing.JPanel {
 
     public TTUser() {
         initComponents();
-        setTT();
-    }
-
-    public void showMessage(String msg) {
-        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
-    }
-
-    public void showMessageOK(String msg) {
-        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void setTT() {
         this.txtHoten.setText(NguoiDungController.ndOn.getHoTen());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = sdf.format(NguoiDungController.ndOn.getNgaySinh());
@@ -42,6 +30,25 @@ public class TTUser extends javax.swing.JPanel {
         this.txtGioiTinh.setSelectedItem(sex);
     }
 
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showMessageOK(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void setTT() {
+        this.txtHoten.setText(NguoiDungController.ndOn.getHoTen());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = sdf.format(NguoiDungController.ndOn.getNgaySinh());
+        this.txtNgaySinh.setText(dateString);
+        this.txtMail.setText(NguoiDungController.ndOn.getEmail());
+        this.txtSDT.setText(NguoiDungController.ndOn.getSdt());
+        this.txtCMND.setText(NguoiDungController.ndOn.getCMND());
+        String sex = NguoiDungController.ndOn.getGioiTinh() ? "Nam" : "Nữ";
+        this.txtGioiTinh.setSelectedItem(sex);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
