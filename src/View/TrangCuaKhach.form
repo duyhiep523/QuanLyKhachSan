@@ -576,6 +576,12 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="huyDatPhongBtn">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="cc" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="H&#x1ee7;y &#x111;&#x1eb7;t ph&#xf2;ng"/>
                   </Properties>
                   <Events>

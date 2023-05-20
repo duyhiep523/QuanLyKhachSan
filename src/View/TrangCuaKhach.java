@@ -338,6 +338,8 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         hdpTGBD.setText("1111-11-11");
 
+        huyDatPhongBtn.setBackground(new java.awt.Color(0, 204, 255));
+        huyDatPhongBtn.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         huyDatPhongBtn.setText("Hủy đặt phòng");
         huyDatPhongBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
