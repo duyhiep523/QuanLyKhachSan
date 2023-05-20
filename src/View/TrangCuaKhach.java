@@ -960,7 +960,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         tbPhongDaDat.setModel(TBHDP);
     }
 
-    public void resetFormHuyDatPhong() {
+    public final void resetFormHuyDatPhong() {
         hdpMADP.setText("");
         hdpMaKh.setText("");
         hdpMaP.setText("");
