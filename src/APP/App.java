@@ -36,7 +36,7 @@ public class App {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new DangNhap().setVisible(true);
+            new BatDau().setVisible(true);
         });
     }
 }

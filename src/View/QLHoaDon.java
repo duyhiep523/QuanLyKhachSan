@@ -147,7 +147,7 @@ public class QLHoaDon extends javax.swing.JPanel {
 
         jLabel3.setText("MaKH");
 
-        jLabel4.setText("Phòng thuê");
+        jLabel4.setText("Mã DP");
 
         jLabel5.setText("Ngày tạo");
 
