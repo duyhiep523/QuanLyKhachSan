@@ -5,17 +5,19 @@
 package Controller;
 
 import Model.DatPhongModel;
-import Model.PhongModel;
+//import Model.PhongModel;
 import View.TrangCuaKhach;
+//import java.text.SimpleDateFormat
+import java.util.Date;
 
 /**
  *
  * @author hiep0
  */
 public class DatPhongController {
-
+    
     private static TrangCuaKhach trangCuaKhach;
-
+    
     public DatPhongController(TrangCuaKhach view) {
         DatPhongController.trangCuaKhach = view;
     }
@@ -52,13 +54,20 @@ public class DatPhongController {
         } else {
             trangCuaKhach.showMessage("Mã đặt phòng đã tồn tại");
         }
-
+        
     }
     // tạo mới đặt phòng
 
     // huy dat phong
     public void huyDatPhong() {
         DatPhongModel datphong = trangCuaKhach.getHuyDatPhong();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date();
+        int comparison = currentDate.compareTo(datphong.getThoiGianBatDau());
+        if (comparison > 0) {
+            trangCuaKhach.showMessage("Phòng bạn đã sử dụng không thể hủy");
+            return;
+        }
         boolean test = new DatPhongModel().huyDP(datphong);
         if (test) {
             trangCuaKhach.showMessageOK("xóa thành công");
