@@ -20,7 +20,7 @@ public class CSDL {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String urlDB = "jdbc:mysql://localhost:3306/QuanLyKhachSan";
             String userName = "root";
-            String passwordUser = "123456789";
+            String passwordUser = "Thanhtu.2003";
             conn = DriverManager.getConnection(urlDB, userName, passwordUser);
         } catch (ClassNotFoundException | SQLException e) {
         }

@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Controller.KhachHangController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -37,27 +38,57 @@ public class PhongModel extends CSDL {
         this.tinhTrang = tinhTrang;
     }
 
-//    public ArrayList<PhongModel> getPhong() {
-//        ArrayList<PhongModel> arr = new ArrayList<>();
-//        try {
-//            Connection conn = this.getConnection();
-//
-//            String sql = "select *from phong";
-//
-//            PreparedStatement stm = conn.prepareStatement(sql);
-//
-//            ResultSet rs = stm.executeQuery();
-//            while (rs.next()) {
-//                PhongModel phong = new PhongModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getBoolean(5));
-//                arr.add(phong);
-//            }
-//            return arr;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PhongModel.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return arr;
-//    }
+    public PhongModel(String maPhong, String tenPhong, String loaiPhong, float giaPhong) {
+        this.maPhong = maPhong;
+        this.tenPhong = tenPhong;
+        this.loaiPhong = loaiPhong;
+        this.giaPhong = giaPhong;
+    }
 
+    
+
+    public ArrayList<PhongModel> getPhong() {
+        ArrayList<PhongModel> arr = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "select *from phong";
+
+            PreparedStatement stm = conn.prepareStatement(sql);
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                PhongModel phong = new PhongModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getBoolean(5));
+                arr.add(phong);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arr;
+    }
+    
+        public ArrayList<PhongModel> getPhongTheoMaKH() {
+        ArrayList<PhongModel> arr = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "select phong.maPhong, phong.tenPhong, phong.loaiPhong, phong.GiaPhong from phong inner join lich_dat_phong ON \n" +
+            "phong.maPhong =  lich_dat_phong.maPhong\n" +"where lich_dat_phong.maKhachHang = ?";
+            PreparedStatement stm = conn.prepareStatement(sql); 
+            stm.setString(1, KhachHangController.khOn.getMaKH());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                PhongModel phong = new PhongModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4));
+                arr.add(phong);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(PhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arr;
+    }
+    
     public ArrayList<PhongModel> getPhongTim(String key, int gioitinh) {
         ArrayList<PhongModel> arr = new ArrayList<>();
         String sql = "";

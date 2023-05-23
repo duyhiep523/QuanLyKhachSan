@@ -4,6 +4,10 @@
  */
 package View;
 
+import Model.PhongModel;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hiep0
@@ -13,8 +17,24 @@ public class DSPhong extends javax.swing.JPanel {
     /**
      * Creates new form DSPhong
      */
+    ArrayList<PhongModel> arr = new PhongModel().getPhong();
+    final String header[] = {"Mã phòng", "Tên phòng", "Loại phòng", "Giá phòng", "Tình trạng"};
+    final DefaultTableModel tbDP = new DefaultTableModel(header, 0);
+        public final void taiTrang(ArrayList<PhongModel> arr) {
+        tbDP.getDataVector().removeAllElements();
+        for (int i = 0; i < arr.size(); i++) {
+            String gia = String.valueOf(arr.get(i).getGiaPhong());
+            String tinhTrang = arr.get(i).getTinhTrang() ? "Đang thuê" : "Chưa thuê";
+            String nd[] = {arr.get(i).getMaPhong(), arr.get(i).getTenPhong(), arr.get(i).getLoaiPhong(), gia, tinhTrang};
+            tbDP.addRow(nd);
+        }
+        TBPhong.setModel(tbDP);
+    }
+   
     public DSPhong() {
         initComponents();
+        taiTrang(arr);
+        
     }
 
 
@@ -24,11 +44,11 @@ public class DSPhong extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TBPhong = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TBPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,7 +82,7 @@ public class DSPhong extends javax.swing.JPanel {
                 "Mã phòng", "Loại phòng", "Giá phòng", "Tình trạng"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TBPhong);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,8 +109,8 @@ public class DSPhong extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TBPhong;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

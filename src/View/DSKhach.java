@@ -4,6 +4,10 @@
  */
 package View;
 
+import Model.KhachHangModel;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hiep0
@@ -13,8 +17,22 @@ public class DSKhach extends javax.swing.JPanel {
     /**
      * Creates new form DSKhach
      */
+    ArrayList<KhachHangModel> arr = new KhachHangModel().getKhachHang();
+    final String header[] = {"Mã khách hàng", "Tên khách hàng", "CMND", "Số điện thoại", "Giới tính"};
+    final DefaultTableModel tbDP = new DefaultTableModel(header, 0);
+        public final void taiTrang(ArrayList<KhachHangModel> arr) {
+        tbDP.getDataVector().removeAllElements();
+        for (int i = 0; i < arr.size(); i++) {
+            String gioiTinh = arr.get(i).getGioiTinh() ? "Nam" : "Nữ";
+            String nd[] = {arr.get(i).getMaKH(), arr.get(i).getTenKH(), arr.get(i).getCMND(), arr.get(i).getSDT(), gioiTinh};
+            tbDP.addRow(nd);
+        }
+        tbKhach.setModel(tbDP);
+    }
+
     public DSKhach() {
         initComponents();
+        taiTrang(arr);
     }
 
 
@@ -24,11 +42,11 @@ public class DSKhach extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbKhach = new javax.swing.JTable();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbKhach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -62,7 +80,7 @@ public class DSKhach extends javax.swing.JPanel {
                 "Mã Khách hàng", "Tên Khách hàng", "CMND", "Số điện thoại", "Giới tính"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbKhach);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,6 +109,6 @@ public class DSKhach extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbKhach;
     // End of variables declaration//GEN-END:variables
 }

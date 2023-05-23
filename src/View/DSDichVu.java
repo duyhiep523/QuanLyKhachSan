@@ -4,15 +4,33 @@
  */
 package View;
 
+import Model.DichVuModel;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hiep0
  */
 public class DSDichVu extends javax.swing.JPanel {
+        ArrayList<DichVuModel> arr = new DichVuModel().getService();
 
+    final String header[] = {"Mã Dịch Vụ ", "Tên Dịch Vụ", "Giá Dịch Vụ"};
+    final DefaultTableModel df = new DefaultTableModel(header, 0);
+
+    public final void taiTrang(ArrayList<DichVuModel> arr) {
+        df.getDataVector().removeAllElements();
+        for (int i = 0; i < arr.size(); i++) {
+            String gia = String.valueOf(arr.get(i).getServicePrice());
+            String nd[] = {arr.get(i).getServiceId(), arr.get(i).getServiceName(), gia};
+            df.addRow(nd);
+        }
+        table.setModel(df);
+    }
 
     public DSDichVu() {
         initComponents();
+        taiTrang(arr);
     }
 
 
@@ -22,9 +40,9 @@ public class DSDichVu extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -58,8 +76,8 @@ public class DSDichVu extends javax.swing.JPanel {
                 "Mã Dịch Vụ", "Tên Dịch Vụ", "Giá Dịch Vụ"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
+        table.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,6 +106,6 @@ public class DSDichVu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

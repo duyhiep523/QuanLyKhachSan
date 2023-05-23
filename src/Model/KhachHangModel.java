@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,6 +47,33 @@ public class KhachHangModel extends CSDL {
     }
 
 // dang nhap
+    
+    public ArrayList<KhachHangModel> getKhachHang(){
+        ArrayList<KhachHangModel> arr = new ArrayList<>();
+        try{
+            Connection conn = this.getConnection();
+            String sql = "select * from khach_hang";
+            Statement stm = conn.createStatement();
+            ResultSet result = stm.executeQuery(sql);
+            while (result.next()){
+                KhachHangModel kh = new KhachHangModel();
+                kh.setMaKH(result.getString(1));
+                kh.setTenKH(result.getString(2));
+                kh.setGioiTinh(result.getBoolean(3));
+                kh.setSDT(result.getString(4));
+                kh.setCMND(result.getString(5));
+                kh.setTaiKhoan(result.getString(6));
+                kh.setMatKhau(result.getString(7));
+                arr.add(kh);
+            }
+            return arr;
+        }catch(SQLException ex){
+            System.out.println("khong do khach_hang len giao dien");
+        }
+        return arr;
+    }
+    
+    
     public KhachHangModel dangNhap(String taiKhoan, String matKhau) {
         KhachHangModel kH = new KhachHangModel();
         try (Connection conn = this.getConnection()) {

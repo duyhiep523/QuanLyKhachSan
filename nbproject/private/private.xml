@@ -3,26 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Model/DatPhongModel.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/NguoiDung.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Model/PhongModel.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Controller/KhachHangController.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/APP/App.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/DoiMatKhau.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/TrangCuaKhach.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/ManHinhChinh.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Model/KhachHangModel.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Controller/NguoiDungController.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Controller/DatPhongController.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/QLHoaDon.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/BatDau.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Controller/DichVuController.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/QLThemDV.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Model/DichVuModel.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Model/HoaDonModel.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/QLDichVu.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/View/TTUser.java</file>
-            <file>file:/C:/Users/hiep0/OneDrive/Máy%20tính/QuanLyKhachSan/src/Model/NguoiDungModel.java</file>
+            <file>file:/D:/Hoàng%20Thanh%20Tú/HỌC%20TẬP/Java/QuanLyKhachSan/src/Model/HoaDonModel.java</file>
+            <file>file:/D:/Hoàng%20Thanh%20Tú/HỌC%20TẬP/Java/QuanLyKhachSan/src/Controller/KhachHangController.java</file>
+            <file>file:/D:/Hoàng%20Thanh%20Tú/HỌC%20TẬP/Java/QuanLyKhachSan/src/View/DSHoaDon.java</file>
+            <file>file:/D:/Hoàng%20Thanh%20Tú/HỌC%20TẬP/Java/QuanLyKhachSan/src/View/QLHoaDon.java</file>
+            <file>file:/D:/Hoàng%20Thanh%20Tú/HỌC%20TẬP/Java/QuanLyKhachSan/src/Model/DatPhongModel.java</file>
+            <file>file:/D:/Hoàng%20Thanh%20Tú/HỌC%20TẬP/Java/QuanLyKhachSan/src/View/TTKhachHang.java</file>
+            <file>file:/D:/Hoàng%20Thanh%20Tú/HỌC%20TẬP/Java/QuanLyKhachSan/src/View/TrangCuaKhach.java</file>
         </group>
     </open-files>
 </project-private>

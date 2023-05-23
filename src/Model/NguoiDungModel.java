@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,7 +66,27 @@ public class NguoiDungModel extends CSDL {
         this.gioiTinh = null;
     }
 // check dang nhap
-
+    public ArrayList<NguoiDungModel> getNguoiDung(){
+        ArrayList<NguoiDungModel> arr = new ArrayList<>();
+        try{
+            Connection conn = this.getConnection();
+            String sql = "select hoTen, gioiTinh, email, soDienThoai from quan_ly";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                 NguoiDungModel nd = new NguoiDungModel();
+                 nd.setHoTen(rs.getString(1));
+                 nd.setGioiTinh(rs.getBoolean(2));
+                 nd.setEmail(rs.getString(3));
+                 nd.setSdt(rs.getString(4));
+                 arr.add(nd);
+            }
+            return arr;
+        }catch(SQLException ex){
+            System.out.println("sos");
+        }
+        return arr;
+    }
     public NguoiDungModel checkLogin(String taiKhoan, String matKhau) {
         NguoiDungModel nd = new NguoiDungModel();
         try (Connection conn = this.getConnection()) {
