@@ -41,6 +41,36 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     public void setTenTrangChu(KhachHangModel kh) {
         this.kHName.setText(kh.getTenKH());
     }
+    
+    public final ArrayList<PhongModel> layDSPhongTheoLoaiPhong(){
+        int index = jCbLoaiPhong.getSelectedIndex();
+        if(index >0){
+            String selectedValue = jCbLoaiPhong.getItemAt(index);
+            System.out.println(selectedValue);
+            return new PhongModel().getPhongTheoLoaiPhong(selectedValue);  
+        }   
+        return new PhongModel().getPhongTheoMaKH();
+        
+    }
+    
+    public ArrayList<DichVuModel> LayDSDichVuTheoGiaDV(){
+        int index = jComBoxGiaDV.getSelectedIndex();
+        if(index > 0){
+            String selectedVulue = jComBoxGiaDV.getItemAt(index);
+            return new DichVuModel().getDichVuTheoGia(Float.valueOf(selectedVulue));
+            
+        }
+        return new DichVuModel().getDichVuTheoMaKh();
+    }
+    
+    public final ArrayList<PhongModel> layDSPhongTheoGiaPhong(){
+        int index1 = jCbGiaPhong.getSelectedIndex();
+        if(index1 > 0){
+            String selectedValue = jCbGiaPhong.getItemAt(index1);
+            return new PhongModel().getPhongTheoGiaPhong(Float.valueOf(selectedValue));
+        }
+       return new PhongModel().getPhongTheoMaKH();
+    }
 // thông báo
 
     public void showMessage(String msg) {
@@ -114,9 +144,8 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TBPhong = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        jCbGiaPhong = new javax.swing.JComboBox<>();
+        jCbLoaiPhong = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
@@ -124,9 +153,8 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         tbDichVu = new javax.swing.JTable();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        jComBoxGiaDV = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TBQuanLy = new javax.swing.JTable();
@@ -551,11 +579,19 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(TBPhong);
 
-        jButton5.setText("Lọc");
+        jCbGiaPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "50000.0", "80000.0", "150000.0" }));
+        jCbGiaPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCbGiaPhongActionPerformed(evt);
+            }
+        });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCbLoaiPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Phòng Đơn", "Phòng Đôi", "Phòng Vip" }));
+        jCbLoaiPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCbLoaiPhongActionPerformed(evt);
+            }
+        });
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Loại phòng");
@@ -569,16 +605,16 @@ public class TrangCuaKhach extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox5, 0, 80, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jCbLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox4, 0, 80, Short.MAX_VALUE))
-                .addGap(68, 68, 68)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
+                    .addComponent(jCbGiaPhong, 0, 80, Short.MAX_VALUE))
+                .addGap(158, 158, 158)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -591,11 +627,10 @@ public class TrangCuaKhach extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel25)
                             .addComponent(jLabel14))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCbGiaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCbLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -623,11 +658,19 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("Lọc theo giá");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tắt cả", "0-1tr", "1-2tr", "2-3tr" }));
+        jComBoxGiaDV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "200000.0", "50000.0", "10000.0", "2500000.0" }));
+        jComBoxGiaDV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComBoxGiaDVActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("Nhập vào đây");
-
-        jButton6.setText("Lọc");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -641,29 +684,22 @@ public class TrangCuaKhach extends javax.swing.JFrame {
                 .addGap(129, 129, 129)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox6, 0, 88, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addGap(27, 27, 27)
+                    .addComponent(jComBoxGiaDV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel26)
-                            .addComponent(jLabel27))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(135, 135, 135)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComBoxGiaDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(362, Short.MAX_VALUE))
         );
 
@@ -837,7 +873,9 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void kHNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kHNameActionPerformed
-        new TTKhachHang().setVisible(true);        // TODO add your handling code here:
+        new TTKhachHang(this).setVisible(true);
+        this.setTenTrangChu(KhachHangController.khOn);
+        // TODO add your handling code here:
     }//GEN-LAST:event_kHNameActionPerformed
 
 // đặt phòng   
@@ -948,6 +986,25 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         displayNguoiDung(hientaiNguoiDung);
         
     }//GEN-LAST:event_TBQuanLyMouseClicked
+
+    private void jComBoxGiaDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComBoxGiaDVActionPerformed
+        // TODO add your handling code here:
+        taiTrangDichVu(LayDSDichVuTheoGiaDV());
+    }//GEN-LAST:event_jComBoxGiaDVActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jCbGiaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbGiaPhongActionPerformed
+        // TODO add your handling code here:
+          taiTrangPhong(layDSPhongTheoGiaPhong());
+    }//GEN-LAST:event_jCbGiaPhongActionPerformed
+
+    private void jCbLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbLoaiPhongActionPerformed
+        // TODO add your handling code here:
+         taiTrangPhong(layDSPhongTheoLoaiPhong());
+    }//GEN-LAST:event_jCbLoaiPhongActionPerformed
     
     public void displayNguoiDung(int i){
         NguoiDungModel nd = getNguoiDungtheoKH().get(i);
@@ -1156,13 +1213,11 @@ public class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JLabel hdpTGD;
     private javax.swing.JButton huyDatPhongBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jCbGiaPhong;
+    private javax.swing.JComboBox<String> jCbLoaiPhong;
+    private javax.swing.JComboBox<String> jComBoxGiaDV;
     private javax.swing.JLabel jLEmail;
     private javax.swing.JLabel jLGioiTinh;
     private javax.swing.JLabel jLSDT;

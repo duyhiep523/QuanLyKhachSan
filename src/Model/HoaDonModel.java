@@ -66,7 +66,6 @@ public class HoaDonModel extends CSDL {
     public ArrayList<HoaDonModel> getDuLieu() {
         ArrayList<HoaDonModel> arr = new ArrayList<>();
         try {
-
             Connection conn = this.getConnection();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("select * from danh_sach_hoa_don;");

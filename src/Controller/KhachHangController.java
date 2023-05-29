@@ -22,6 +22,11 @@ public class KhachHangController {
     public static KhachHangModel khOn;
     private static TaoTaiKhoanKhach TTK;
     private static TTKhachHang ttKH;
+    private TrangCuaKhach tck;
+
+    public KhachHangController() {
+        tck = new TrangCuaKhach();
+    }
 
     public KhachHangController(TaoTaiKhoanKhach view) {
         KhachHangController.TTK = view;
@@ -41,7 +46,7 @@ public class KhachHangController {
             if (test.getMaKH() != null) {
                 khOn = test;
                 System.out.println(khOn.getTenKH());
-                TrangCuaKhach.run();
+                tck.run();
                 dangNhap.dispose();
             } else {
                 dangNhap.showMessageLogin("sai thông tin");
@@ -111,7 +116,7 @@ public class KhachHangController {
 // tao tai khoan
 // cap nhat thong tin nguoidung
 
-    public void updateTT() {
+    public void updateTT(TrangCuaKhach t) {
         KhachHangModel kh = ttKH.getTT();
 
         if (kh.getTenKH().equals("")) {
@@ -140,7 +145,10 @@ public class KhachHangController {
             System.out.println(kh.getTenKH());
             khOn = kh;
             ttKH.showMessageOK("Cập nhật thành công");
-//            ttKH.setTenTrangChu(khOn);
+            //new TrangCuaKhach().setTenTrangChu(khOn);
+//            tck.setTenTrangChu(khOn);
+            t.setTenTrangChu(khOn);
+            
 
         } else {
             ttKH.showMessage("Người dùng đã tồn tại");
@@ -219,5 +227,8 @@ public class KhachHangController {
     public static void setTtKH(TTKhachHang ttKH) {
         KhachHangController.ttKH = ttKH;
     }
-
+    
+    public int ThongKeKhachHang(){
+        return new KhachHangModel().countKhach();
+    }
 }

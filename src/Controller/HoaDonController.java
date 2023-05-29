@@ -3,47 +3,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
+
 import View.DSHoaDon;
 import Model.HoaDonModel;
 import View.QLHoaDon;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import View.QLThongKe;
+
 /**
  *
  * @author hiep0
  */
 public class HoaDonController {
+
     DSHoaDon dshoadon;
     QLHoaDon qlhoadon;
-    QLThongKe qlTK;
-    HoaDonModel hd;
 
-    public HoaDonController(HoaDonModel hd) {
-        this.hd = hd;
+    public HoaDonController() {
+
     }
-    
+
+    public int laySoHoaDon() {
+        return new HoaDonModel().demSoHoaDon();
+    }
+
     public HoaDonController(DSHoaDon dshoadon) {
         this.dshoadon = dshoadon;
     }
-    
-    
+
     public HoaDonController(QLHoaDon qlhoadon) {
         this.qlhoadon = qlhoadon;
-    }
-
-    public HoaDonController(QLThongKe qlTK) {
-        this.qlTK = qlTK;
     }
 
     public void hienthi1() {
         qlhoadon.taiTrang(new HoaDonModel().getDuLieu());
     }
-    
+
     public void hienthi() {
         dshoadon.taiTrang(new HoaDonModel().getDuLieu());
-    }    
+    }
 
 //       tạo hóa đơn
     public String regexNgayTao = "\\d{4}[-]\\d{1,2}[-]\\d{1,2}";
@@ -56,7 +55,6 @@ public class HoaDonController {
         return matcher.matches();
     }
 
-    
     public void taoHoaDon() {
         HoaDonModel hd = qlhoadon.getHoaDon();
         if (hd.getMaHoaDon().equals("")) {
@@ -102,9 +100,9 @@ public class HoaDonController {
         }
 
     }
-    
-    public void suaHoaDon(){
-            HoaDonModel hd = qlhoadon.getHoaDon();
+
+    public void suaHoaDon() {
+        HoaDonModel hd = qlhoadon.getHoaDon();
         if (hd.getMaHoaDon().equals("")) {
             qlhoadon.showMessage("Mã hóa đơn không được để trống");
             return;
@@ -145,11 +143,10 @@ public class HoaDonController {
             qlhoadon.taiTrang(new HoaDonModel().getDuLieu());
         } else {
             qlhoadon.showMessage("Thất bại sửa hóa đơn");
-        }    
+        }
     }
-    
-    
-    public void xoaHoaDon(){
+
+    public void xoaHoaDon() {
         HoaDonModel hd = qlhoadon.xoaHoaDon();
         if (hd.getMaHoaDon().equals("")) {
             qlhoadon.showMessage("Mã hóa đơn không được để trống");
@@ -165,18 +162,10 @@ public class HoaDonController {
         if (test) {
             qlhoadon.showMessage("xóa hóa đơn Thành công");
             qlhoadon.taiTrang(new HoaDonModel().getDuLieu());
-            
+
         } else {
             qlhoadon.showMessage("Thất bại sửa hóa đơn");
-        }    
+        }
     }
-    
-    public String countHD(HoaDonModel hd){
-           int dem = hd.demSoHoaDon(hd);
-           String str = String.valueOf(dem);
-           return str;
-//           return qlTK.trungGian(str);
-    }
-    
 
 }

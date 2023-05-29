@@ -15,6 +15,7 @@ public class DichVuModel extends CSDL {
     private String serviceName;
     private float servicePrice;
     private int count;
+
     public DichVuModel(String serviceId, String serviceName, float servicePrice, int count) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
@@ -86,15 +87,15 @@ public class DichVuModel extends CSDL {
         }
         return arr;
     }
-    
-        public ArrayList<DichVuModel> getDichVuTheoMaKh() {
+
+    public ArrayList<DichVuModel> getDichVuTheoMaKh() {
         ArrayList<DichVuModel> arr = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
-            String sql = "select dich_vu.maDichVu, dich_vu.tenDichVu, dich_vu.giaDichVu,count(dich_vu.maDichVu) from dich_vu inner join chi_tiet_dich_vu\n" +
-"on dich_vu.maDichVu = chi_tiet_dich_vu.maDichVu \n" +
-"inner join lich_dat_phong on lich_dat_phong.maDatPhong = chi_tiet_dich_vu.maDatPhong \n" +
-"where lich_dat_phong.maKhachHang = ? group by dich_vu.maDichVu";
+            String sql = "select dich_vu.maDichVu, dich_vu.tenDichVu, dich_vu.giaDichVu,count(dich_vu.maDichVu) from dich_vu inner join chi_tiet_dich_vu\n"
+                    + "on dich_vu.maDichVu = chi_tiet_dich_vu.maDichVu \n"
+                    + "inner join lich_dat_phong on lich_dat_phong.maDatPhong = chi_tiet_dich_vu.maDatPhong \n"
+                    + "where lich_dat_phong.maKhachHang = ? group by dich_vu.maDichVu";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, KhachHangController.khOn.getMaKH());
             ResultSet rs = statement.executeQuery();
@@ -103,7 +104,34 @@ public class DichVuModel extends CSDL {
                 dv.setServiceId(rs.getString(1));
                 dv.setServiceName(rs.getString(2));
                 dv.setServicePrice(rs.getFloat(3));
-                dv.setCount( rs.getInt(4));
+                dv.setCount(rs.getInt(4));
+                arr.add(dv);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("noop");
+        }
+        return arr;
+    }
+    
+        public ArrayList<DichVuModel> getDichVuTheoGia(Float gia) {
+        ArrayList<DichVuModel> arr = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+            String sql = "select dich_vu.maDichVu, dich_vu.tenDichVu, dich_vu.giaDichVu,count(dich_vu.maDichVu) from dich_vu inner join chi_tiet_dich_vu\n"
+                    + "on dich_vu.maDichVu = chi_tiet_dich_vu.maDichVu \n"
+                    + "inner join lich_dat_phong on lich_dat_phong.maDatPhong = chi_tiet_dich_vu.maDatPhong \n"
+                    + "where lich_dat_phong.maKhachHang = ? and dich_vu.giaDichVu = '"+gia
+                    +"'  group by dich_vu.maDichVu";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, KhachHangController.khOn.getMaKH());
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                DichVuModel dv = new DichVuModel();
+                dv.setServiceId(rs.getString(1));
+                dv.setServiceName(rs.getString(2));
+                dv.setServicePrice(rs.getFloat(3));
+                dv.setCount(rs.getInt(4));
                 arr.add(dv);
             }
             return arr;
@@ -113,7 +141,33 @@ public class DichVuModel extends CSDL {
         return arr;
     }
 
-
+        public ArrayList<DichVuModel> getDichVuTheoTenDV(String key) {
+        ArrayList<DichVuModel> arr = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+            String sql = "select dich_vu.maDichVu, dich_vu.tenDichVu, dich_vu.giaDichVu,count(dich_vu.maDichVu) from dich_vu inner join chi_tiet_dich_vu\n"
+                    + "on dich_vu.maDichVu = chi_tiet_dich_vu.maDichVu \n"
+                    + "inner join lich_dat_phong on lich_dat_phong.maDatPhong = chi_tiet_dich_vu.maDatPhong \n"
+                    + "where lich_dat_phong.maKhachHang = ? and dich_vu.tenDichVu like '%" + key
+                    + "%'  group by dich_vu.maDichVu";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, KhachHangController.khOn.getMaKH());
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                DichVuModel dv = new DichVuModel();
+                dv.setServiceId(rs.getString(1));
+                dv.setServiceName(rs.getString(2));
+                dv.setServicePrice(rs.getFloat(3));
+                dv.setCount(rs.getInt(4));
+                arr.add(dv);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("noop");
+        }
+        return arr;
+    }
+        
     public Boolean them(DichVuModel dv) {
         try {
             Connection conn = this.getConnection();
@@ -135,7 +189,7 @@ public class DichVuModel extends CSDL {
                 } else {
                     return false;
                 }
-              
+
             }
             return false;
 
@@ -144,7 +198,8 @@ public class DichVuModel extends CSDL {
         }
         return false;
     }
-public boolean deleteDV(DichVuModel dv) {
+
+    public boolean deleteDV(DichVuModel dv) {
         String sql = "";
         try {
             Connection conn = this.getConnection();
@@ -155,15 +210,14 @@ public boolean deleteDV(DichVuModel dv) {
             st.executeUpdate();
             return true;
 
-} catch (SQLException ex) {
-            Logger.getLogger(DichVuModel.class  
-
-.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DichVuModel.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
- public Boolean sua(DichVuModel dv) {
+    public Boolean sua(DichVuModel dv) {
 
         try {
             Connection conn = this.getConnection();
@@ -175,10 +229,28 @@ public boolean deleteDV(DichVuModel dv) {
             stm.executeUpdate();
             return true;
 
-} catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(DichVuModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    public int CountDichVu(){
+        int i = 1;
+        try{
+            Connection conn = this.getConnection();
+            String sql = "select count(maDichVu) from dich_vu";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                i = rs.getInt(i);
+            }
+            return i;
+        }catch(SQLException ex){
+             System.out.println("Không thống kê được dịch vụ");
+             
+        }
+        return i;
     }
 
 }

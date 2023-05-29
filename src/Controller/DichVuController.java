@@ -25,6 +25,9 @@ public class DichVuController {
   public String regexTDV = "^DV+[0-9]$";
      public String regexPDV = "^[0-9]$";
 
+    public DichVuController() {
+    }
+
 public boolean Regex(String input, String regex) {
     Pattern pattern = Pattern.compile(regex);
     Matcher matcher = pattern.matcher(input);
@@ -94,4 +97,7 @@ public void themDV() {
         }
     }
     
+    public int CountDichVu(){
+        return new DichVuModel().CountDichVu();
+    }
 }

@@ -14,39 +14,43 @@ import javax.swing.JOptionPane;
  * @author hiep0
  */
 public class TTKhachHang extends javax.swing.JFrame {
-
-    public TTKhachHang() {
+    
+    TrangCuaKhach t;
+    
+    public TTKhachHang(TrangCuaKhach tck) {
+        t = tck;
         initComponents();
         this.setLocationRelativeTo(null);
-        txtName.setText(KhachHangController.khOn.getTenKH());
-        txtGioiTinh.setText(KhachHangController.khOn.getGioiTinh() ? "Nam" : "Nữ");
-        txtSDT.setText(KhachHangController.khOn.getSDT());
-        txtCMND.setText(KhachHangController.khOn.getCMND());
-
-        textName.setText(KhachHangController.khOn.getTenKH());
-        if (KhachHangController.khOn.getGioiTinh()) {
-            textGioiTinh.setSelectedIndex(0);
-        } else {
-            textGioiTinh.setSelectedIndex(1);
-        }
-
-        textSDT.setText(KhachHangController.khOn.getSDT());
-        textCMND.setText(KhachHangController.khOn.getCMND());
+//        txtName.setText(KhachHangController.khOn.getTenKH());
+//        txtGioiTinh.setText(KhachHangController.khOn.getGioiTinh() ? "Nam" : "Nữ");
+//        txtSDT.setText(KhachHangController.khOn.getSDT());
+//        txtCMND.setText(KhachHangController.khOn.getCMND());
+//
+//        textName.setText(KhachHangController.khOn.getTenKH());
+//        if (KhachHangController.khOn.getGioiTinh()) {
+//            textGioiTinh.setSelectedIndex(0);
+//        } else {
+//            textGioiTinh.setSelectedIndex(1);
+//        }
+//
+//        textSDT.setText(KhachHangController.khOn.getSDT());
+//        textCMND.setText(KhachHangController.khOn.getCMND());
+        this.setTT(KhachHangController.khOn);
     }
-
-    public void setTT(KhachHangModel kh) {
+    
+    public final void setTT(KhachHangModel kh) {
         txtName.setText(kh.getTenKH());
         txtGioiTinh.setText(kh.getGioiTinh() ? "Nam" : "Nữ");
         txtSDT.setText(kh.getSDT());
         txtCMND.setText(kh.getCMND());
-
+        
         textName.setText(kh.getTenKH());
         if (kh.getGioiTinh()) {
             textGioiTinh.setSelectedIndex(0);
         } else {
             textGioiTinh.setSelectedIndex(1);
         }
-
+        
         textSDT.setText(kh.getSDT());
         textCMND.setText(kh.getCMND());
     }
@@ -65,7 +69,7 @@ public class TTKhachHang extends javax.swing.JFrame {
     public static boolean checkPass = false;
     public static boolean change = false;
     public static String MKCUKI;
-
+    
     public KhachHangModel getMK() {
         char[] s = passHienTai.getPassword();
         char[] s1 = passMoi.getPassword();
@@ -100,7 +104,7 @@ public class TTKhachHang extends javax.swing.JFrame {
         passHienTai.setText("");
         passLai.setText("");
         passMoi.setText("");
-
+        
     }
 // reset form mật khẩu
 
@@ -108,7 +112,7 @@ public class TTKhachHang extends javax.swing.JFrame {
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
-
+    
     public void showMessageOK(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -387,7 +391,9 @@ public class TTKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        new KhachHangController(this).updateTT();        // TODO add your handling code here:
+        new KhachHangController(this).updateTT(t);
+        this.setTT(KhachHangController.khOn);
+        // TODO add your handling code here:
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void updatePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePassActionPerformed
@@ -397,37 +403,37 @@ public class TTKhachHang extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TTKhachHang().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TTKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new TTKhachHang().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;

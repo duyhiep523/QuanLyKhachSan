@@ -5,6 +5,7 @@
 package Model;
 
 import Controller.KhachHangController;
+import Controller.PhongController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -44,6 +45,7 @@ public class PhongModel extends CSDL {
         this.loaiPhong = loaiPhong;
         this.giaPhong = giaPhong;
     }
+
 
     
 
@@ -89,6 +91,53 @@ public class PhongModel extends CSDL {
         return arr;
     }
     
+        public ArrayList<PhongModel> getPhongTheoLoaiPhong(String key) {
+        ArrayList<PhongModel> arr = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "select phong.maPhong, phong.tenPhong, phong.loaiPhong, phong.GiaPhong from phong inner join lich_dat_phong ON \n" +
+            "phong.maPhong =  lich_dat_phong.maPhong\n" +"where lich_dat_phong.maKhachHang = ? and phong.loaiPhong = '"+key+"'";
+            PreparedStatement stm = conn.prepareStatement(sql); 
+            stm.setString(1, KhachHangController.khOn.getMaKH());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                PhongModel phong = new PhongModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4));
+                arr.add(phong);
+            }
+            System.out.println("hhhhhh");
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("ppppppppp");
+            Logger.getLogger(PhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arr;
+    }
+        
+        public ArrayList<PhongModel> getPhongTheoGiaPhong(Float key) {
+        ArrayList<PhongModel> arr = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "select phong.maPhong, phong.tenPhong, phong.loaiPhong, phong.giaPhong from phong inner join lich_dat_phong ON \n" +
+            "phong.maPhong =  lich_dat_phong.maPhong\n" +"where lich_dat_phong.maKhachHang = ? and phong.giaPhong = '"+ key+"'";
+            PreparedStatement stm = conn.prepareStatement(sql); 
+            stm.setString(1, KhachHangController.khOn.getMaKH());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                PhongModel phong = new PhongModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4));
+                arr.add(phong);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("ggggggg");
+            Logger.getLogger(PhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arr;
+    }
+        
+    
+        
     public ArrayList<PhongModel> getPhongTim(String key, int gioitinh) {
         ArrayList<PhongModel> arr = new ArrayList<>();
         String sql = "";
@@ -118,7 +167,26 @@ public class PhongModel extends CSDL {
         }
         return arr;
     }
+    
 
+    
+    public int CountPhong(){
+        int i = 1;
+        try{
+            Connection conn = this.getConnection();
+            String sql = "select count(maPhong) from phong";
+            PreparedStatement stmm = conn.prepareStatement(sql);
+            ResultSet rs = stmm.executeQuery();
+            while(rs.next()){
+                i = rs.getInt(i);
+            }
+            return i;
+        }catch(SQLException ex){
+            System.out.println("Khong thong ke duoc phong");
+        }
+        return i;
+    }
+    
     public String getMaPhong() {
         return maPhong;
     }

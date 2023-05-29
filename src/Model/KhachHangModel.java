@@ -50,8 +50,8 @@ public class KhachHangModel extends CSDL {
     
     public ArrayList<KhachHangModel> getKhachHang(){
         ArrayList<KhachHangModel> arr = new ArrayList<>();
-        try{
-            Connection conn = this.getConnection();
+        try(Connection conn = this.getConnection();){
+            
             String sql = "select * from khach_hang";
             Statement stm = conn.createStatement();
             ResultSet result = stm.executeQuery(sql);
@@ -102,8 +102,8 @@ public class KhachHangModel extends CSDL {
 // Tao tai khoan
 
     public boolean taoTaiKhoan(KhachHangModel kh) {
-        try {
-            Connection conn = this.getConnection();
+        try(Connection conn = this.getConnection();) {
+            
             String query = "select count(maKhachHang) from khach_hang where maKhachHang='" + kh.getMaKH() + "'";
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery(query);
@@ -144,8 +144,7 @@ public class KhachHangModel extends CSDL {
 // Doi thong tin
 
     public boolean doiThongTin(KhachHangModel kh) {
-        try {
-            Connection conn = this.getConnection();
+        try(Connection conn = this.getConnection();){
             String sql = "update khach_hang set tenKhachHang= ? ,gioiTinh= ? ,soDienThoai= ?,canCuocCongDan= ? where maKhachHang= ? and taiKhoan=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, kh.getTenKH());
@@ -166,8 +165,8 @@ public class KhachHangModel extends CSDL {
 // Doi mat khau 
 
     public boolean doiMatKhau(KhachHangModel kh) {
-        try {
-            Connection conn = this.getConnection();
+        try(Connection conn = this.getConnection();){
+            
             String sql = "update khach_hang set matkhau= ?  where maKhachHang=? and taiKhoan= ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, kh.getMatKhau());
@@ -182,6 +181,24 @@ public class KhachHangModel extends CSDL {
         return false;
     }
 // Doi mat khau
+    
+    public int countKhach(){
+        int i = 1;
+        try(Connection conn = this.getConnection();){
+            
+            String sql = "Select count(*) from khach_hang";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                i = rs.getInt(i);
+            }
+            System.out.println(""+i);
+            return i;
+        }catch(SQLException ex){
+            System.out.println("Khong thong ke duoc khach hang");
+        }
+        return i;
+    }
 
     public String getMaKH() {
         return maKH;
