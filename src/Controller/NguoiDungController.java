@@ -8,6 +8,7 @@ import Model.NguoiDungModel;
 import View.DangNhap;
 import View.DoiMatKhau;
 import View.ManHinhChinh;
+import View.NguoiDung;
 import View.TTUser;
 import View.TaotaiKhoan;
 import java.text.SimpleDateFormat;
@@ -145,7 +146,7 @@ public class NguoiDungController {
 
 // them nguoi dung
 // update tt
-    public void updateNguoiDung() {
+    public void updateNguoiDung(NguoiDung nguoidung) {
         NguoiDungModel nd = ttus.getNDMD();
         String error = "";
         if (nd.getHoTen().equals("")) {
@@ -186,7 +187,7 @@ public class NguoiDungController {
                 ndOn = nd;
                 ttus.showMessageOK("update thành công mời bạn đăng nhập lại");
                 ttus.setTT();
-
+                nguoidung.updateNguoidung();
             } else {
                 ttus.showMessage("dã có lỗi sảy ra");
             }

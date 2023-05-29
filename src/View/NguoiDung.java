@@ -18,8 +18,10 @@ import javax.swing.JOptionPane;
 public class NguoiDung extends javax.swing.JFrame {
 
     private static JButton btnQL;
+    ManHinhChinh view;
 
-    public NguoiDung() {
+    public NguoiDung(ManHinhChinh view) {
+        this.view = view;
         initComponents();
         updateNguoidung();
     }
@@ -32,7 +34,8 @@ public class NguoiDung extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void updateNguoidung() {
+    public final void updateNguoidung() {
+        this.view.updateTTAVT();
         this.txtName.setText(NguoiDungController.ndOn.getHoTen());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         this.txtDOB.setText(formatter.format(NguoiDungController.ndOn.getNgaySinh()));
@@ -284,7 +287,7 @@ public class NguoiDung extends javax.swing.JFrame {
             btnQL.setBackground(Color.white);
             btnQL.setForeground(Color.black);
         }
-        TTUser TT = new TTUser();
+        TTUser TT = new TTUser(this);
         TT.setSize(679, 300);
         TT.setLocation(0, 0);
         content.removeAll();

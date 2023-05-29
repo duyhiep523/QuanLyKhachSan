@@ -288,10 +288,10 @@ public class ManHinhChinh extends javax.swing.JFrame {
     }//GEN-LAST:event_datPhongBtnActionPerformed
 
     private void btnTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTActionPerformed
-        NguoiDung n1 = new NguoiDung();
+        NguoiDung n1 = new NguoiDung(this);
         n1.setLocationRelativeTo(null);
         n1.setVisible(true);
-
+        this.updateTTAVT();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTTActionPerformed
 

@@ -157,7 +157,7 @@ public class QLHoaDon extends javax.swing.JPanel {
                 "Mã HD", "Mã KH", "Tên KH", "Phòng thuê", "Tiền phòng", "Tiền dịch vụ", "Ngày làm", "Tổng tiền"
             }
         ));
-        DanhSachHoaDon.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        DanhSachHoaDon.setSelectionBackground(new java.awt.Color(204, 204, 204));
         DanhSachHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DanhSachHoaDonMouseClicked(evt);
@@ -391,8 +391,8 @@ public class QLHoaDon extends javax.swing.JPanel {
 
     private void ButtonADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonADDActionPerformed
         // TODO add your handling code here:
-           new HoaDonController(this).taoHoaDon();
-                           TxtmaHD.setText("");
+        new HoaDonController(this).taoHoaDon();
+        TxtmaHD.setText("");
         TxtmaDatPhong.setText("");
         TxtngayTao.setText("");
 
@@ -400,31 +400,31 @@ public class QLHoaDon extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         taiTrang(layDSHoaDon());
+        taiTrang(layDSHoaDon());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ButtonEDITActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEDITActionPerformed
         // TODO add your handling code here:
-           new HoaDonController(this).suaHoaDon();
-                           TxtmaHD.setText("");
-        TxtmaDatPhong.setText("");
-        TxtngayTao.setText("");
+        new HoaDonController(this).suaHoaDon();
+//        TxtmaHD.setText("");
+//        TxtmaDatPhong.setText("");
+//        TxtngayTao.setText("");
 
     }//GEN-LAST:event_ButtonEDITActionPerformed
 
     private void ButtonDELETEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDELETEActionPerformed
         // TODO add your handling code here:
-           new HoaDonController(this).xoaHoaDon();
+        new HoaDonController(this).xoaHoaDon();
         TxtmaHD.setText("");
         TxtmaDatPhong.setText("");
         TxtngayTao.setText("");
 
     }//GEN-LAST:event_ButtonDELETEActionPerformed
-    
-  
+
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-                TxtmaHD.setText("");
+        TxtmaHD.setText("");
         TxtmaDatPhong.setText("");
         TxtngayTao.setText("");
 
@@ -432,23 +432,21 @@ public class QLHoaDon extends javax.swing.JPanel {
 
     private void txtTimMaHoaDonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimMaHoaDonKeyReleased
         // TODO add your handling code here:
-             taiTrang(layDSHoaDon());
+        taiTrang(layDSHoaDon());
     }//GEN-LAST:event_txtTimMaHoaDonKeyReleased
 
     private void DanhSachHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhSachHoaDonMouseClicked
         // TODO add your handling code here:
-          hientai = DanhSachHoaDon.getSelectedRow();
+        hientai = DanhSachHoaDon.getSelectedRow();
         Display(hientai);
     }//GEN-LAST:event_DanhSachHoaDonMouseClicked
-    
-        public final ArrayList<HoaDonModel> layDSHoaDon() {
+
+    public final ArrayList<HoaDonModel> layDSHoaDon() {
         return new HoaDonModel().timKiem(txtTimMaHoaDon.getText(), txtTimMaHoaDon.getText(), jTextTimMaKH.getText());
     }
-        int hientai = 0;
+    int hientai = 0;
 
-    
-            
-            public void Display(int i) {
+    public void Display(int i) {
         HoaDonModel hd = arr.get(i);
         TxtmaHD.setText(hd.getMaHoaDon());
         TxtmaDatPhong.setText(hd.getMaDatPhong());

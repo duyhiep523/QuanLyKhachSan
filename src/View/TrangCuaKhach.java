@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author hiep0
  */
-public class TrangCuaKhach extends javax.swing.JFrame {
+public final class TrangCuaKhach extends javax.swing.JFrame {
 
     public TrangCuaKhach() {
         initComponents();
@@ -53,7 +53,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         
     }
     
-    public ArrayList<DichVuModel> LayDSDichVuTheoGiaDV(){
+    public ArrayList<DichVuModel> LayDSDichVuTheoGiaDV() {
         int index = jComBoxGiaDV.getSelectedIndex();
         if(index > 0){
             String selectedVulue = jComBoxGiaDV.getItemAt(index);
@@ -172,7 +172,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -486,15 +486,15 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         jLabel40.setText("Tổng tiền");
 
-        jLTenKH.setText("jLabel42");
+        jLTenKH.setText(".");
 
-        JLmaDatPhong.setText("jLabel43");
+        JLmaDatPhong.setText(".");
 
-        JLTienDV.setText("jLabel44");
+        JLTienDV.setText(".");
 
-        jLTienPhong.setText("jLabel45");
+        jLTienPhong.setText(".");
 
-        jLTongTien.setText("jLabel46");
+        jLTongTien.setText(".");
 
         jButton8.setText("Thanh toán ngay");
 
@@ -733,13 +733,13 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         jLabel31.setText("Số điện thoại");
 
-        jLTen.setText("jLabel32");
+        jLTen.setText(".");
 
-        jLGioiTinh.setText("jLabel33");
+        jLGioiTinh.setText(".");
 
-        jLEmail.setText("jLabel34");
+        jLEmail.setText(".");
 
-        jLSDT.setText("jLabel35");
+        jLSDT.setText(".");
 
         jButton7.setText("Liên hệ ngay");
 
@@ -815,6 +815,8 @@ public class TrangCuaKhach extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Thống kê của khách sạn", jPanel7);
 
+        jButton1.setBackground(new java.awt.Color(255, 0, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jButton1.setText("Đăng xuất");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -822,6 +824,8 @@ public class TrangCuaKhach extends javax.swing.JFrame {
             }
         });
 
+        kHName.setBackground(new java.awt.Color(0, 204, 255));
+        kHName.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         kHName.setText("Nguyễn Duy Hiệp");
         kHName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -834,9 +838,9 @@ public class TrangCuaKhach extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(kHName, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(kHName, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jTabbedPane2)
         );
@@ -844,7 +848,7 @@ public class TrangCuaKhach extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kHName, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)

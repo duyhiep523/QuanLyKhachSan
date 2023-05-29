@@ -14,43 +14,29 @@ import javax.swing.JOptionPane;
  * @author hiep0
  */
 public class TTKhachHang extends javax.swing.JFrame {
-    
+
     TrangCuaKhach t;
-    
+
     public TTKhachHang(TrangCuaKhach tck) {
         t = tck;
         initComponents();
         this.setLocationRelativeTo(null);
-//        txtName.setText(KhachHangController.khOn.getTenKH());
-//        txtGioiTinh.setText(KhachHangController.khOn.getGioiTinh() ? "Nam" : "Nữ");
-//        txtSDT.setText(KhachHangController.khOn.getSDT());
-//        txtCMND.setText(KhachHangController.khOn.getCMND());
-//
-//        textName.setText(KhachHangController.khOn.getTenKH());
-//        if (KhachHangController.khOn.getGioiTinh()) {
-//            textGioiTinh.setSelectedIndex(0);
-//        } else {
-//            textGioiTinh.setSelectedIndex(1);
-//        }
-//
-//        textSDT.setText(KhachHangController.khOn.getSDT());
-//        textCMND.setText(KhachHangController.khOn.getCMND());
         this.setTT(KhachHangController.khOn);
     }
-    
+
     public final void setTT(KhachHangModel kh) {
         txtName.setText(kh.getTenKH());
         txtGioiTinh.setText(kh.getGioiTinh() ? "Nam" : "Nữ");
         txtSDT.setText(kh.getSDT());
         txtCMND.setText(kh.getCMND());
-        
+
         textName.setText(kh.getTenKH());
         if (kh.getGioiTinh()) {
             textGioiTinh.setSelectedIndex(0);
         } else {
             textGioiTinh.setSelectedIndex(1);
         }
-        
+
         textSDT.setText(kh.getSDT());
         textCMND.setText(kh.getCMND());
     }
@@ -69,7 +55,7 @@ public class TTKhachHang extends javax.swing.JFrame {
     public static boolean checkPass = false;
     public static boolean change = false;
     public static String MKCUKI;
-    
+
     public KhachHangModel getMK() {
         char[] s = passHienTai.getPassword();
         char[] s1 = passMoi.getPassword();
@@ -104,7 +90,7 @@ public class TTKhachHang extends javax.swing.JFrame {
         passHienTai.setText("");
         passLai.setText("");
         passMoi.setText("");
-        
+
     }
 // reset form mật khẩu
 
@@ -112,7 +98,7 @@ public class TTKhachHang extends javax.swing.JFrame {
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     public void showMessageOK(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }

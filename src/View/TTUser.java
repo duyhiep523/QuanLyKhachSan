@@ -17,7 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class TTUser extends javax.swing.JPanel {
 
-    public TTUser() {
+//    ManHinhChinh mhc;
+    NguoiDung nd;
+
+    public TTUser(NguoiDung nd) {
+        this.nd = nd;
         initComponents();
         this.txtHoten.setText(NguoiDungController.ndOn.getHoTen());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -244,7 +248,7 @@ public boolean checkDOB = true;
         return new NguoiDungModel(hoTen, date, email, sdt, CMND, NguoiDungController.ndOn.getTaiKhoan(), NguoiDungController.ndOn.getMatKhau(), sex);
     }
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        new NguoiDungController(this).updateNguoiDung();
+        new NguoiDungController(this).updateNguoiDung(nd);
         // TODO add your handling code here:
     }//GEN-LAST:event_updateBtnActionPerformed
 
