@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Controller.HoaDonController;
 
 /**
  *
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
  */
 public class HoaDonModel extends CSDL {
 
+    HoaDonController hoadoncontroller;
     private String maHoaDon;
     private String maDatPHong;
     private Date ngayTao;
@@ -30,9 +32,22 @@ public class HoaDonModel extends CSDL {
     private float TienPhong;
     private float TienDichVu;
     private float TongTien;
+    private int count;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public HoaDonModel() {
 
+    }
+
+    public HoaDonModel(int count) {
+        this.count = count;
     }
 
     public HoaDonModel(String maHoaDon, String maKhachHang, String TenKhachHang,
@@ -186,6 +201,7 @@ public class HoaDonModel extends CSDL {
             String sql = "update hoa_don set maDatPhong = ?, ngayTao = ? where maHoaDon = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            
             String ngayTao = format.format(hd.getNgayTao());
             stm.setString(1, hd.getMaHoaDon());
             stm.setString(2, ngayTao);
@@ -203,7 +219,6 @@ public class HoaDonModel extends CSDL {
             Connection conn = this.getConnection();
             String sql = "delete from hoa_don WHERE maHoaDon = '" + hd.getMaHoaDon() + "'";
             Statement stm = conn.createStatement();
-//            stm.setString(1, hd.getMaHoaDon());
             stm.executeUpdate(sql);
             return true;
         } catch (SQLException ex) {
@@ -225,7 +240,7 @@ public class HoaDonModel extends CSDL {
 
     }
 
-    public ArrayList<HoaDonModel> timKiem(String key,String key2,String key3) {
+    public ArrayList<HoaDonModel> timKiem(String key, String key2, String key3) {
         ArrayList<HoaDonModel> arr = new ArrayList<>();
         String sql = "";
         try {
@@ -247,35 +262,36 @@ public class HoaDonModel extends CSDL {
         }
         return arr;
     }
-    
-    public int demSoHoaDon(HoaDonModel hd){
-        try{
+
+    public int demSoHoaDon() {
+        int i = 1;
+        try {
+
             Connection conn = this.getConnection();
             String query = "select count(maHoaDon) from hoa_don";
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery(query);
-            int i = 0;
+
             while (rs.next()) {
-                i = rs.getInt(1);
+                i = rs.getInt(i);
             }
             return i;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("khong thong ke duoc hoa don");
-            Logger.getLogger(HoaDonModel.class.getName()).log(Level.SEVERE, null, ex);            
+            Logger.getLogger(HoaDonModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return i;
     }
-    
-    
-    public ArrayList<HoaDonModel> layHoaDonTheoMaKhachHang(){
+
+    public ArrayList<HoaDonModel> layHoaDonTheoMaKhachHang() {
         ArrayList<HoaDonModel> arr = new ArrayList<>();
-        try{
-        Connection conn = this.getConnection();
-        String sql = "Select * from danh_sach_hoa_don where maKhachHang = ?";
-        PreparedStatement stm  = conn.prepareStatement(sql);
-        stm.setString(1, KhachHangController.khOn.getMaKH());
-        ResultSet rs = stm.executeQuery();
-        while(rs.next()){
+        try {
+            Connection conn = this.getConnection();
+            String sql = "Select * from danh_sach_hoa_don where maKhachHang = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, KhachHangController.khOn.getMaKH());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
                 HoaDonModel hd = new HoaDonModel();
                 hd.setMaHoaDon(rs.getString(1));
                 hd.setMaKhachHang(rs.getString(2));
@@ -286,11 +302,11 @@ public class HoaDonModel extends CSDL {
                 hd.setNgayTao(rs.getDate(7));
                 hd.setTongTien(rs.getFloat(8));
                 arr.add(hd);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("Không lấy được mã hóa đơn đổ lên TrinhTrangKhachHang");
         }
         return arr;
-    }catch(SQLException ex){
-            System.out.println("Không lấy được mã hóa đơn đổ lên TrinhTrangKhachHang");
     }
-    return arr;
-    }
-} 
+}
