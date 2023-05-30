@@ -21,7 +21,16 @@ public class ManHinhChinh extends javax.swing.JFrame {
     public ManHinhChinh() {
         this.setTitle("Màn hình chính");
         initComponents();
+        AnhNgoai a = new AnhNgoai();
+        a.setSize(1320, 820);
+        a.setLocation(0, 0);
+        content.removeAll();
+        content.add(a, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+
         this.btnTT.setText(NguoiDungController.ndOn.getHoTen());
+
     }
 
     public void updateTTAVT() {
@@ -186,7 +195,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1285, Short.MAX_VALUE)
+            .addGap(0, 1649, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
