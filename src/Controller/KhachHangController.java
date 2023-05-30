@@ -40,11 +40,11 @@ public class KhachHangController {
             KhachHangModel test = new KhachHangModel().dangNhap(kh.getTaiKhoan(), kh.getMatKhau());
             if (test.getMaKH() != null) {
                 khOn = test;
-                System.out.println(khOn.getTenKH());
+//                System.out.println(khOn.getTenKH());
                 TrangCuaKhach.run();////
                 dangNhap.dispose();
             } else {
-                dangNhap.showMessageLogin("sai thông tin");
+                dangNhap.showMessageLogin("Sai thông tin");
             }
         }
     }

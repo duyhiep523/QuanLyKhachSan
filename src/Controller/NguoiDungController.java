@@ -54,7 +54,6 @@ public class NguoiDungController {
                 if (ndc.getCMND() != null) {
                     ManHinhChinh.run();
                     ndOn = ndc;
-//                    MHC.run();//
                     dnview.dispose();
                 } else {
                     dnview.showMessageLogin("Sai thông tin đăng nhập \n");
@@ -140,7 +139,7 @@ public class NguoiDungController {
             ttk.showMessageOK("Tạo thành công");
             ttk.resetForm();
         } else {
-            ttk.showMessage("người dùng đã tồn tại");
+            ttk.showMessage("Người dùng đã tồn tại");
         }
     }
 
@@ -185,11 +184,11 @@ public class NguoiDungController {
             boolean test = new NguoiDungModel().updateNguoiDung(nd);
             if (test) {
                 ndOn = nd;
-                ttus.showMessageOK("update thành công mời bạn đăng nhập lại");
+                ttus.showMessageOK("update thành công ");
                 ttus.setTT();
                 nguoidung.updateNguoidung();
             } else {
-                ttus.showMessage("dã có lỗi sảy ra");
+                ttus.showMessage("Đã có lỗi sảy ra");
             }
         } else {
             ttus.showMessage(error);
