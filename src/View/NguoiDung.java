@@ -42,7 +42,7 @@ public class NguoiDung extends javax.swing.JFrame {
         this.txtSDT.setText(NguoiDungController.ndOn.getSdt());
         this.txtCMND.setText(NguoiDungController.ndOn.getCMND());
         this.txtMail.setText(NguoiDungController.ndOn.getEmail());
-        System.out.println(NguoiDungController.ndOn.getGioiTinh());
+//        System.out.println(NguoiDungController.ndOn.getGioiTinh());
         String gioitinh = (NguoiDungController.ndOn.getGioiTinh() == true) ? "Nam" : "Nữ";
         this.txtSex.setText(gioitinh);
     }

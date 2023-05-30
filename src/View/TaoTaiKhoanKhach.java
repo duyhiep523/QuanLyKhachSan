@@ -79,7 +79,11 @@ public class TaoTaiKhoanKhach extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 1, 1, new java.awt.Color(0, 0, 0)));
 
+        createTK.setBackground(new java.awt.Color(0, 153, 255));
+        createTK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        createTK.setForeground(new java.awt.Color(255, 255, 255));
         createTK.setText("Tạo");
         createTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +107,9 @@ public class TaoTaiKhoanKhach extends javax.swing.JFrame {
 
         txtGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
+        jButton2.setBackground(new java.awt.Color(204, 204, 204));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 0, 51));
         jButton2.setText("Hủy");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +125,7 @@ public class TaoTaiKhoanKhach extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createTK)
+                .addComponent(createTK, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
@@ -136,7 +143,7 @@ public class TaoTaiKhoanKhach extends javax.swing.JFrame {
                     .addComponent(txtMatKhau)
                     .addComponent(txtTaiKhoan)
                     .addComponent(txtMKH)
-                    .addComponent(txtGioiTinh, 0, 148, Short.MAX_VALUE)
+                    .addComponent(txtGioiTinh, 0, 146, Short.MAX_VALUE)
                     .addComponent(txtCMND)
                     .addComponent(txtSDT)
                     .addComponent(txtName))
@@ -173,9 +180,9 @@ public class TaoTaiKhoanKhach extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createTK)
+                    .addComponent(createTK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap())
         );

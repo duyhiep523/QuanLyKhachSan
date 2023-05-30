@@ -54,7 +54,7 @@ public class QLThongKe extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("11111");
+        jLabel5.setText("..........");
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Số hóa đơn");
@@ -94,7 +94,7 @@ public class QLThongKe extends javax.swing.JPanel {
 
         jLCountDV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLCountDV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLCountDV.setText("11111");
+        jLCountDV.setText("..........");
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Số dịch vụ");
@@ -134,7 +134,7 @@ public class QLThongKe extends javax.swing.JPanel {
 
         jLThongKeKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLThongKeKhachHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLThongKeKhachHang.setText("11111");
+        jLThongKeKhachHang.setText("..........");
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setText("Số Khách");
@@ -174,7 +174,7 @@ public class QLThongKe extends javax.swing.JPanel {
 
         jLCountPhong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLCountPhong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLCountPhong.setText("11111");
+        jLCountPhong.setText("..........");
 
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setText("Số phòng");

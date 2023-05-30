@@ -142,7 +142,10 @@ public class TTKhachHang extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Thông tin của bạn");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -153,7 +156,10 @@ public class TTKhachHang extends javax.swing.JFrame {
 
         jLabel12.setText("SDT");
 
+        updateBtn.setBackground(new java.awt.Color(0, 153, 255));
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         updateBtn.setText("Cập nhật");
+        updateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -187,7 +193,7 @@ public class TTKhachHang extends javax.swing.JFrame {
                     .addComponent(textName)
                     .addComponent(textGioiTinh, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textSDT))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(updateBtn)
                 .addGap(33, 33, 33))
         );
@@ -228,6 +234,8 @@ public class TTKhachHang extends javax.swing.JFrame {
 
         jLabel16.setText("Nhập lại");
 
+        updatePass.setBackground(new java.awt.Color(0, 153, 255));
+        updatePass.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         updatePass.setText("Đổi mật khẩu");
         updatePass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +258,7 @@ public class TTKhachHang extends javax.swing.JFrame {
                     .addComponent(passHienTai)
                     .addComponent(passMoi)
                     .addComponent(passLai, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(updatePass)
@@ -271,7 +279,7 @@ public class TTKhachHang extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(passLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(updatePass)
                 .addGap(20, 20, 20))
         );
@@ -294,6 +302,8 @@ public class TTKhachHang extends javax.swing.JFrame {
 
         txtGioiTinh.setText("jLabel9");
 
+        jButton3.setBackground(new java.awt.Color(255, 0, 51));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Trở lại");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,7 +360,7 @@ public class TTKhachHang extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtCMND)
                     .addComponent(txtGioiTinh))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))

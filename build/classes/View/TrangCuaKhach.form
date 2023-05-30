@@ -38,6 +38,11 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
       </Properties>
 
       <Layout>
@@ -119,7 +124,7 @@
                                       </Group>
                                       <Component id="jLabel7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                                  <EmptySpace pref="32" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -195,11 +200,11 @@
                                   <Component id="searchTinhTrang" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="116" max="32767" attributes="0"/>
+                          <EmptySpace pref="114" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="587" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="585" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -322,6 +327,9 @@
                       <Font name="Segoe UI" size="18" style="3"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#x110;&#x1eb7;t ph&#xf2;ng"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DatBtnActionPerformed"/>
@@ -409,7 +417,7 @@
                                       <Component id="hdpTGBD" alignment="0" pref="98" max="32767" attributes="0"/>
                                       <Component id="hdpGP" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="109" max="32767" attributes="0"/>
+                                  <EmptySpace pref="107" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
@@ -461,7 +469,7 @@
                               </Group>
                               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="136" max="32767" attributes="0"/>
+                          <EmptySpace pref="134" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -589,6 +597,9 @@
                       <Font name="Segoe UI" size="14" style="3"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="H&#x1ee7;y &#x111;&#x1eb7;t ph&#xf2;ng"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="huyDatPhongBtnActionPerformed"/>
@@ -649,7 +660,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="38" max="32767" attributes="0"/>
+                          <EmptySpace pref="8" max="32767" attributes="0"/>
                           <Component id="jScrollPane6" min="-2" pref="709" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -658,7 +669,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane6" pref="593" max="32767" attributes="0"/>
+                          <Component id="jScrollPane6" pref="591" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -827,6 +838,12 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton8">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="cc" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n ngay"/>
                   </Properties>
                 </Component>
@@ -895,7 +912,7 @@
                                           <Component id="jCbLoaiPhong" min="-2" pref="124" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="56" max="32767" attributes="0"/>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel25" max="32767" attributes="0"/>
                                       <Component id="jCbGiaPhong" pref="80" max="32767" attributes="0"/>
@@ -909,7 +926,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPane3" alignment="0" pref="556" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane3" alignment="0" pref="554" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1056,7 +1073,7 @@
                                       <Component id="jLabel27" max="32767" attributes="0"/>
                                       <Component id="jComBoxGiaDV" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="224" max="32767" attributes="0"/>
+                                  <EmptySpace pref="222" max="32767" attributes="0"/>
                                   <Component id="jScrollPane4" min="-2" pref="569" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1075,7 +1092,7 @@
                                       <Component id="jComBoxGiaDV" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="362" max="32767" attributes="0"/>
+                                  <EmptySpace pref="360" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1198,7 +1215,7 @@
                                               <Component id="jLGioiTinh" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jLTen" alignment="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="328" max="32767" attributes="0"/>
+                                          <EmptySpace pref="326" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
@@ -1214,7 +1231,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane5" pref="556" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane5" pref="554" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
@@ -1358,6 +1375,16 @@
               <Font name="Segoe UI" size="14" style="3"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder>
+                  <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -1372,6 +1399,14 @@
               <Font name="Segoe UI" size="18" style="3"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nguy&#x1ec5;n Duy Hi&#x1ec7;p"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kHNameActionPerformed"/>

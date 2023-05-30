@@ -138,7 +138,6 @@ public class BatDau extends javax.swing.JFrame {
         //</editor-fold>
 
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new BatDau().setVisible(true);

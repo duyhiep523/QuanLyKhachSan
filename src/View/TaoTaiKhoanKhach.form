@@ -41,6 +41,11 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+            <MatteColorBorder bottom="1" left="1" right="1" top="0"/>
+          </Border>
+        </Property>
       </Properties>
 
       <Layout>
@@ -50,7 +55,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="createTK" min="-2" max="-2" attributes="0"/>
+                  <Component id="createTK" min="-2" pref="84" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
@@ -71,7 +76,7 @@
                       <Component id="txtMatKhau" max="32767" attributes="0"/>
                       <Component id="txtTaiKhoan" max="32767" attributes="0"/>
                       <Component id="txtMKH" max="32767" attributes="0"/>
-                      <Component id="txtGioiTinh" alignment="0" pref="148" max="32767" attributes="0"/>
+                      <Component id="txtGioiTinh" alignment="0" pref="146" max="32767" attributes="0"/>
                       <Component id="txtCMND" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtSDT" max="32767" attributes="0"/>
                       <Component id="txtName" alignment="0" max="32767" attributes="0"/>
@@ -118,9 +123,9 @@
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtMatKhau" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="createTK" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="createTK" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -131,6 +136,15 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="createTK">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="T&#x1ea1;o"/>
           </Properties>
           <Events>
@@ -199,6 +213,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="0" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
           </Properties>
           <Events>
