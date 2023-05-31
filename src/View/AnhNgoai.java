@@ -16,7 +16,7 @@ public class AnhNgoai extends javax.swing.JPanel {
     public AnhNgoai() {
         initComponents();
     }
-
+// em khóc huhu
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -3,17 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package View;
+
 import Model.DichVuModel;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Controller.DichVuController;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author hiep0
  */
 public class QLDichVu extends javax.swing.JPanel {
-        ArrayList<DichVuModel> arr = new DichVuModel().getService();
+
+    ArrayList<DichVuModel> arr = new DichVuModel().getService();
 
     final String header[] = {"Mã Dịch Vụ ", "Tên Dịch Vụ", "Giá Dịch Vụ"};
     final DefaultTableModel df = new DefaultTableModel(header, 0);
@@ -35,9 +38,7 @@ public class QLDichVu extends javax.swing.JPanel {
         txt_price.setText(String.valueOf(dv.getServicePrice()));
 
     }
-    
-    
-    
+
     public void resetForm() {
         txt_Id.setText("");
         txt_Name.setText("");
@@ -51,13 +52,13 @@ public class QLDichVu extends javax.swing.JPanel {
         return new DichVuModel(maDichVu, tenDichVu, gia);
 
     }
+
     public QLDichVu() {
         initComponents();
-                taiTrang(arr);
+        taiTrang(arr);
 
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
