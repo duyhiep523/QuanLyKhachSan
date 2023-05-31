@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
  */
 public class HoaDonController {
 
-    DSHoaDon dshoadon;
-    QLHoaDon qlhoadon;
+    static DSHoaDon dshoadon;
+    static QLHoaDon qlhoadon;
 
     public HoaDonController() {
 
@@ -29,25 +29,21 @@ public class HoaDonController {
     }
 
     public HoaDonController(DSHoaDon dshoadon) {
-        this.dshoadon = dshoadon;
+        HoaDonController.dshoadon = dshoadon;
     }
 
     public HoaDonController(QLHoaDon qlhoadon) {
-        this.qlhoadon = qlhoadon;
-    }
-
-    public void hienthi1() {
-        qlhoadon.taiTrang(new HoaDonModel().getDuLieu());
+        HoaDonController.qlhoadon = qlhoadon;
     }
 
     public void hienthi() {
-        dshoadon.taiTrang(new HoaDonModel().getDuLieu());
+        dshoadon.taiTrang(new HoaDonModel().getDuLieuTinhTien());
     }
 
 //       tạo hóa đơn
     public String regexNgayTao = "\\d{4}[-]\\d{1,2}[-]\\d{1,2}";
-    public String regexMaHoaDon = "^HD\\d{2,3}$";
-    public String regexMaDP = "^DP\\d{2,3}$";
+    public String regexMaHoaDon = "^HD\\d{2,5}$";
+    public String regexMaDP = "^DP\\d{2,5}$";
 
     public boolean Regex(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
@@ -58,23 +54,23 @@ public class HoaDonController {
     public void taoHoaDon() {
         HoaDonModel hd = qlhoadon.getHoaDon();
         if (hd.getMaHoaDon().equals("")) {
-            qlhoadon.showMessage("Mã hóa đơn không được để trống");
+            qlhoadon.showMessageFail("Mã hóa đơn không được để trống");
             return;
         }
 
         if (!Regex(hd.getMaHoaDon(), regexMaHoaDon)) {
-            qlhoadon.showMessage("Mã hóa đơn phải đúng định dạng vd: HD01");
+            qlhoadon.showMessageFail("Mã hóa đơn phải đúng định dạng vd: HD01");
             return;
         }
 
         if (hd.getMaDatPhong().equals("")) {
-            qlhoadon.showMessageOK("Mã đặt phòng không được để trống");
+            qlhoadon.showMessageFail("Mã đặt phòng không được để trống");
             return;
 
         }
 
         if (!Regex(hd.getMaDatPhong(), regexMaDP)) {
-            qlhoadon.showMessage("Mã đặt phòng phải đúng định dạng vd: DP01");
+            qlhoadon.showMessageFail("Mã đặt phòng phải đúng định dạng vd: DP01");
             return;
         }
 
@@ -82,21 +78,23 @@ public class HoaDonController {
         String ngayTao = format.format(hd.getNgayTao());
 
         if (ngayTao.equals("2222-11-11")) {
-            qlhoadon.showMessage("Ngày tạo không được để trống");
+            qlhoadon.showMessageFail("Ngày tạo không được để trống");
             return;
         }
 
         if (!Regex(ngayTao, regexNgayTao)) {
-            qlhoadon.showMessage("Ngày tạo phải đúng định dạng vd: 2004-17-11");
+            qlhoadon.showMessageFail("Ngày tạo phải đúng định dạng vd: 2004-17-11");
             return;
         }
 
         boolean test = new HoaDonModel().addHoaDon(hd);
         if (test) {
-            qlhoadon.showMessage("Thêm hóa đơn Thành công");
-            qlhoadon.taiTrang(new HoaDonModel().getDuLieu());
+            qlhoadon.showMessageSuccess("Thêm hóa đơn Thành công");
+            qlhoadon.taiTrang(qlhoadon.layDSHoaDon());
+            qlhoadon.reset();
+
         } else {
-            qlhoadon.showMessage("Mã Hóa Đơn đã tồn tại OR Phòng không còn trống");
+            qlhoadon.showMessageFail("Mã Hóa Đơn đã tồn tại OR Phòng không còn trống");
         }
 
     }
@@ -104,23 +102,23 @@ public class HoaDonController {
     public void suaHoaDon() {
         HoaDonModel hd = qlhoadon.getHoaDon();
         if (hd.getMaHoaDon().equals("")) {
-            qlhoadon.showMessage("Mã hóa đơn không được để trống");
+            qlhoadon.showMessageFail("Mã hóa đơn không được để trống");
             return;
         }
 
         if (!Regex(hd.getMaHoaDon(), regexMaHoaDon)) {
-            qlhoadon.showMessage("Mã hóa đơn phải đúng định dạng vd: HD01");
+            qlhoadon.showMessageFail("Mã hóa đơn phải đúng định dạng vd: HD01");
             return;
         }
 
         if (hd.getMaDatPhong().equals("")) {
-            qlhoadon.showMessageOK("Mã đặt phòng không được để trống");
+            qlhoadon.showMessageFail("Mã đặt phòng không được để trống");
             return;
 
         }
 
         if (!Regex(hd.getMaDatPhong(), regexMaDP)) {
-            qlhoadon.showMessage("Mã đặt phòng phải đúng định dạng vd: DP01");
+            qlhoadon.showMessageFail("Mã đặt phòng phải đúng định dạng vd: DP01");
             return;
         }
 
@@ -128,43 +126,44 @@ public class HoaDonController {
         String ngayTao = format.format(hd.getNgayTao());
 
         if (ngayTao.equals("2222-11-11")) {
-            qlhoadon.showMessage("Ngày tạo không được để trống");
+            qlhoadon.showMessageFail("Ngày tạo không được để trống");
             return;
         }
 
         if (!Regex(ngayTao, regexNgayTao)) {
-            qlhoadon.showMessage("Ngày tạo phải đúng định dạng vd: 2004-17-11");
+            qlhoadon.showMessageFail("Ngày tạo phải đúng định dạng vd: 2004-17-11");
             return;
         }
 
         boolean test = new HoaDonModel().suaHoaDon(hd);
         if (test) {
-            qlhoadon.showMessage("Sửa hóa đơn Thành công");
-            qlhoadon.taiTrang(new HoaDonModel().getDuLieu());
+            qlhoadon.showMessageSuccess("Sửa hóa đơn Thành công");
+            qlhoadon.taiTrang(qlhoadon.layDSHoaDon());
+            qlhoadon.reset();
         } else {
-            qlhoadon.showMessage("Thất bại sửa hóa đơn");
+            qlhoadon.showMessageFail("Thất bại sửa hóa đơn");
         }
     }
 
     public void xoaHoaDon() {
         HoaDonModel hd = qlhoadon.xoaHoaDon();
         if (hd.getMaHoaDon().equals("")) {
-            qlhoadon.showMessage("Mã hóa đơn không được để trống");
+            qlhoadon.showMessageFail("Mã hóa đơn không được để trống");
             return;
         }
 
         if (!Regex(hd.getMaHoaDon(), regexMaHoaDon)) {
-            qlhoadon.showMessage("Mã hóa đơn phải đúng định dạng vd: HD01");
+            qlhoadon.showMessageFail("Mã hóa đơn phải đúng định dạng vd: HD01");
             return;
         }
 
         boolean test = new HoaDonModel().xoaHoaDon(hd);
         if (test) {
-            qlhoadon.showMessage("xóa hóa đơn Thành công");
-            qlhoadon.taiTrang(new HoaDonModel().getDuLieu());
-
+            qlhoadon.showMessageSuccess("xóa hóa đơn Thành công");
+            qlhoadon.taiTrang(qlhoadon.layDSHoaDon());
+            qlhoadon.reset();
         } else {
-            qlhoadon.showMessage("Thất bại sửa hóa đơn");
+            qlhoadon.showMessageFail("Thất bại sửa hóa đơn");
         }
     }
 

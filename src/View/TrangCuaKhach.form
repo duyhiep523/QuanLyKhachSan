@@ -658,9 +658,7 @@
                               <Component id="jLTienPhong" max="32767" attributes="0"/>
                               <Component id="jLTongTien" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="8" max="32767" attributes="0"/>
+                          <EmptySpace pref="185" max="32767" attributes="0"/>
                           <Component id="jScrollPane6" min="-2" pref="709" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -687,18 +685,10 @@
                               <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="JLTienDV" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLTienPhong" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                  <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLTienPhong" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -834,17 +824,6 @@
                 <Component class="javax.swing.JLabel" name="jLTongTien">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="."/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="jButton8">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="cc" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n ngay"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1066,14 +1045,14 @@
                                   <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel26" max="32767" attributes="0"/>
-                                      <Component id="jTextField1" pref="95" max="32767" attributes="0"/>
+                                      <Component id="JTextTenDV" pref="95" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel27" max="32767" attributes="0"/>
                                       <Component id="jComBoxGiaDV" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="222" max="32767" attributes="0"/>
+                                  <EmptySpace pref="229" max="32767" attributes="0"/>
                                   <Component id="jScrollPane4" min="-2" pref="569" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1090,7 +1069,7 @@
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jComBoxGiaDV" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="JTextTenDV" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="360" max="32767" attributes="0"/>
                               </Group>
@@ -1160,7 +1139,7 @@
                                 <StringItem index="1" value="200000.0"/>
                                 <StringItem index="2" value="50000.0"/>
                                 <StringItem index="3" value="10000.0"/>
-                                <StringItem index="4" value="2500000.0"/>
+                                <StringItem index="4" value="250000.0"/>
                               </StringArray>
                             </Property>
                           </Properties>
@@ -1171,12 +1150,10 @@
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Nh&#x1ead;p v&#xe0;o &#x111;&#xe2;y"/>
-                          </Properties>
+                        <Component class="javax.swing.JTextField" name="JTextTenDV">
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTextTenDVActionPerformed"/>
+                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTextTenDVKeyReleased"/>
                           </Events>
                         </Component>
                       </SubComponents>

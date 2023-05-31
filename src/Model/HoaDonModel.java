@@ -15,15 +15,13 @@ import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Controller.HoaDonController;
+import View.QLHoaDon;
 
 /**
  *
  * @author tu
  */
 public class HoaDonModel extends CSDL {
-
-    HoaDonController hoadoncontroller;
     private String maHoaDon;
     private String maDatPHong;
     private Date ngayTao;
@@ -49,7 +47,7 @@ public class HoaDonModel extends CSDL {
     public HoaDonModel(int count) {
         this.count = count;
     }
-
+    
     public HoaDonModel(String maHoaDon, String maKhachHang, String TenKhachHang,
             String maDatPHong, float TienPhong, float TienDichVu, Date ngayTao, float TongTien) {
         this.maHoaDon = maHoaDon;
@@ -61,9 +59,34 @@ public class HoaDonModel extends CSDL {
         this.ngayTao = ngayTao;
         this.TongTien = TongTien;
     }
-
-//    lấy dữ liệu
-    public ArrayList<HoaDonModel> getDuLieu() {
+    
+    public HoaDonModel(String maHoaDon, String maDatPHong, Date ngayTao) {
+        this.maHoaDon = maHoaDon;
+        this.maDatPHong = maDatPHong;
+        this.ngayTao = ngayTao;
+    }
+    
+        public ArrayList<HoaDonModel> getDuLieu() {
+        ArrayList<HoaDonModel> arr = new ArrayList<>();
+        try {
+            Connection conn = this.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("select * from hoa_don;");
+            while (rs.next()) {
+                HoaDonModel hd = new HoaDonModel();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaDatPhong(rs.getString(2));
+                hd.setNgayTao(rs.getDate(3));
+                arr.add(hd);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("Khong the do du lieu len !!!");
+        }
+        return arr;
+    }
+//    lấy dữ liệu tính tiền
+    public ArrayList<HoaDonModel> getDuLieuTinhTien() {
         ArrayList<HoaDonModel> arr = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
@@ -164,7 +187,7 @@ public class HoaDonModel extends CSDL {
                 i = rs.getInt(1);
             }
             if (i > 0) {
-                System.out.println("ma hoa don ton tai");
+                new QLHoaDon().showMessageFail("Mã Hóa đơn đã tồn tại");
                 return false;
             }
 
@@ -174,9 +197,21 @@ public class HoaDonModel extends CSDL {
                 i = rs.getInt(1);
             }
             if (i > 0) {
-                System.out.println("ma dat phong da ton tai");
+                new QLHoaDon().showMessageFail("Mã Đặt Phòng đã tồn tại đã sử dụng");
                 return false;
             }
+            
+            query = "select count(maDatPhong) from lich_dat_phong where maDatPhong = '" + hd.getMaDatPhong() + "'";
+            rs = s.executeQuery(query);
+            while (rs.next()) {
+                i = rs.getInt(1);
+            }
+            if (i < 0) {
+                new QLHoaDon().showMessageFail("Mã Đặt Phòng ko tồn tại trong Lịch Đặt Phòng");
+                return false;
+            }
+            
+            
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String ngayTao = format.format(hd.getNgayTao());
 
@@ -197,14 +232,13 @@ public class HoaDonModel extends CSDL {
     public boolean suaHoaDon(HoaDonModel hd) {
         try {
             Connection conn = this.getConnection();
-            String sql = "update hoa_don set maDatPhong = ?, ngayTao = ? where maHoaDon = ?";
+            String sql = "update hoa_don set maDatPhong = ?, ngayTao = ? where maHoaDon = '"+ hd.getMaHoaDon()+"'";
             PreparedStatement stm = conn.prepareStatement(sql);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            
             String ngayTao = format.format(hd.getNgayTao());
-            stm.setString(1, hd.getMaHoaDon());
+            stm.setString(1, hd.getMaDatPhong());
             stm.setString(2, ngayTao);
-            stm.executeUpdate(sql);
+            stm.executeUpdate();
             return true;
         } catch (SQLException ex) {
             System.out.println("error in HoaDonModel suaHoaDon");
@@ -228,36 +262,27 @@ public class HoaDonModel extends CSDL {
 
     }
 
-    public HoaDonModel(String maHoaDon, String maDatPHong, Date ngayTao) {
-        this.maHoaDon = maHoaDon;
-        this.maDatPHong = maDatPHong;
-        this.ngayTao = ngayTao;
-    }
+
 
     public HoaDonModel(String maHoaDon) {
         this.maHoaDon = maHoaDon;
 
     }
 
-    public ArrayList<HoaDonModel> timKiem(String key, String key2, String key3) {
+    public ArrayList<HoaDonModel> timKiem(String key1){
         ArrayList<HoaDonModel> arr = new ArrayList<>();
-        String sql = "";
         try {
             Connection conn = this.getConnection();
-            sql = "select * from danh_sach_hoa_don where (maHoaDon like '%" + key + "%' and maKhachHang like '%" + key2 + "%'and maDatPhong like '%" + key3 + "%')";
-
-            Statement stm = conn.createStatement();
-
-            ResultSet rs = stm.executeQuery(sql);
+            String sql = "select * from hoa_don where maHoaDon like '%"+ key1 +"%'";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                HoaDonModel hoadon = new HoaDonModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getFloat(6), rs.getDate(7), rs.getFloat(8));
+                HoaDonModel hoadon = new HoaDonModel(rs.getString(1), rs.getString(2), rs.getDate(3));
                 arr.add(hoadon);
             }
-            System.out.println(sql);
-
             return arr;
         } catch (SQLException ex) {
-            System.out.println(sql);
+            System.out.println("KKKKKKKKKKKKKKKK");
         }
         return arr;
     }
@@ -286,7 +311,7 @@ public class HoaDonModel extends CSDL {
         ArrayList<HoaDonModel> arr = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
-            String sql = "Select * from danh_sach_hoa_don where maKhachHang = ?";
+            String sql = "select * from danh_sach_hoa_don where maKhachHang = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, KhachHangController.khOn.getMaKH());
             ResultSet rs = stm.executeQuery();

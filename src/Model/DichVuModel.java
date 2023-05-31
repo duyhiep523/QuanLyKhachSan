@@ -1,6 +1,4 @@
 package Model;
-
-import Controller.KhachHangController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,14 +12,6 @@ public class DichVuModel extends CSDL {
     private String serviceId;
     private String serviceName;
     private float servicePrice;
-    private int count;
-
-    public DichVuModel(String serviceId, String serviceName, float servicePrice, int count) {
-        this.serviceId = serviceId;
-        this.serviceName = serviceName;
-        this.servicePrice = servicePrice;
-        this.count = count;
-    }
 
     public DichVuModel(String serviceId, String serviceName, float servicePrice) {
         this.serviceId = serviceId;
@@ -53,13 +43,6 @@ public class DichVuModel extends CSDL {
         this.servicePrice = servicePrice;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     public DichVuModel() {
     }
@@ -87,51 +70,19 @@ public class DichVuModel extends CSDL {
         }
         return arr;
     }
-
-    public ArrayList<DichVuModel> getDichVuTheoMaKh() {
-        ArrayList<DichVuModel> arr = new ArrayList<>();
-        try {
-            Connection conn = this.getConnection();
-            String sql = "select dich_vu.maDichVu, dich_vu.tenDichVu, dich_vu.giaDichVu,count(dich_vu.maDichVu) from dich_vu inner join chi_tiet_dich_vu\n"
-                    + "on dich_vu.maDichVu = chi_tiet_dich_vu.maDichVu \n"
-                    + "inner join lich_dat_phong on lich_dat_phong.maDatPhong = chi_tiet_dich_vu.maDatPhong \n"
-                    + "where lich_dat_phong.maKhachHang = ? group by dich_vu.maDichVu";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, KhachHangController.khOn.getMaKH());
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                DichVuModel dv = new DichVuModel();
-                dv.setServiceId(rs.getString(1));
-                dv.setServiceName(rs.getString(2));
-                dv.setServicePrice(rs.getFloat(3));
-                dv.setCount(rs.getInt(4));
-                arr.add(dv);
-            }
-            return arr;
-        } catch (SQLException ex) {
-            System.out.println("noop");
-        }
-        return arr;
-    }
     
-        public ArrayList<DichVuModel> getDichVuTheoGia(Float gia) {
+            public ArrayList<DichVuModel> getDichVuTheoGia(Float gia) {
         ArrayList<DichVuModel> arr = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
-            String sql = "select dich_vu.maDichVu, dich_vu.tenDichVu, dich_vu.giaDichVu,count(dich_vu.maDichVu) from dich_vu inner join chi_tiet_dich_vu\n"
-                    + "on dich_vu.maDichVu = chi_tiet_dich_vu.maDichVu \n"
-                    + "inner join lich_dat_phong on lich_dat_phong.maDatPhong = chi_tiet_dich_vu.maDatPhong \n"
-                    + "where lich_dat_phong.maKhachHang = ? and dich_vu.giaDichVu = '"+gia
-                    +"'  group by dich_vu.maDichVu";
+            String sql = "select * from dich_vu where giaDichVu = '"+gia+"'";
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, KhachHangController.khOn.getMaKH());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 DichVuModel dv = new DichVuModel();
                 dv.setServiceId(rs.getString(1));
                 dv.setServiceName(rs.getString(2));
                 dv.setServicePrice(rs.getFloat(3));
-                dv.setCount(rs.getInt(4));
                 arr.add(dv);
             }
             return arr;
@@ -145,20 +96,14 @@ public class DichVuModel extends CSDL {
         ArrayList<DichVuModel> arr = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
-            String sql = "select dich_vu.maDichVu, dich_vu.tenDichVu, dich_vu.giaDichVu,count(dich_vu.maDichVu) from dich_vu inner join chi_tiet_dich_vu\n"
-                    + "on dich_vu.maDichVu = chi_tiet_dich_vu.maDichVu \n"
-                    + "inner join lich_dat_phong on lich_dat_phong.maDatPhong = chi_tiet_dich_vu.maDatPhong \n"
-                    + "where lich_dat_phong.maKhachHang = ? and dich_vu.tenDichVu like '%" + key
-                    + "%'  group by dich_vu.maDichVu";
+            String sql = "select * from dich_vu where tenDichVu like '%"+key+"%'";
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, KhachHangController.khOn.getMaKH());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 DichVuModel dv = new DichVuModel();
                 dv.setServiceId(rs.getString(1));
                 dv.setServiceName(rs.getString(2));
                 dv.setServicePrice(rs.getFloat(3));
-                dv.setCount(rs.getInt(4));
                 arr.add(dv);
             }
             return arr;

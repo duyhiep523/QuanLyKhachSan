@@ -26,50 +26,61 @@ import javax.swing.table.DefaultTableModel;
 public final class TrangCuaKhach extends javax.swing.JFrame {
 
     public TrangCuaKhach() {
-        initComponents();
+initComponents();
         this.setLocationRelativeTo(null);
         this.kHName.setText(KhachHangController.khOn.getTenKH());
         taiTrang(layDSPhong());
         taiTrangHuyDatPhong(layDSDP());
-        taiTrangHoaDon(layDSHoaDon());
-        taiTrangPhong(getPhongTheoMaKH());
+        taiTrangHoaDon(layDSHoaDonTheoMaKhachHang());
+        taiTrangPhong(getPhong());
         taiTrangDichVu(getDichVu());
-        taiTrangNguoiDung(getNguoiDungtheoKH());
+        taiTrangNguoiDung(getNguoiDung());
         resetFormHuyDatPhong();
+    }
+
+ public ArrayList<HoaDonModel> layDSHoaDonTheoMaKhachHang() {
+        return new HoaDonModel().layHoaDonTheoMaKhachHang();
     }
 
     public void setTenTrangChu(KhachHangModel kh) {
         this.kHName.setText(kh.getTenKH());
     }
-    
-    public final ArrayList<PhongModel> layDSPhongTheoLoaiPhong(){
-        int index = jCbLoaiPhong.getSelectedIndex();
-        if(index >0){
-            String selectedValue = jCbLoaiPhong.getItemAt(index);
-//            System.out.println(selectedValue);
-            return new PhongModel().getPhongTheoLoaiPhong(selectedValue);  
-        }   
-        return new PhongModel().getPhongTheoMaKH();
-        
+
+    public final ArrayList<DichVuModel> layDSDichVuTheoTenDV() {
+        if (JTextTenDV.equals("")) {
+            return new DichVuModel().getService();
+        } else {
+            return new DichVuModel().getDichVuTheoTenDV(JTextTenDV.getText());
+        }
     }
-    
+
+    public final ArrayList<PhongModel> layDSPhongTheoLoaiPhong() {
+        int index = jCbLoaiPhong.getSelectedIndex();
+        if (index > 0) {
+            String selectedValue = jCbLoaiPhong.getItemAt(index);
+            return new PhongModel().getPhongTheoLoaiPhong(selectedValue);
+        }
+        return new PhongModel().getPhong();
+
+    }
+
     public ArrayList<DichVuModel> LayDSDichVuTheoGiaDV() {
         int index = jComBoxGiaDV.getSelectedIndex();
-        if(index > 0){
+        if (index > 0) {
             String selectedVulue = jComBoxGiaDV.getItemAt(index);
             return new DichVuModel().getDichVuTheoGia(Float.valueOf(selectedVulue));
-            
+
         }
-        return new DichVuModel().getDichVuTheoMaKh();
+        return new DichVuModel().getService();
     }
-    
-    public final ArrayList<PhongModel> layDSPhongTheoGiaPhong(){
+
+    public final ArrayList<PhongModel> layDSPhongTheoGiaPhong() {
         int index1 = jCbGiaPhong.getSelectedIndex();
-        if(index1 > 0){
+        if (index1 > 0) {
             String selectedValue = jCbGiaPhong.getItemAt(index1);
             return new PhongModel().getPhongTheoGiaPhong(Float.valueOf(selectedValue));
         }
-       return new PhongModel().getPhongTheoMaKH();
+        return new PhongModel().getPhong();
     }
 // thông báo
 
@@ -138,7 +149,6 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
         JLTienDV = new javax.swing.JLabel();
         jLTienPhong = new javax.swing.JLabel();
         jLTongTien = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
@@ -154,7 +164,7 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jComBoxGiaDV = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        JTextTenDV = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TBQuanLy = new javax.swing.JTable();
@@ -499,10 +509,6 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
 
         jLTongTien.setText(".");
 
-        jButton8.setBackground(new java.awt.Color(0, 204, 255));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setText("Thanh toán ngay");
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -526,9 +532,7 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
                     .addComponent(JLTienDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLTienPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -549,15 +553,10 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
                     .addComponent(JLTienDV))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel39)
-                            .addComponent(jLTienPhong)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton8)))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39)
+                    .addComponent(jLTienPhong))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
@@ -663,17 +662,21 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("Lọc theo giá");
 
-        jComBoxGiaDV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "200000.0", "50000.0", "10000.0", "2500000.0" }));
+        jComBoxGiaDV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "200000.0", "50000.0", "10000.0", "250000.0" }));
         jComBoxGiaDV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComBoxGiaDVActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("Nhập vào đây");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        JTextTenDV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                JTextTenDVActionPerformed(evt);
+            }
+        });
+        JTextTenDV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTextTenDVKeyReleased(evt);
             }
         });
 
@@ -685,12 +688,12 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                    .addComponent(JTextTenDV, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
                 .addGap(129, 129, 129)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComBoxGiaDV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -704,7 +707,7 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComBoxGiaDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTextTenDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(360, Short.MAX_VALUE))
         );
 
@@ -1005,22 +1008,26 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
         taiTrangDichVu(LayDSDichVuTheoGiaDV());
     }//GEN-LAST:event_jComBoxGiaDVActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void JTextTenDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextTenDVActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_JTextTenDVActionPerformed
 
     private void jCbGiaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbGiaPhongActionPerformed
-        // TODO add your handling code here:
-          taiTrangPhong(layDSPhongTheoGiaPhong());
+taiTrangPhong(layDSPhongTheoGiaPhong());
     }//GEN-LAST:event_jCbGiaPhongActionPerformed
 
     private void jCbLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbLoaiPhongActionPerformed
         // TODO add your handling code here:
          taiTrangPhong(layDSPhongTheoLoaiPhong());
     }//GEN-LAST:event_jCbLoaiPhongActionPerformed
+
+    private void JTextTenDVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextTenDVKeyReleased
+        // TODO add your handling code here:
+                taiTrangDichVu(layDSDichVuTheoTenDV());
+    }//GEN-LAST:event_JTextTenDVKeyReleased
     
     public void displayNguoiDung(int i){
-        NguoiDungModel nd = getNguoiDungtheoKH().get(i);
+        NguoiDungModel nd = getNguoiDung().get(i);
         jLTen.setText(nd.getHoTen());
         String gioiTinh = nd.getGioiTinh() ? "Nam" : "Nữ";
         jLGioiTinh.setText(gioiTinh);
@@ -1091,8 +1098,8 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
         TBPhong.setModel(df2);
     }
     
-        public ArrayList<PhongModel> getPhongTheoMaKH(){
-            return new PhongModel().getPhongTheoMaKH();
+        public ArrayList<PhongModel> getPhong(){
+            return new PhongModel().getPhong();
         }
 //    xuất hóa đơn 
     
@@ -1145,26 +1152,25 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
 
     }
     
-    public ArrayList<DichVuModel> getDichVu(){
-        return new DichVuModel().getDichVuTheoMaKh();
+    public ArrayList<DichVuModel> getDichVu() {
+        return new DichVuModel().getService();
     }
     
-    final String header4[] = {"Mã Dịch Vụ ", "Tên Dịch Vụ", "Giá Dịch Vụ","Số lần"};
+    final String header4[] = {"Mã Dịch Vụ ", "Tên Dịch Vụ", "Giá Dịch Vụ"};
     final DefaultTableModel df = new DefaultTableModel(header4, 0);
 
     public final void taiTrangDichVu(ArrayList<DichVuModel> arr) {
         df.getDataVector().removeAllElements();
         for (int i = 0; i < arr.size(); i++) {
             String gia = String.valueOf(arr.get(i).getServicePrice());
-            String solan = String.valueOf(arr.get(i).getCount());
-            String nd[] = {arr.get(i).getServiceId(), arr.get(i).getServiceName(), gia,solan};
+            String nd[] = {arr.get(i).getServiceId(), arr.get(i).getServiceName(), gia};
             df.addRow(nd);
         }
         tbDichVu.setModel(df);
     }
     
     
-    public ArrayList<NguoiDungModel> getNguoiDungtheoKH(){
+    public ArrayList<NguoiDungModel> getNguoiDung(){
         return new NguoiDungModel().getNguoiDung();
     }
     
@@ -1215,6 +1221,7 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JButton DatBtn;
     private javax.swing.JLabel JLTienDV;
     private javax.swing.JLabel JLmaDatPhong;
+    private javax.swing.JTextField JTextTenDV;
     private javax.swing.JTable TBDatPhong;
     private javax.swing.JTable TBPhong;
     private javax.swing.JTable TBQuanLy;
@@ -1227,7 +1234,6 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JButton huyDatPhongBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jCbGiaPhong;
     private javax.swing.JComboBox<String> jCbLoaiPhong;
     private javax.swing.JComboBox<String> jComBoxGiaDV;
@@ -1281,7 +1287,6 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton kHName;
     private javax.swing.JComboBox<String> searchTinhTrang;
     private javax.swing.JTable tbBangHoaDon;
