@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public final class TrangCuaKhach extends javax.swing.JFrame {
 
     public TrangCuaKhach() {
-initComponents();
+        initComponents();
         this.setLocationRelativeTo(null);
         this.kHName.setText(KhachHangController.khOn.getTenKH());
         taiTrang(layDSPhong());
@@ -38,7 +38,7 @@ initComponents();
         resetFormHuyDatPhong();
     }
 
- public ArrayList<HoaDonModel> layDSHoaDonTheoMaKhachHang() {
+    public ArrayList<HoaDonModel> layDSHoaDonTheoMaKhachHang() {
         return new HoaDonModel().layHoaDonTheoMaKhachHang();
     }
 
@@ -908,7 +908,7 @@ initComponents();
         }
         return new PhongModel().getPhongTim(txtSearch.getText(), tinhtrang);
     }
-    
+
     public final void taiTrang(ArrayList<PhongModel> arr) {
         tbDP.getDataVector().removeAllElements();
         for (int i = 0; i < arr.size(); i++) {
@@ -922,6 +922,7 @@ initComponents();
     public static boolean ngaySD = false;
     public static boolean checkempty = false;
     public static boolean checkMuon = false;
+    public static boolean checkOld = false;
 
     public DatPhongModel getDatPhong() {
         if (txtTinhTrang.getText().equals("Đang thuê")) {
@@ -935,9 +936,13 @@ initComponents();
         Date thoiGianBatDau = null;
         try {
             thoiGianBatDau = formatter.parse(txtTGBD.getText());
+            int comparison = (new Date()).compareTo(thoiGianBatDau);
+            if (comparison > 0) {
+//                System.out.println("đã đi vào");
+                checkOld = true;
+            }
         } catch (ParseException ex) {
             ngaySD = true;
-
             System.out.println("sai định dạng thôi mà");
         }
 
@@ -995,12 +1000,12 @@ initComponents();
         hientaiHoaDon = tbBangHoaDon.getSelectedRow();
         DisplayHoaDon(hientaiHoaDon);
     }//GEN-LAST:event_tbBangHoaDonMouseClicked
-   int hientaiNguoiDung = 0;
+    int hientaiNguoiDung = 0;
     private void TBQuanLyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBQuanLyMouseClicked
         // TODO add your handling code here:
-        hientaiNguoiDung  = TBQuanLy.getSelectedRow();
+        hientaiNguoiDung = TBQuanLy.getSelectedRow();
         displayNguoiDung(hientaiNguoiDung);
-        
+
     }//GEN-LAST:event_TBQuanLyMouseClicked
 
     private void jComBoxGiaDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComBoxGiaDVActionPerformed
@@ -1013,20 +1018,20 @@ initComponents();
     }//GEN-LAST:event_JTextTenDVActionPerformed
 
     private void jCbGiaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbGiaPhongActionPerformed
-taiTrangPhong(layDSPhongTheoGiaPhong());
+        taiTrangPhong(layDSPhongTheoGiaPhong());
     }//GEN-LAST:event_jCbGiaPhongActionPerformed
 
     private void jCbLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbLoaiPhongActionPerformed
         // TODO add your handling code here:
-         taiTrangPhong(layDSPhongTheoLoaiPhong());
+        taiTrangPhong(layDSPhongTheoLoaiPhong());
     }//GEN-LAST:event_jCbLoaiPhongActionPerformed
 
     private void JTextTenDVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextTenDVKeyReleased
         // TODO add your handling code here:
-                taiTrangDichVu(layDSDichVuTheoTenDV());
+        taiTrangDichVu(layDSDichVuTheoTenDV());
     }//GEN-LAST:event_JTextTenDVKeyReleased
-    
-    public void displayNguoiDung(int i){
+
+    public void displayNguoiDung(int i) {
         NguoiDungModel nd = getNguoiDung().get(i);
         jLTen.setText(nd.getHoTen());
         String gioiTinh = nd.getGioiTinh() ? "Nam" : "Nữ";
@@ -1034,9 +1039,8 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
         jLEmail.setText(nd.getEmail());
         jLSDT.setText(nd.getSdt());
     }
-    
-    
-    public void DisplayHoaDon(int i){
+
+    public void DisplayHoaDon(int i) {
         HoaDonModel hd = layDSHoaDon().get(i);
         jLTenKH.setText(hd.getTenKhachHang());
         JLmaDatPhong.setText(hd.getMaDatPhong());
@@ -1046,9 +1050,9 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
         JLTienDV.setText(str1);
         jLTienPhong.setText(str2);
         jLTongTien.setText(str3);
-       
-        
+
     }
+
     public void DisplayHDP(int i) {
         DatPhongModel hdp = layDSDP().get(i);
         hdpMADP.setText(hdp.getMaDP());
@@ -1084,11 +1088,11 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
         }
         tbPhongDaDat.setModel(TBHDP);
     }
-    
-    
+
     final String header2[] = {"Mã phòng", "Tên phòng", "Loại phòng", "Giá phòng"};
     final DefaultTableModel df2 = new DefaultTableModel(header2, 0);
-        public final void taiTrangPhong(ArrayList<PhongModel> arr) {
+
+    public final void taiTrangPhong(ArrayList<PhongModel> arr) {
         df2.getDataVector().removeAllElements();
         for (int i = 0; i < arr.size(); i++) {
             String gia = String.valueOf(arr.get(i).getGiaPhong());
@@ -1097,21 +1101,20 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
         }
         TBPhong.setModel(df2);
     }
-    
-        public ArrayList<PhongModel> getPhong(){
-            return new PhongModel().getPhong();
-        }
+
+    public ArrayList<PhongModel> getPhong() {
+        return new PhongModel().getPhong();
+    }
 //    xuất hóa đơn 
-    
-    public ArrayList<HoaDonModel> layDSHoaDon(){
+
+    public ArrayList<HoaDonModel> layDSHoaDon() {
         return new HoaDonModel().layHoaDonTheoMaKhachHang();
     }
-    
-    
+
     final String header1[] = {"Mã hóa đơn", "Mã khách hàng", "Tên khách hàng", "Mã đặt phòng", "Tiền phòng", "Tiền dịch vụ", "Ngày tạo", "Tổng tiền"};
     final DefaultTableModel tb = new DefaultTableModel(header1, 0);
 
-    public final void taiTrangHoaDon(ArrayList<HoaDonModel> arr){
+    public final void taiTrangHoaDon(ArrayList<HoaDonModel> arr) {
         tb.getDataVector().removeAllElements();
         for (int i = 0; i < arr.size(); i++) {
             SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -1120,14 +1123,13 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
             String str2 = String.valueOf(arr.get(i).getTienDichVu());
             String str3 = String.valueOf(arr.get(i).getTongTien());
             String nd[] = {arr.get(i).getMaHoaDon(), arr.get(i).getMaKhachHang(),
-            arr.get(i).getTenKhachHang(), arr.get(i).getMaDatPhong(), str1, str2, ngayTao, str3};
-            tb.addRow(nd);      
-    }
+                arr.get(i).getTenKhachHang(), arr.get(i).getMaDatPhong(), str1, str2, ngayTao, str3};
+            tb.addRow(nd);
+        }
         tbBangHoaDon.setModel(tb);
-        
-}        
-      
-    
+
+    }
+
     public final void resetFormHuyDatPhong() {
         hdpMADP.setText("");
         hdpMaKh.setText("");
@@ -1151,11 +1153,11 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
         return new DatPhongModel(hdpMADP.getText(), hdpMaP.getText(), KhachHangController.khOn.getMaKH(), date, thoiGianBatDau, Float.parseFloat(hdpGP.getText()));
 
     }
-    
+
     public ArrayList<DichVuModel> getDichVu() {
         return new DichVuModel().getService();
     }
-    
+
     final String header4[] = {"Mã Dịch Vụ ", "Tên Dịch Vụ", "Giá Dịch Vụ"};
     final DefaultTableModel df = new DefaultTableModel(header4, 0);
 
@@ -1168,13 +1170,12 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
         }
         tbDichVu.setModel(df);
     }
-    
-    
-    public ArrayList<NguoiDungModel> getNguoiDung(){
+
+    public ArrayList<NguoiDungModel> getNguoiDung() {
         return new NguoiDungModel().getNguoiDung();
     }
-    
-    final String header5[] = {"Tên người Quản Lý", "Giới Tính", "email","Số điện thoại"};
+
+    final String header5[] = {"Tên người Quản Lý", "Giới Tính", "email", "Số điện thoại"};
     final DefaultTableModel df6 = new DefaultTableModel(header5, 0);
 
     public final void taiTrangNguoiDung(ArrayList<NguoiDungModel> arr) {
@@ -1186,10 +1187,8 @@ taiTrangPhong(layDSPhongTheoGiaPhong());
         }
         TBQuanLy.setModel(df6);
     }
-    
- 
-// hủy đặt phòng    
 
+// hủy đặt phòng    
     public static void run() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

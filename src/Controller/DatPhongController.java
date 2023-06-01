@@ -15,9 +15,9 @@ import java.util.Date;
  * @author hiep0
  */
 public class DatPhongController {
-    
+
     private static TrangCuaKhach trangCuaKhach;
-    
+
     public DatPhongController(TrangCuaKhach view) {
         DatPhongController.trangCuaKhach = view;
     }
@@ -44,6 +44,11 @@ public class DatPhongController {
             TrangCuaKhach.ngaySD = false;
             return;
         }
+        if (TrangCuaKhach.checkOld) {
+            trangCuaKhach.showMessage("Ngày bắt đầu sử dụng không thể là ngày trong quá khứ");
+            TrangCuaKhach.checkOld = false;
+            return;
+        }
         boolean test = new DatPhongModel().themDatPhong(datphong);
         if (test) {
             trangCuaKhach.showMessageOK("Đặt thành công");
@@ -54,7 +59,7 @@ public class DatPhongController {
         } else {
             trangCuaKhach.showMessage("Mã đặt phòng đã tồn tại");
         }
-        
+
     }
     // tạo mới đặt phòng
 
