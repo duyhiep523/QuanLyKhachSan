@@ -11,6 +11,8 @@ import View.TaoTaiKhoanKhach;
 import View.TrangCuaKhach;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import View.QLKhach;
 
 /**
  *
@@ -22,6 +24,11 @@ public class KhachHangController {
     public static KhachHangModel khOn;
     private static TaoTaiKhoanKhach TTK;
     private static TTKhachHang ttKH;
+    private static QLKhach khach;
+
+    public KhachHangController(QLKhach view) {
+        KhachHangController.khach = view;
+    }
 
     public KhachHangController(TaoTaiKhoanKhach view) {
         KhachHangController.TTK = view;
@@ -222,4 +229,88 @@ public class KhachHangController {
     public int ThongKeKhachHang() {
         return new KhachHangModel().countKhach();
     }
+    public String regexTDV = "^KH+[0-9]$";
+
+    public void themKH() {
+
+        KhachHangModel kh = khach.getKH();
+        if (Regex(kh.getMaKH(), regexTDV)) {
+            JOptionPane.showMessageDialog(khach, "ID phải có định dạng KHxxx.");
+            return;
+        }
+        if (kh.getTenKH().equals("")) {
+            ttKH.showMessage("Tên không được để rỗng");
+            return;
+        }
+        if (kh.getSDT().equals("")) {
+            ttKH.showMessage("Số điện thoại không được để rỗng");
+            return;
+        }
+        if (!Regex(kh.getSDT(), regexSDT)) {
+            ttKH.showMessage("Số điện thoại sai định dạng");
+            return;
+
+        }
+        if (kh.getCMND().equals("")) {
+            ttKH.showMessage("Chứng minh nhân dân không được để rỗng");
+            return;
+        }
+        if (!Regex(kh.getCMND(), regexSDT)) {
+            ttKH.showMessage("Chứng minh nhân dân sai định dạng");
+            return;
+        }
+        boolean add = new KhachHangModel().them(kh);
+        if (add) {
+            JOptionPane.showMessageDialog(khach, "thêm dịch vụ thành công.");
+
+        } else {
+            JOptionPane.showMessageDialog(khach, "thêm dịch vụ thất bại do trùng với tên MKH.");
+        }
+    }
+
+    public void xoaKH() {
+        KhachHangModel kh = khach.getKH();
+        boolean dele = new KhachHangModel().deleteKH(kh);
+        if (dele) {
+            JOptionPane.showMessageDialog(khach, "xóa dịch vụ thành công.");
+            khach.taiTrang(new KhachHangModel().getCustomer());
+            khach.resetForm();
+
+        } else {
+            JOptionPane.showMessageDialog(khach, "xóa dịch vụ thất bại.");
+        }
+    }
+
+    public void suaKH() {
+        KhachHangModel kh = khach.getKH();
+        if (kh.getTenKH().equals("")) {
+            ttKH.showMessage("Tên không được để rỗng");
+            return;
+        }
+        if (kh.getSDT().equals("")) {
+            ttKH.showMessage("Số điện thoại không được để rỗng");
+            return;
+        }
+        if (!Regex(kh.getSDT(), regexSDT)) {
+            ttKH.showMessage("Số điện thoại sai định dạng");
+            return;
+
+        }
+        if (kh.getCMND().equals("")) {
+            ttKH.showMessage("Chứng minh nhân dân không được để rỗng");
+            return;
+        }
+        if (!Regex(kh.getCMND(), regexSDT)) {
+            ttKH.showMessage("Chứng minh nhân dân sai định dạng");
+            return;
+        }
+        boolean sua = new KhachHangModel().sua(kh);
+        if (sua) {
+            JOptionPane.showMessageDialog(khach, "sửa dịch vụ thành công.");
+
+        } else {
+            JOptionPane.showMessageDialog(khach, "sửa dịch vụ thất bại do trùng tên vs mKH");
+        }
+    }
+
 }
