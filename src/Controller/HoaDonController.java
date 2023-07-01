@@ -8,6 +8,8 @@ import View.DSHoaDon;
 import Model.HoaDonModel;
 import View.QLHoaDon;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +39,7 @@ public class HoaDonController {
     }
 
     public void hienthi() {
-        dshoadon.taiTrang(new HoaDonModel().getDuLieuTinhTien());
+        dshoadon.taiTrang(new HoaDonModel().getDuLieu());
     }
 
 //       tạo hóa đơn
@@ -51,7 +53,7 @@ public class HoaDonController {
         return matcher.matches();
     }
 
-    public void taoHoaDon() {
+    public void themHoaDon() {
         HoaDonModel hd = qlhoadon.getHoaDon();
         if (hd.getMaHoaDon().equals("")) {
             qlhoadon.showMessageFail("Mã hóa đơn không được để trống");
@@ -73,19 +75,17 @@ public class HoaDonController {
             qlhoadon.showMessageFail("Mã đặt phòng phải đúng định dạng vd: DP01");
             return;
         }
-
+        
+        
+        
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String ngayTao = format.format(hd.getNgayTao());
-
-        if (ngayTao.equals("2222-11-11")) {
-            qlhoadon.showMessageFail("Ngày tạo không được để trống");
-            return;
-        }
-
-        if (!Regex(ngayTao, regexNgayTao)) {
-            qlhoadon.showMessageFail("Ngày tạo phải đúng định dạng vd: 2004-17-11");
-            return;
-        }
+        
+        
+        LocalDate curentDate = LocalDate.now();
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        ngayTao = formatter.format(curentDate);
 
         boolean test = new HoaDonModel().addHoaDon(hd);
         if (test) {
@@ -94,7 +94,7 @@ public class HoaDonController {
             qlhoadon.reset();
 
         } else {
-            qlhoadon.showMessageFail("Mã Hóa Đơn đã tồn tại OR Phòng không còn trống");
+            qlhoadon.showMessageFail("Thêm hóa đơn thật bại");
         }
 
     }
@@ -122,18 +122,18 @@ public class HoaDonController {
             return;
         }
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String ngayTao = format.format(hd.getNgayTao());
-
-        if (ngayTao.equals("2222-11-11")) {
-            qlhoadon.showMessageFail("Ngày tạo không được để trống");
-            return;
-        }
-
-        if (!Regex(ngayTao, regexNgayTao)) {
-            qlhoadon.showMessageFail("Ngày tạo phải đúng định dạng vd: 2004-17-11");
-            return;
-        }
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        String ngayTao = format.format(hd.getNgayTao());
+//
+//        if (ngayTao.equals("2222-11-11")) {
+//            qlhoadon.showMessageFail("Ngày tạo không được để trống");
+//            return;
+//        }
+//
+//        if (!Regex(ngayTao, regexNgayTao)) {
+//            qlhoadon.showMessageFail("Ngày tạo phải đúng định dạng vd: 2004-17-11");
+//            return;
+//        }
 
         boolean test = new HoaDonModel().suaHoaDon(hd);
         if (test) {
