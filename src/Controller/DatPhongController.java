@@ -77,7 +77,7 @@ public class DatPhongController {
         if (test) {
             trangCuaKhach.showMessageOK("xóa thành công");
             trangCuaKhach.taiTrangHuyDatPhong(trangCuaKhach.layDSDP());
-            new DatPhongModel().updateHDP(datphong);
+                new DatPhongModel().updateHDP(datphong);
             trangCuaKhach.taiTrang(trangCuaKhach.layDSPhong());
             trangCuaKhach.resetFormHuyDatPhong();
             trangCuaKhach.resetForm();
