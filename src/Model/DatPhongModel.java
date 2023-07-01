@@ -5,6 +5,7 @@
 package Model;
 
 import Controller.KhachHangController;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
+import java.text.DateFormat;
 
 /**
  *
@@ -143,6 +145,102 @@ public class DatPhongModel extends CSDL {
     }
     // huy dat phong khach    
 // p
+    // Nhan
+    public ArrayList<DatPhongModel> getDulieu() {
+        ArrayList<DatPhongModel> arr = new ArrayList<>();
+
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "select * from lich_dat_phong";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                DatPhongModel datP = new DatPhongModel(rs.getString(1), rs.getString(3),
+                        rs.getString(2), rs.getDate(4), rs.getDate(5), rs.getFloat(6));
+                arr.add(datP);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("Khong thanh cong");
+        }
+        return arr;
+    }
+    public boolean addRoom1(DatPhongModel room) {
+        Connection conn = this.getConnection();
+        String query = "";
+        try {
+            Statement st = conn.createStatement();
+            
+             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        // Chuyển đổi Date sang chuỗi
+             String ngayDat = dateFormat.format(room.thoiGianDat);
+              String ngayBD = dateFormat.format(room.thoiGianBatDau);
+              
+            query = "insert into lich_dat_phong value ('" + room.getMaDP() + "','" + room.getMaKH() + "','" + room.getMaPhong() + "','" + ngayDat
+                    + "','" + ngayBD + "'," + room.getGiaPhong() + ")";
+            st.executeUpdate(query);
+            System.out.println(query);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(query);
+            System.out.println("Khong thanh cong");
+        }
+        return false;
+
+    }
+    public boolean xoaP(DatPhongModel phong) throws SQLException {
+        Connection conn = this.getConnection();
+        String query = "";
+        try {
+            Statement st = conn.createStatement();
+            String sql = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.executeUpdate();
+            query = "delete from lich_dat_phong where maDatPhong='" + phong.getMaDP() + "'";
+            st.executeUpdate(query);
+            System.out.println(query);
+            sql = "SET FOREIGN_KEY_CHECKS=1;";
+            stm = conn.prepareStatement(sql);
+            stm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(query);
+            System.out.println("Khong thanh cong");
+        }
+        return false;
+    }
+    public boolean update1(DatPhongModel room) {
+        Connection conn = this.getConnection();
+        String query = "";
+
+        try {
+            
+             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        // Chuyển đổi Date sang chuỗi
+             String ngayDat = dateFormat.format(room.thoiGianDat);
+              String ngayBD = dateFormat.format(room.thoiGianBatDau);
+            query = "update lich_dat_phong set maKhachHang =?, maPhong=?, thoiGianDat =?, thoiGianBatDauSuDung=?,giaPhong=? where maDatPhong =? ";
+            PreparedStatement stm = conn.prepareStatement(query);
+            stm.setString(1, room.getMaKH());
+            stm.setString(2, room.getMaPhong());
+            stm.setString(3, ngayDat);
+            stm.setString(4, ngayBD);
+            stm.setFloat(5, room.getGiaPhong()); 
+            stm.setString(6, room.getMaDP());
+            stm.executeUpdate();
+            System.out.println(query);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(query);
+
+            System.out.println("Khong thanh cong");
+        }
+        return false;
+    }
+    
     public String getMaDP() {
         return maDP;
     }

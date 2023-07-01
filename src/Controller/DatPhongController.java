@@ -5,11 +5,16 @@
 package Controller;
 
 import Model.DatPhongModel;
+import View.QLDatPhong;
 //import Model.PhongModel;
 import View.TrangCuaKhach;
 //import java.text.SimpleDateFormat
+import java.sql.SQLException;
 import java.util.Date;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author hiep0
@@ -86,5 +91,143 @@ public class DatPhongController {
         }
     }
 
-    // huy dat phong
+   // NHÀN
+    
+    public static QLDatPhong qlDP;
+    
+    
+    
+    public String regexMaDP = "^DP\\d{2,5}$";
+    public String regexMaPhong = "^P\\d{2,5}$";
+    public String regexKhachHang = "KH\\d{2,5}$";
+   
+    
+     public boolean Regex(String input, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
+     
+     public DatPhongController(QLDatPhong ql) {
+
+        DatPhongController.qlDP = ql;
+    }
+    public void QLDatPhong() {
+        DatPhongModel addRoom = qlDP.getPhong();
+         String gia = String.valueOf(addRoom.getGiaPhong());
+
+        if (addRoom.getMaPhong().equals("")) {
+            qlDP.showMessage("Ma phong bi trong. Vui long nhap ma phong!");
+            return;
+        }
+        if (!Regex(addRoom.getMaPhong(), regexMaPhong)) {
+            qlDP.showMessage("Mã phòng phải đúng định dạng vd: P01");
+            return;
+        }
+        if (addRoom.getMaDP().equals("")) {
+            qlDP.showMessage("Ma dat phong bi trong. Vui long nhap ten phong!");
+            return;
+        }
+        if (!Regex(addRoom.getMaDP(), regexMaDP)) {
+            qlDP.showMessage("Mã đặt phòng phải đúng định dạng vd: DP01");
+            return;
+        }
+        if (addRoom.getMaKH().equals("")) {
+            qlDP.showMessage("Ma khach hang bi trong. Vui long nhap ma khach hang!");
+            return;
+        }
+        if (!Regex(addRoom.getMaKH(), regexKhachHang)) {
+            qlDP.showMessage("Mã khách hàng phải đúng định dạng vd: KH01");
+            return;
+        }
+        
+        if (gia.equals("")) {
+        
+            qlDP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
+            return;
+        }
+        if (addRoom.getThoiGianDat().equals("")) {
+            qlDP.showMessage("Thoi gian dat phong bi trong. Vui long nhap Thoi gian dat phong!");
+            return;
+        }
+         
+        if (addRoom.getThoiGianBatDau().equals("")) {
+            qlDP.showMessage("Thoi gian bat dau thue phong bi trong. Vui long nhap Thoi gian bat dau phong!");
+            return;
+        }
+        
+        boolean test = new DatPhongModel().addRoom1(addRoom);
+        if (test) {
+            qlDP.showMessageOK("Them thanh cong");
+            qlDP.taiTrang(new DatPhongModel().getDulieu());
+        } else {
+            qlDP.showMessage("Them Phong Khong Thanh cong!");
+        }
+    }
+    //Xóa phong
+
+   
+
+    public void removeRoom() {
+        DatPhongModel removeRoom = qlDP.getPhong();
+        if (removeRoom.getMaDP().equals("")) {
+            qlDP.showMessage("Ma dat phong bi trong. Vui long nhaap ma dat phong!");
+            return;
+        }
+        boolean test;
+        try {
+            test = new DatPhongModel().xoaP(removeRoom);
+            if (test) {
+                qlDP.showMessageOK("Xoa thanh cong");
+                qlDP.taiTrang(new DatPhongModel().getDulieu());
+                
+            } else {
+                qlDP.showMessage("Khong Thanh cong!");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatPhongController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    // UPDATE PHONG
+    public void updateRoom1(){
+        
+        DatPhongModel updateRoom = qlDP.getPhong();
+        String gia = String.valueOf(updateRoom.getGiaPhong());
+        if (updateRoom.getMaDP().equals("")) {
+            qlDP.showMessage("Ma dat phong bi trong. Vui long nhap ma dat phong!");
+            return;
+        }
+        if (updateRoom.getMaPhong().equals("")) {
+            qlDP.showMessage("Ma phong bi trong. Vui long nhap ma phong!");
+            return;
+        }
+        if (updateRoom.getMaKH().equals("")) {
+            qlDP.showMessage("Ma khach hang bi trong. Vui long nhap ma khach hang!");
+            return;
+        }
+        if (gia.equals("")) {
+        
+            qlDP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
+            return;
+        }
+        if (updateRoom.getThoiGianDat().equals("")) {
+            qlDP.showMessage("Thoi gian dat phong bi trong. Vui long nhap Thoi gian dat phong!");
+            return;
+        }
+        if (updateRoom.getThoiGianBatDau().equals("")) {
+            qlDP.showMessage("Thoi gian bat dau thue phong bi trong. Vui long nhap Thoi gian bat dau phong!");
+            return;
+        }
+         boolean test = new DatPhongModel().update1(updateRoom);
+            if(test){
+               qlDP.showMessageOK("Update phong thanh cong");
+               qlDP.taiTrang(new DatPhongModel().getDulieu());
+               
+           }else{
+                 qlDP.showMessage("Update phong khong thanh cong");
+
+           }
+        
+    }
 }

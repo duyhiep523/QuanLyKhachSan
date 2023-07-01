@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLHoaDon extends javax.swing.JPanel {
 
-final String header[] = {"Mã hóa đơn", "Mã khách hàng", "Tên khách hàng", "Mã đặt phòng", "Tiền phòng", "Tiền dịch vụ", "Ngày tạo", "Tổng tiền"};
+    final String header[] = {"Mã hóa đơn", "Mã khách hàng", "Tên khách hàng", "Mã đặt phòng", "Tiền phòng", "Tiền dịch vụ", "Ngày tạo", "Tổng tiền"};
     final DefaultTableModel tb = new DefaultTableModel(header, 0);
 
     public final void taiTrang(ArrayList<HoaDonModel> arr) {
@@ -46,6 +46,7 @@ final String header[] = {"Mã hóa đơn", "Mã khách hàng", "Tên khách hàn
         }
         DanhSachHoaDon.setModel(tb);
     }
+
     public void showMessageFail(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }
@@ -71,7 +72,7 @@ final String header[] = {"Mã hóa đơn", "Mã khách hàng", "Tên khách hàn
     }
 //    lấy dữ liệu để THÊM HÓA ĐƠN
 
- public HoaDonModel getHoaDon() {
+    public HoaDonModel getHoaDon() {
         String maHD = TxtmaHD.getText();
         String maDatPhong = TxtmaDatPhong.getText();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -91,7 +92,7 @@ final String header[] = {"Mã hóa đơn", "Mã khách hàng", "Tên khách hàn
         return new HoaDonModel(maHD, maDatPhong, ngayTao);
     }
 
-private ArrayList<HoaDonModel> timKiemHoaDon() {
+    private ArrayList<HoaDonModel> timKiemHoaDon() {
         if (jtextTimMaHoaDon.equals("")) {
             return new HoaDonModel().getDuLieu();
         } else {
@@ -135,8 +136,14 @@ private ArrayList<HoaDonModel> timKiemHoaDon() {
     }
 
     int hientai = 0;
+
+        public void setEnabledTRUE() {
+        TxtmaHD.setEnabled(true);
+        TxtmaDatPhong.setEnabled(true);
+        TxtngayTao.setEnabled(true);
+    }    
     
-        public void SetsetEditableTrue() {
+    public void SetsetEditableTrue() {
         TxtmaHD.setEditable(true);
         TxtmaDatPhong.setEditable(true);
         TxtngayTao.setEditable(true);
@@ -157,8 +164,8 @@ private ArrayList<HoaDonModel> timKiemHoaDon() {
         TxtngayTao.setText(ngayTao);
         this.SetsetEditableFalse();
     }
-    
-        public void resetJtextField() {
+
+    public void resetJtextField() {
         jTextMaDP.setText("");
         jTextMaKH.setText("");
         jtextTimMaHoaDon.setText("");
@@ -171,9 +178,6 @@ private ArrayList<HoaDonModel> timKiemHoaDon() {
         String ngayTao = formatter.format(curentDate);
         TxtngayTao.setText(ngayTao);
     }
-    
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -535,12 +539,13 @@ private ArrayList<HoaDonModel> timKiemHoaDon() {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.SetsetEditableFalse();
+        this.setEnabledTRUE();
         reset();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jtextTimMaHoaDonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtextTimMaHoaDonKeyReleased
         // TODO add your handling code here:
-         taiTrang(timKiemHoaDon());
+        taiTrang(timKiemHoaDon());
     }//GEN-LAST:event_jtextTimMaHoaDonKeyReleased
 
     private void DanhSachHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DanhSachHoaDonMouseClicked
@@ -571,7 +576,7 @@ private ArrayList<HoaDonModel> timKiemHoaDon() {
 
     private void jTextMaKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextMaKHMouseClicked
         // TODO add your handling code here:
-                this.resetJtextField();
+        this.resetJtextField();
         jTextMaKH.setEnabled(true);
         jtextTimMaHoaDon.setEnabled(false);
         jTextMaDP.setEnabled(false);
@@ -579,7 +584,7 @@ private ArrayList<HoaDonModel> timKiemHoaDon() {
 
     private void jtextTimMaHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtextTimMaHoaDonMouseClicked
         // TODO add your handling code here:
-                this.resetJtextField();
+        this.resetJtextField();
 
         jtextTimMaHoaDon.setEnabled(true);
         jTextMaKH.setEnabled(false);
@@ -588,7 +593,7 @@ private ArrayList<HoaDonModel> timKiemHoaDon() {
 
     private void jTextMaDPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextMaDPMouseClicked
         // TODO add your handling code here:
-        
+
         this.resetJtextField();
 
         jTextMaDP.setEnabled(true);

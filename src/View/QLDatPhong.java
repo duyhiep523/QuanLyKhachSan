@@ -3,6 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package View;
+import Controller.DatPhongController;
+import Model.DatPhongModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +24,7 @@ public class QLDatPhong extends javax.swing.JPanel {
     public QLDatPhong() {
        
         initComponents();
+        taiTrang(arr);
     }
 
     @SuppressWarnings("unchecked")
@@ -23,7 +34,7 @@ public class QLDatPhong extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableDatPHONG = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -34,20 +45,20 @@ public class QLDatPhong extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtDP = new javax.swing.JTextField();
+        txtMaphong = new javax.swing.JTextField();
+        txtMaKH = new javax.swing.JTextField();
+        txtGiaPhong = new javax.swing.JTextField();
+        txtNgayDat = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtNgayBatDau = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setText("Quản lý đặt phòng");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableDatPHONG.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -79,7 +90,12 @@ public class QLDatPhong extends javax.swing.JPanel {
                 "Mã đặt phòng", "Mã phòng", "Tên người đặt", "Loại phòng", "Số điện thoại", "Căn cước", "Ngày đặt"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TableDatPHONG.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableDatPHONGMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TableDatPHONG);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -87,6 +103,11 @@ public class QLDatPhong extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(0, 204, 255));
         jButton1.setText("Thêm");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 204, 255));
         jButton2.setText("Sửa ");
@@ -99,6 +120,11 @@ public class QLDatPhong extends javax.swing.JPanel {
         jButton4.setBackground(new java.awt.Color(0, 204, 255));
         jButton4.setText("Làm mới");
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,11 +159,11 @@ public class QLDatPhong extends javax.swing.JPanel {
 
         jLabel4.setText("Mã KH");
 
-        jLabel5.setText("SDT");
+        jLabel5.setText("Giá phòng");
 
-        jLabel6.setText("CMND");
+        jLabel6.setText("Ngày đặt");
 
-        jLabel7.setText("Ngày đặt");
+        jLabel7.setText("Ngày bắt đầu");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,20 +179,20 @@ public class QLDatPhong extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5))
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField6))
+                            .addComponent(txtDP, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(txtMaphong)
+                            .addComponent(txtMaKH)
+                            .addComponent(txtGiaPhong)
+                            .addComponent(txtNgayDat)
+                            .addComponent(txtNgayBatDau))
                         .addGap(71, 71, 71)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(276, 742, Short.MAX_VALUE))
@@ -179,7 +205,7 @@ public class QLDatPhong extends javax.swing.JPanel {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,23 +214,23 @@ public class QLDatPhong extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMaphong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGiaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -220,9 +246,88 @@ public class QLDatPhong extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+        public DatPhongModel getPhong() {
+        String ngayDat = txtNgayDat.getText();
+        String ngayBD = txtNgayBatDau.getText();
+//       giaP = txtGiaPhong.getFloat();
+        float gia = Float.parseFloat(txtGiaPhong.getText());
+        Date date1 = null;
+        Date date2 = null;
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(ngayDat);
+            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(ngayBD);
+        } catch (ParseException ex) {
+            Logger.getLogger(QLDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new DatPhongModel(txtDP.getText(), txtMaphong.getText(), txtMaKH.getText(), date1, date2, gia);//        return new DatPhongModel(txtDP.getText(), txtMaphong.getText(), txtMaKH.getText(), date1,date2, txtGiaPhong.getText());
+    }
 
+    ArrayList<DatPhongModel> arr = new DatPhongModel().getDulieu();
+    final String header[] = {"Mã Đặt Phòng", "Mã Phòng", "Mã Khách Hàng", "Thời Gian Đặt", "Thời gian bắt đầu sử dụng", "Giá phòng"};
+    final DefaultTableModel tb = new DefaultTableModel(header, 0);
 
+    public final void taiTrang(ArrayList<DatPhongModel> arr) {
+        tb.getDataVector().removeAllElements();
+        for (int i = 0; i < arr.size(); i++) {
+            float giaP = arr.get(i).getGiaPhong();
+            String giaPhong = Float.toString(giaP);
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+            String thoigiandat = date.format(arr.get(i).getThoiGianDat());
+            String tgianbdsd = date.format(arr.get(i).getThoiGianBatDau());
+//            System.out.println(thoigiandat + "   " + tgianbdsd);
+            String nd[] = {arr.get(i).getMaDP(), arr.get(i).getMaPhong(),
+                arr.get(i).getMaKH(), thoigiandat, tgianbdsd, giaPhong};
+            tb.addRow(nd);
+
+        }
+        TableDatPHONG.setModel(tb);
+    }
+
+    int hientai1 = 0;
+
+    public void Display(int hientai) {
+        DatPhongModel dp = arr.get(hientai);
+        float giaP = dp.getGiaPhong();
+        String giaPhong = String.valueOf(giaP);
+        txtDP.setText(dp.getMaDP());
+        txtMaphong.setText(dp.getMaPhong());
+        txtMaKH.setText(dp.getMaKH());
+        txtGiaPhong.setText(giaPhong);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayDat = format.format(dp.getThoiGianDat());
+        String ngayBatDau = format.format(dp.getThoiGianBatDau());
+        txtNgayDat.setText(ngayDat);
+        txtNgayBatDau.setText(ngayBatDau);
+    }
+    
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        txtDP.setText("");
+        txtMaphong.setText("");
+        txtMaKH.setText("");
+        txtGiaPhong.setText("");
+        txtNgayDat.setText("");
+        txtNgayBatDau.setText("");
+    }//GEN-LAST:event_jButton4MouseClicked
+    
+    private void TableDatPHONGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDatPHONGMouseClicked
+        // TODO add your handling code here:
+       hientai1 = TableDatPHONG.getSelectedRow();
+        Display(hientai1);
+    }//GEN-LAST:event_TableDatPHONGMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            // TODO add your handling code here:
+          new DatPhongController(this).QLDatPhong();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableDatPHONG;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -237,12 +342,18 @@ public class QLDatPhong extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField txtDP;
+    private javax.swing.JTextField txtGiaPhong;
+    private javax.swing.JTextField txtMaKH;
+    private javax.swing.JTextField txtMaphong;
+    private javax.swing.JTextField txtNgayBatDau;
+    private javax.swing.JTextField txtNgayDat;
     // End of variables declaration//GEN-END:variables
+public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showMessageOK(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
