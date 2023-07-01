@@ -5,6 +5,7 @@
 package Model;
 
 import Controller.KhachHangController;
+import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -102,6 +103,25 @@ public class DatPhongModel extends CSDL {
         return dp;
     }
 
+    public boolean kiemTraPhong(DatPhongModel phong) {
+        boolean result = false;
+        try {
+            Connection conn = this.getConnection();
+            String query = "select tinhTrang from phong where maPhong=?";
+            PreparedStatement stm = conn.prepareStatement(query);
+            stm.setString(1, phong.getMaPhong());
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                result = rs.getBoolean(1);
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatPhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     public boolean huyDP(DatPhongModel hdp) {
         try {
             Connection conn = this.getConnection();
@@ -143,6 +163,7 @@ public class DatPhongModel extends CSDL {
         }
         return false;
     }
+
     // huy dat phong khach    
 // p
     // Nhan
@@ -166,21 +187,23 @@ public class DatPhongModel extends CSDL {
         }
         return arr;
     }
+
     public boolean addRoom1(DatPhongModel room) {
         Connection conn = this.getConnection();
         String query = "";
         try {
             Statement st = conn.createStatement();
-            
-             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
-        // Chuyển đổi Date sang chuỗi
-             String ngayDat = dateFormat.format(room.thoiGianDat);
-              String ngayBD = dateFormat.format(room.thoiGianBatDau);
-              
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Chuyển đổi Date sang chuỗi
+            String ngayDat = dateFormat.format(room.thoiGianDat);
+            String ngayBD = dateFormat.format(room.thoiGianBatDau);
+
             query = "insert into lich_dat_phong value ('" + room.getMaDP() + "','" + room.getMaKH() + "','" + room.getMaPhong() + "','" + ngayDat
                     + "','" + ngayBD + "'," + room.getGiaPhong() + ")";
             st.executeUpdate(query);
+
             System.out.println(query);
             return true;
         } catch (SQLException ex) {
@@ -190,6 +213,7 @@ public class DatPhongModel extends CSDL {
         return false;
 
     }
+
     public boolean xoaP(DatPhongModel phong) throws SQLException {
         Connection conn = this.getConnection();
         String query = "";
@@ -211,26 +235,33 @@ public class DatPhongModel extends CSDL {
         }
         return false;
     }
+
     public boolean update1(DatPhongModel room) {
         Connection conn = this.getConnection();
         String query = "";
 
         try {
-            
-             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
-        // Chuyển đổi Date sang chuỗi
-             String ngayDat = dateFormat.format(room.thoiGianDat);
-              String ngayBD = dateFormat.format(room.thoiGianBatDau);
+
+            String sql = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.executeUpdate();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Chuyển đổi Date sang chuỗi
+            String ngayDat = dateFormat.format(room.thoiGianDat);
+            String ngayBD = dateFormat.format(room.thoiGianBatDau);
             query = "update lich_dat_phong set maKhachHang =?, maPhong=?, thoiGianDat =?, thoiGianBatDauSuDung=?,giaPhong=? where maDatPhong =? ";
             PreparedStatement stm = conn.prepareStatement(query);
             stm.setString(1, room.getMaKH());
             stm.setString(2, room.getMaPhong());
             stm.setString(3, ngayDat);
             stm.setString(4, ngayBD);
-            stm.setFloat(5, room.getGiaPhong()); 
+            stm.setFloat(5, room.getGiaPhong());
             stm.setString(6, room.getMaDP());
             stm.executeUpdate();
+            String sqlUP = "SET FOREIGN_KEY_CHECKS=1;";
+            conn.prepareStatement(sqlUP);
+            stmt.executeUpdate();
             System.out.println(query);
             return true;
         } catch (SQLException ex) {
@@ -240,7 +271,7 @@ public class DatPhongModel extends CSDL {
         }
         return false;
     }
-    
+
     public String getMaDP() {
         return maDP;
     }

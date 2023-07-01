@@ -162,6 +162,91 @@ public class PhongModel extends CSDL {
         return i;
     }
     
+    //Nhàn
+    public ArrayList<PhongModel> getDulieu() {
+        ArrayList<PhongModel> arr = new ArrayList<>();
+
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "select * from phong";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                PhongModel room = new PhongModel(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getFloat(4), rs.getBoolean(5));
+                arr.add(room);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            System.out.println("Đổ dữ liệu phòng không thành công");
+        }
+        return arr;
+    }
+    
+     public boolean themPhong(PhongModel phong) {
+        Connection conn = this.getConnection();
+        try {
+            Statement st = conn.createStatement();
+          
+            boolean tinhTrang = false;
+            String query = "insert into phong value ('" + phong.getMaPhong() + "','" + phong.getTenPhong() + "','" + phong.getLoaiPhong() + "'," + phong.getGiaPhong() + "," + tinhTrang + ")";
+            st.executeUpdate(query);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Khong thanh cong");
+        }
+        return false;
+    }
+     
+     // Xóa phong
+    public boolean xoaPhong(PhongModel phong) {
+        Connection conn = this.getConnection();
+
+        try {
+            String sql0 = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stm0= conn.prepareStatement(sql0);
+            stm0.executeUpdate();
+
+            String sql = "delete from phong where maPhong = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, phong.getMaPhong());
+            pst.executeUpdate();
+            String sql1 = "SET FOREIGN_KEY_CHECKS=1;";
+            PreparedStatement stm1= conn.prepareStatement(sql1);
+            stm1.executeUpdate();
+            return true;
+
+        } catch (SQLException ex) {
+            System.out.println("Xóa Khong thanh cong");
+
+        }
+        return false;
+    }
+    
+        public boolean updateRoom(PhongModel phong) {
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "update phong set tenPhong=?, loaiPhong=?, giaPhong=?, tinhTrang=? where maPhong=? ";
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, phong.getTenPhong());
+            pst.setString(2, phong.getLoaiPhong());
+            pst.setFloat(3, phong.getGiaPhong());
+            pst.setBoolean(4, phong.getTinhTrang());
+             pst.setString(5, phong.getMaPhong());
+            pst.executeUpdate();
+            return true;
+
+        } catch (SQLException ex) {
+            System.out.println("Khong thanh cong");
+        }
+        return false;
+    }
+
+    
     public String getMaPhong() {
         return maPhong;
     }

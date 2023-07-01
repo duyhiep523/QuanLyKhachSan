@@ -14,6 +14,7 @@ import Model.NguoiDungModel;
 import Model.PhongModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -912,6 +913,7 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
     public static boolean checkempty = false;
     public static boolean checkMuon = false;
     public static boolean checkOld = false;
+    public static boolean checkNghiepVu = false;
 
     public DatPhongModel getDatPhong() {
         if (txtTinhTrang.getText().equals("Đang thuê")) {
@@ -927,8 +929,15 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
             thoiGianBatDau = formatter.parse(txtTGBD.getText());
             int comparison = (new Date()).compareTo(thoiGianBatDau);
             if (comparison > 0) {
-//                System.out.println("đã đi vào");
                 checkOld = true;
+            }
+            long timeInMillis = (new Date()).getTime();
+            long addedTimeInMillis = 2 * 24 * 60 * 60 * 1000L;
+            Date ngaySau = new Date(timeInMillis + addedTimeInMillis);
+            int soSanh = thoiGianBatDau.compareTo(ngaySau);
+            if (soSanh > 0) {
+                System.out.println(thoiGianBatDau + " lớn hơn" + ngaySau);
+                checkNghiepVu = true;
             }
         } catch (ParseException ex) {
             ngaySD = true;

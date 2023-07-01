@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  *
  * @author hiep0
@@ -54,6 +55,11 @@ public class DatPhongController {
             TrangCuaKhach.checkOld = false;
             return;
         }
+        if (TrangCuaKhach.checkNghiepVu) {
+            trangCuaKhach.showMessage("Ngày bắt đầu sử dụng không thể lớn hơn 2 ngày ");
+            TrangCuaKhach.checkNghiepVu = false;
+            return;
+        }
         boolean test = new DatPhongModel().themDatPhong(datphong);
         if (test) {
             trangCuaKhach.showMessageOK("Đặt thành công");
@@ -82,7 +88,7 @@ public class DatPhongController {
         if (test) {
             trangCuaKhach.showMessageOK("xóa thành công");
             trangCuaKhach.taiTrangHuyDatPhong(trangCuaKhach.layDSDP());
-                new DatPhongModel().updateHDP(datphong);
+            new DatPhongModel().updateHDP(datphong);
             trangCuaKhach.taiTrang(trangCuaKhach.layDSPhong());
             trangCuaKhach.resetFormHuyDatPhong();
             trangCuaKhach.resetForm();
@@ -91,41 +97,43 @@ public class DatPhongController {
         }
     }
 
-   // NHÀN
-    
+    // NHÀN
     public static QLDatPhong qlDP;
-    
-    
-    
+
     public String regexMaDP = "^DP\\d{2,5}$";
     public String regexMaPhong = "^P\\d{2,5}$";
     public String regexKhachHang = "KH\\d{2,5}$";
-   
-    
-     public boolean Regex(String input, String regex) {
+
+    public boolean Regex(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
-     
-     public DatPhongController(QLDatPhong ql) {
+
+    public DatPhongController(QLDatPhong ql) {
 
         DatPhongController.qlDP = ql;
     }
+
     public void QLDatPhong() {
+
         DatPhongModel addRoom = qlDP.getPhong();
-         String gia = String.valueOf(addRoom.getGiaPhong());
+        String gia = String.valueOf(addRoom.getGiaPhong());
 
         if (addRoom.getMaPhong().equals("")) {
-            qlDP.showMessage("Ma phong bi trong. Vui long nhap ma phong!");
+            qlDP.showMessage("Mã phòng bị trống. Vui lòng nhập lại");
             return;
         }
         if (!Regex(addRoom.getMaPhong(), regexMaPhong)) {
             qlDP.showMessage("Mã phòng phải đúng định dạng vd: P01");
             return;
         }
+        if (new DatPhongModel().kiemTraPhong(addRoom)) {
+            qlDP.showMessage("Mã phongd này đang được thuê vui lòng chọn phòng khác!");
+            return;
+        }
         if (addRoom.getMaDP().equals("")) {
-            qlDP.showMessage("Ma dat phong bi trong. Vui long nhap ten phong!");
+            qlDP.showMessage("Mã đặt phòng trống. Vui lòng nhập lại!");
             return;
         }
         if (!Regex(addRoom.getMaDP(), regexMaDP)) {
@@ -133,40 +141,39 @@ public class DatPhongController {
             return;
         }
         if (addRoom.getMaKH().equals("")) {
-            qlDP.showMessage("Ma khach hang bi trong. Vui long nhap ma khach hang!");
+            qlDP.showMessage("Mã khách hàng trống. Vui lòng nhập lại!");
             return;
         }
         if (!Regex(addRoom.getMaKH(), regexKhachHang)) {
             qlDP.showMessage("Mã khách hàng phải đúng định dạng vd: KH01");
             return;
         }
-        
+
         if (gia.equals("")) {
-        
-            qlDP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
+
+            qlDP.showMessage("giá phòng bị trống. Vui lòng nhập lại!");
             return;
         }
         if (addRoom.getThoiGianDat().equals("")) {
-            qlDP.showMessage("Thoi gian dat phong bi trong. Vui long nhap Thoi gian dat phong!");
+            qlDP.showMessage("Thời gian đặt phòng bị trống. Vui long nhap Thoi gian dat phong!");
             return;
         }
-         
+
         if (addRoom.getThoiGianBatDau().equals("")) {
-            qlDP.showMessage("Thoi gian bat dau thue phong bi trong. Vui long nhap Thoi gian bat dau phong!");
+            qlDP.showMessage("thời gian bắt đầu thuê bị trống. Vui lòng nhập lại!");
             return;
         }
-        
+
         boolean test = new DatPhongModel().addRoom1(addRoom);
         if (test) {
             qlDP.showMessageOK("Them thanh cong");
+            addRoom.updateMuonPhong(addRoom);
             qlDP.taiTrang(new DatPhongModel().getDulieu());
         } else {
             qlDP.showMessage("Them Phong Khong Thanh cong!");
         }
     }
     //Xóa phong
-
-   
 
     public void removeRoom() {
         DatPhongModel removeRoom = qlDP.getPhong();
@@ -179,8 +186,9 @@ public class DatPhongController {
             test = new DatPhongModel().xoaP(removeRoom);
             if (test) {
                 qlDP.showMessageOK("Xoa thanh cong");
+                removeRoom.updateHDP(removeRoom);
                 qlDP.taiTrang(new DatPhongModel().getDulieu());
-                
+
             } else {
                 qlDP.showMessage("Khong Thanh cong!");
             }
@@ -189,9 +197,10 @@ public class DatPhongController {
         }
 
     }
+
     // UPDATE PHONG
-    public void updateRoom1(){
-        
+    public void updateRoom1() {
+
         DatPhongModel updateRoom = qlDP.getPhong();
         String gia = String.valueOf(updateRoom.getGiaPhong());
         if (updateRoom.getMaDP().equals("")) {
@@ -207,7 +216,7 @@ public class DatPhongController {
             return;
         }
         if (gia.equals("")) {
-        
+
             qlDP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
             return;
         }
@@ -219,15 +228,15 @@ public class DatPhongController {
             qlDP.showMessage("Thoi gian bat dau thue phong bi trong. Vui long nhap Thoi gian bat dau phong!");
             return;
         }
-         boolean test = new DatPhongModel().update1(updateRoom);
-            if(test){
-               qlDP.showMessageOK("Update phong thanh cong");
-               qlDP.taiTrang(new DatPhongModel().getDulieu());
-               
-           }else{
-                 qlDP.showMessage("Update phong khong thanh cong");
+        boolean test = new DatPhongModel().update1(updateRoom);
+        if (test) {
+            qlDP.showMessageOK("Update phong thanh cong");
+            qlDP.taiTrang(new DatPhongModel().getDulieu());
 
-           }
-        
+        } else {
+            qlDP.showMessage("Update phong khong thanh cong");
+
+        }
+
     }
 }

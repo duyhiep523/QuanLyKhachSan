@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package View;
+
 import Controller.DatPhongController;
 import Model.DatPhongModel;
 import java.util.logging.Level;
@@ -20,11 +21,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLDatPhong extends javax.swing.JPanel {
 
-
     public QLDatPhong() {
-       
+
         initComponents();
-        taiTrang(arr);
+        taiTrang(getDatPhongQL());
     }
 
     @SuppressWarnings("unchecked")
@@ -112,10 +112,25 @@ public class QLDatPhong extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 204, 255));
         jButton2.setText("Sửa ");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 204, 255));
         jButton3.setText("Xóa");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 204, 255));
         jButton4.setText("Làm mới");
@@ -246,8 +261,8 @@ public class QLDatPhong extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-        public DatPhongModel getPhong() {
+
+    public DatPhongModel getPhong() {
         String ngayDat = txtNgayDat.getText();
         String ngayBD = txtNgayBatDau.getText();
 //       giaP = txtGiaPhong.getFloat();
@@ -263,7 +278,11 @@ public class QLDatPhong extends javax.swing.JPanel {
         return new DatPhongModel(txtDP.getText(), txtMaphong.getText(), txtMaKH.getText(), date1, date2, gia);//        return new DatPhongModel(txtDP.getText(), txtMaphong.getText(), txtMaKH.getText(), date1,date2, txtGiaPhong.getText());
     }
 
-    ArrayList<DatPhongModel> arr = new DatPhongModel().getDulieu();
+    public ArrayList<DatPhongModel> getDatPhongQL() {
+        return new DatPhongModel().getDulieu();
+
+    }
+
     final String header[] = {"Mã Đặt Phòng", "Mã Phòng", "Mã Khách Hàng", "Thời Gian Đặt", "Thời gian bắt đầu sử dụng", "Giá phòng"};
     final DefaultTableModel tb = new DefaultTableModel(header, 0);
 
@@ -287,7 +306,7 @@ public class QLDatPhong extends javax.swing.JPanel {
     int hientai1 = 0;
 
     public void Display(int hientai) {
-        DatPhongModel dp = arr.get(hientai);
+        DatPhongModel dp = getDatPhongQL().get(hientai);
         float giaP = dp.getGiaPhong();
         String giaPhong = String.valueOf(giaP);
         txtDP.setText(dp.getMaDP());
@@ -301,7 +320,7 @@ public class QLDatPhong extends javax.swing.JPanel {
         txtNgayDat.setText(ngayDat);
         txtNgayBatDau.setText(ngayBatDau);
     }
-    
+
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
         txtDP.setText("");
@@ -311,21 +330,34 @@ public class QLDatPhong extends javax.swing.JPanel {
         txtNgayDat.setText("");
         txtNgayBatDau.setText("");
     }//GEN-LAST:event_jButton4MouseClicked
-    
+
     private void TableDatPHONGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableDatPHONGMouseClicked
         // TODO add your handling code here:
-       hientai1 = TableDatPHONG.getSelectedRow();
+        hientai1 = TableDatPHONG.getSelectedRow();
         Display(hientai1);
     }//GEN-LAST:event_TableDatPHONGMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            // TODO add your handling code here:
-          new DatPhongController(this).QLDatPhong();
+        // TODO add your handling code here:
+        new DatPhongController(this).QLDatPhong();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        new DatPhongController(this).updateRoom1();
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        new DatPhongController(this).removeRoom();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableDatPHONG;
     private javax.swing.JButton jButton1;
