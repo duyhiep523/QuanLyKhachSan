@@ -41,7 +41,36 @@ public class QLPhong extends javax.swing.JPanel {
         if (LoaiPhong.getSelectedItem().equals("Đôi")) {
             loaiPhong = "Phòng Đôi";
         }
+
         return new PhongModel(txtMaPhong.getText(), txtTenPhong.getText(), loaiPhong, gia, true);
+    }
+
+    public PhongModel getUPPhong() {
+        if (txtGiaPhong.getText().equals("")) {
+            chekgia = true;
+        }
+        float gia = -1.f;
+        if (!txtGiaPhong.getText().equals("")) {
+            gia = Float.parseFloat(txtGiaPhong.getText());
+        }
+        String loaiPhong = "";
+        if (LoaiPhong.getSelectedItem().equals("Đơn")) {
+            loaiPhong = "Phòng Đơn";
+        }
+
+        if (LoaiPhong.getSelectedItem().equals("Vipppppppp")) {
+            loaiPhong = "Phòng VIP";
+        }
+        if (LoaiPhong.getSelectedItem().equals("Đôi")) {
+            loaiPhong = "Phòng Đôi";
+        }
+        boolean tt = false;
+        switch (TinhTrang.getSelectedIndex()) {
+            case 1 -> tt = true;
+            case 2 -> tt = false;
+            default -> this.showMessage("tình trạng k được bỏ trống");
+        }
+        return new PhongModel(txtMaPhong.getText(), txtTenPhong.getText(), loaiPhong, gia, tt);
     }
     ArrayList<PhongModel> arr = new PhongModel().getDulieu();
     final String header[] = {"Mã Phòng", "Tên Phòng", "Loại Phòng", "Giá Phòng", "Tình Trạng"};
@@ -178,6 +207,11 @@ public class QLPhong extends javax.swing.JPanel {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -368,6 +402,10 @@ public class QLPhong extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }

@@ -199,7 +199,6 @@ public class DichVuModel extends CSDL {
         try {
             Connection conn = this.getConnection();
             String sql = "INSERT INTO chi_tiet_dich_vu VALUES (?, ?, ?, ?, ?)";
-            System.out.println(sql);
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, dv.getServiceId());
             stm.setString(2, dv.getIdR());
@@ -295,7 +294,7 @@ public class DichVuModel extends CSDL {
         ArrayList<DichVuModel> arr1 = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
-            String sql = "SELECT * FROM dich_vu WHERE maDichVu LIKE '%" + key + "%' or tenDichVu LIKE '%" + key + "%' ";
+            String sql = "SELECT * FROM dich_vu WHERE maDichVu LIKE '%" + key + "%' or tenDichVu LIKE '%" + key + "%' or giaDichVu LIKE '%"+ key+"%'";
 //            System.out.println(sql);
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

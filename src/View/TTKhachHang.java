@@ -166,15 +166,9 @@ public class TTKhachHang extends javax.swing.JFrame {
             }
         });
 
-        textName.setText("jTextField1");
-
         jLabel13.setText("CMND");
 
         textGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-
-        textSDT.setText("jTextField2");
-
-        textCMND.setText("jTextField3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -294,13 +288,13 @@ public class TTKhachHang extends javax.swing.JFrame {
 
         jLabel5.setText("CMND");
 
-        txtName.setText("jLabel6");
+        txtName.setText(".");
 
-        txtSDT.setText("jLabel7");
+        txtSDT.setText(".");
 
-        txtCMND.setText("jLabel8");
+        txtCMND.setText(".");
 
-        txtGioiTinh.setText("jLabel9");
+        txtGioiTinh.setText(".");
 
         jButton3.setBackground(new java.awt.Color(255, 0, 51));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

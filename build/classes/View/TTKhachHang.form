@@ -235,9 +235,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="textName">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
@@ -258,14 +255,8 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="textSDT">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField2"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="textCMND">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField3"/>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -395,22 +386,22 @@
         </Component>
         <Component class="javax.swing.JLabel" name="txtName">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel6"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txtSDT">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel7"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txtCMND">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel8"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txtGioiTinh">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel9"/>
+            <Property name="text" type="java.lang.String" value="."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">

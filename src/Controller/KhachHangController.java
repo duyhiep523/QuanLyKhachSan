@@ -229,42 +229,36 @@ public class KhachHangController {
     public int ThongKeKhachHang() {
         return new KhachHangModel().countKhach();
     }
-    public String regexTDV = "^KH+[0-9]$";
+    public String regexKH = "^KH\\d+$";
 
     public void themKH() {
 
         KhachHangModel kh = khach.getKH();
-        if (Regex(kh.getMaKH(), regexTDV)) {
-            JOptionPane.showMessageDialog(khach, "ID phải có định dạng KHxxx.");
+        if (!Regex(kh.getMaKH(), regexKH)) {
+            JOptionPane.showMessageDialog(khach, "Mã Khách Hàng phải có định dạng KHxxx.");
             return;
         }
+
         if (kh.getTenKH().equals("")) {
-            ttKH.showMessage("Tên không được để rỗng");
+            JOptionPane.showMessageDialog(khach, "Tên không được để rỗng");
             return;
         }
         if (kh.getSDT().equals("")) {
-            ttKH.showMessage("Số điện thoại không được để rỗng");
+            JOptionPane.showMessageDialog(khach, "SĐT không được để trống");
             return;
         }
-        if (!Regex(kh.getSDT(), regexSDT)) {
-            ttKH.showMessage("Số điện thoại sai định dạng");
-            return;
 
-        }
         if (kh.getCMND().equals("")) {
-            ttKH.showMessage("Chứng minh nhân dân không được để rỗng");
+            JOptionPane.showMessageDialog(khach, "CMND không được để trống");
             return;
         }
-        if (!Regex(kh.getCMND(), regexSDT)) {
-            ttKH.showMessage("Chứng minh nhân dân sai định dạng");
-            return;
-        }
+
         boolean add = new KhachHangModel().them(kh);
         if (add) {
             JOptionPane.showMessageDialog(khach, "thêm dịch vụ thành công.");
 
         } else {
-            JOptionPane.showMessageDialog(khach, "thêm dịch vụ thất bại do trùng với tên MKH.");
+            JOptionPane.showMessageDialog(khach, "thêm dịch vụ thất bại do đã trùng thông tin.");
         }
     }
 
@@ -282,34 +276,32 @@ public class KhachHangController {
     }
 
     public void suaKH() {
-        KhachHangModel kh = khach.getKH();
+           KhachHangModel kh = khach.getKH();
+        if (!Regex(kh.getMaKH(), regexKH)) {
+            JOptionPane.showMessageDialog(khach, "Mã Khách Hàng phải có định dạng KHxxx.");
+            return;
+        }
+
         if (kh.getTenKH().equals("")) {
-            ttKH.showMessage("Tên không được để rỗng");
+            JOptionPane.showMessageDialog(khach, "Tên không được để rỗng");
             return;
         }
         if (kh.getSDT().equals("")) {
-            ttKH.showMessage("Số điện thoại không được để rỗng");
+            JOptionPane.showMessageDialog(khach, "SĐT không được để trống");
             return;
         }
-        if (!Regex(kh.getSDT(), regexSDT)) {
-            ttKH.showMessage("Số điện thoại sai định dạng");
-            return;
 
-        }
         if (kh.getCMND().equals("")) {
-            ttKH.showMessage("Chứng minh nhân dân không được để rỗng");
+            JOptionPane.showMessageDialog(khach, "CMND không được để trống");
             return;
         }
-        if (!Regex(kh.getCMND(), regexSDT)) {
-            ttKH.showMessage("Chứng minh nhân dân sai định dạng");
-            return;
-        }
-        boolean sua = new KhachHangModel().sua(kh);
-        if (sua) {
-            JOptionPane.showMessageDialog(khach, "sửa dịch vụ thành công.");
+
+        boolean add = new KhachHangModel().sua(kh);
+        if (add) {
+            JOptionPane.showMessageDialog(khach, "Sửa dịch vụ thành công.");
 
         } else {
-            JOptionPane.showMessageDialog(khach, "sửa dịch vụ thất bại do trùng tên vs mKH");
+            JOptionPane.showMessageDialog(khach, " Sửa dịch vụ thất bại do đã trùng thông tin.");
         }
     }
 

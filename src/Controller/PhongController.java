@@ -92,7 +92,7 @@ public class PhongController {
     // sửa phòng
 
     public void updateRoom() {
-        PhongModel phong = qlP.getPhong();
+        PhongModel phong = qlP.getUPPhong();
         if (phong.getMaPhong().equals("")) {
             qlP.showMessage("Ma phong bi trong. Vui long nhap ma phong!");
             return;
@@ -112,11 +112,11 @@ public class PhongController {
             qlP.showMessage("Loai phong bi trong. Vui long nhap ma phong!");
             return;
         }
-        if (phong.getTinhTrang().equals("")) {
-
-            qlP.showMessage("Tinh trang phong bi trong. Vui long nhap ma phong!");
-            return;
-        }
+//        if (phong.getTinhTrang().equals("")) {
+//
+//            qlP.showMessage("Tinh trang phong bi trong. Vui long nhap ma phong!");
+//            return;
+//        }
         boolean test = new PhongModel().updateRoom(phong);
         if (test) {
             qlP.showMessageOK("Update phong thanh cong");

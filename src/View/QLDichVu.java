@@ -327,7 +327,7 @@ public class QLDichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ADDActionPerformed
-        new DichVuController(this).suaDV();
+        new DichVuController(this).themDV();
         arr = new DichVuModel().getService();
         taiTrang(layDVtheoYeuCau());
         // TODO add your handling code here:

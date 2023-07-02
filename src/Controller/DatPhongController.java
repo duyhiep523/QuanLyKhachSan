@@ -6,7 +6,8 @@ package Controller;
 
 import Model.DatPhongModel;
 import View.QLDatPhong;
-//import Model.PhongModel;
+import static View.QLDatPhong.checkFL;
+import View.QLPhong;
 import View.TrangCuaKhach;
 //import java.text.SimpleDateFormat
 import java.sql.SQLException;
@@ -60,6 +61,7 @@ public class DatPhongController {
             TrangCuaKhach.checkNghiepVu = false;
             return;
         }
+
         boolean test = new DatPhongModel().themDatPhong(datphong);
         if (test) {
             trangCuaKhach.showMessageOK("Đặt thành công");
@@ -119,7 +121,14 @@ public class DatPhongController {
 
         DatPhongModel addRoom = qlDP.getPhong();
         String gia = String.valueOf(addRoom.getGiaPhong());
-
+        if (addRoom.getMaDP().equals("")) {
+            qlDP.showMessage("Mã đặt phòng trống. Vui lòng nhập lại!");
+            return;
+        }
+        if (!Regex(addRoom.getMaDP(), regexMaDP)) {
+            qlDP.showMessage("Mã đặt phòng phải đúng định dạng vd: DP01");
+            return;
+        }
         if (addRoom.getMaPhong().equals("")) {
             qlDP.showMessage("Mã phòng bị trống. Vui lòng nhập lại");
             return;
@@ -129,46 +138,51 @@ public class DatPhongController {
             return;
         }
         if (new DatPhongModel().kiemTraPhong(addRoom)) {
-            qlDP.showMessage("Mã phongd này đang được thuê vui lòng chọn phòng khác!");
-            return;
-        }
-        if (addRoom.getMaDP().equals("")) {
-            qlDP.showMessage("Mã đặt phòng trống. Vui lòng nhập lại!");
-            return;
-        }
-        if (!Regex(addRoom.getMaDP(), regexMaDP)) {
-            qlDP.showMessage("Mã đặt phòng phải đúng định dạng vd: DP01");
+            qlDP.showMessage("Mã phòng này đang được thuê vui lòng chọn phòng khác!");
             return;
         }
         if (addRoom.getMaKH().equals("")) {
             qlDP.showMessage("Mã khách hàng trống. Vui lòng nhập lại!");
             return;
         }
+
         if (!Regex(addRoom.getMaKH(), regexKhachHang)) {
             qlDP.showMessage("Mã khách hàng phải đúng định dạng vd: KH01");
             return;
         }
 
-        if (gia.equals("")) {
-
+        if (gia.equals("") || QLDatPhong.checkFL) {
+            checkFL = false;
             qlDP.showMessage("giá phòng bị trống. Vui lòng nhập lại!");
             return;
         }
-        if (addRoom.getThoiGianDat().equals("")) {
-            qlDP.showMessage("Thời gian đặt phòng bị trống. Vui long nhap Thoi gian dat phong!");
+        if (QLDatPhong.checkF2L) {
+            QLDatPhong.checkF2L = false;
+            qlDP.showMessage("giá phòng không được âm và phải đúng định dạng!");
+            return;
+        }
+        if (QLDatPhong.checkn1) {
+            qlDP.showMessage("Thời gian đặt phòng bị trống hoặc sai định dạng!");
+            QLDatPhong.checkn1 = false;
             return;
         }
 
-        if (addRoom.getThoiGianBatDau().equals("")) {
-            qlDP.showMessage("thời gian bắt đầu thuê bị trống. Vui lòng nhập lại!");
+        if (QLDatPhong.checkn2) {
+            qlDP.showMessage("thời gian bắt đầu thuê bị trống hoặc sai định dạng!");
+            QLDatPhong.checkn2 = false;
             return;
         }
-
+        if (QLDatPhong.checkOld) {
+            qlDP.showMessage("Ngày bắt đầu không được nhỏ hơn ngày đặt!");
+            QLDatPhong.checkOld = false;
+            return;
+        }
         boolean test = new DatPhongModel().addRoom1(addRoom);
         if (test) {
             qlDP.showMessageOK("Them thanh cong");
             addRoom.updateMuonPhong(addRoom);
             qlDP.taiTrang(new DatPhongModel().getDulieu());
+            qlDP.reset();
         } else {
             qlDP.showMessage("Them Phong Khong Thanh cong!");
         }
@@ -188,6 +202,7 @@ public class DatPhongController {
                 qlDP.showMessageOK("Xoa thanh cong");
                 removeRoom.updateHDP(removeRoom);
                 qlDP.taiTrang(new DatPhongModel().getDulieu());
+                qlDP.reset();
 
             } else {
                 qlDP.showMessage("Khong Thanh cong!");
@@ -220,18 +235,27 @@ public class DatPhongController {
             qlDP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
             return;
         }
-        if (updateRoom.getThoiGianDat().equals("")) {
-            qlDP.showMessage("Thoi gian dat phong bi trong. Vui long nhap Thoi gian dat phong!");
+        if (QLDatPhong.checkn1) {
+            qlDP.showMessage("Thời gian đặt phòng bị trống hoặc sai định dạng!");
+            QLDatPhong.checkn1 = false;
             return;
         }
-        if (updateRoom.getThoiGianBatDau().equals("")) {
-            qlDP.showMessage("Thoi gian bat dau thue phong bi trong. Vui long nhap Thoi gian bat dau phong!");
+
+        if (QLDatPhong.checkn2) {
+            qlDP.showMessage("thời gian bắt đầu thuê bị trống hoặc sai định dạng!");
+            QLDatPhong.checkn2 = false;
+            return;
+        }
+        if (QLDatPhong.checkOld) {
+            qlDP.showMessage("Ngày bắt đầu không được nhỏ hơn ngày đặt!");
+            QLDatPhong.checkOld = false;
             return;
         }
         boolean test = new DatPhongModel().update1(updateRoom);
         if (test) {
             qlDP.showMessageOK("Update phong thanh cong");
             qlDP.taiTrang(new DatPhongModel().getDulieu());
+            qlDP.reset();
 
         } else {
             qlDP.showMessage("Update phong khong thanh cong");

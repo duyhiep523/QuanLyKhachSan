@@ -21,7 +21,7 @@ public class QLThemDV extends javax.swing.JPanel {
 
     public QLThemDV() {
         initComponents();
-       taiTrang1(layDVtheoYeuCau());
+        taiTrang1(layDVtheoYeuCau());
         taiTrang2(arr2);
     }
     final String header2[] = {"Mã DV", "Tên DV", "Giá DV"};
@@ -175,7 +175,7 @@ public class QLThemDV extends javax.swing.JPanel {
 
         jLabel3.setText("Mã DP");
 
-        txt_r.setText("jTextField2");
+        txt_r.setText(".");
 
         jLabel4.setText("Tên DV");
 
@@ -183,13 +183,13 @@ public class QLThemDV extends javax.swing.JPanel {
 
         jLabel6.setText("Số lượng");
 
-        txt_sl.setText("jTextField5");
+        txt_sl.setText(".");
 
-        txt_MDV.setText("jLabel7");
+        txt_MDV.setText(".");
 
-        txt_p.setText("jLabel8");
+        txt_p.setText(".");
 
-        txt_tdv.setText("jLabel9");
+        txt_tdv.setText(".");
 
         btn_add.setBackground(new java.awt.Color(51, 204, 255));
         btn_add.setText("Thêm");
@@ -331,14 +331,14 @@ public class QLThemDV extends javax.swing.JPanel {
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         new DichVuController(this).themDVV();
         arr1 = new DichVuModel().getService1();
-       taiTrang1(layDVtheoYeuCau());
+        taiTrang1(layDVtheoYeuCau());
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
-        new DichVuController(this).themDVV();
+        new DichVuController(this).suaDVV();
         arr1 = new DichVuModel().getService1();
-       taiTrang1(layDVtheoYeuCau());        // TODO add your handling code here:
+        taiTrang1(layDVtheoYeuCau());        // TODO add your handling code here:
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -354,13 +354,13 @@ public class QLThemDV extends javax.swing.JPanel {
         resetForm();
         arr1 = new DichVuModel().getService1();
         arr2 = new DichVuModel().getService();
-     taiTrang1(layDVtheoYeuCau());
+        taiTrang1(layDVtheoYeuCau());
         taiTrang2(arr2);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txt_sKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_sKeyReleased
-            taiTrang1(layDVtheoYeuCau());
-    
+        taiTrang1(layDVtheoYeuCau());
+
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_sKeyReleased
 
@@ -378,7 +378,13 @@ public class QLThemDV extends javax.swing.JPanel {
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         taiTrang1(layDVtheoYeuCau());        // TODO add your handling code here:
     }//GEN-LAST:event_jTable1KeyReleased
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }
 
+    public void showMessageOK(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;

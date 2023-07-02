@@ -117,6 +117,11 @@ public class QLDatPhong extends javax.swing.JPanel {
                 jButton2MouseClicked(evt);
             }
         });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 204, 255));
         jButton3.setText("Xóa");
@@ -261,21 +266,52 @@ public class QLDatPhong extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+public static boolean checkFL = false;
+    public static boolean checkF2L = false;
+    public static boolean checkn1 = false;
+    public static boolean checkn2 = false;
+    public static boolean checkOld = false;
 
     public DatPhongModel getPhong() {
         String ngayDat = txtNgayDat.getText();
         String ngayBD = txtNgayBatDau.getText();
-//       giaP = txtGiaPhong.getFloat();
-        float gia = Float.parseFloat(txtGiaPhong.getText());
+        if (txtGiaPhong.getText().equals("")) {
+            checkFL = true;
+        }
+        float gia;
+        try {
+            gia = Float.parseFloat(txtGiaPhong.getText());
+            if (gia < 0) {
+                checkF2L = true;
+            }
+        } catch (NumberFormatException ex) {
+            gia = 0;
+            checkF2L = true;
+            System.out.println("hic");
+        }
         Date date1 = null;
         Date date2 = null;
         try {
             date1 = new SimpleDateFormat("yyyy-MM-dd").parse(ngayDat);
+        } catch (ParseException ex) {
+            date1 = new Date();
+            checkn1 = true;
+            System.out.println("chiu roi");
+        }
+        try {
             date2 = new SimpleDateFormat("yyyy-MM-dd").parse(ngayBD);
         } catch (ParseException ex) {
-            Logger.getLogger(QLDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+            date2 = new Date();
+            checkn2 = true;
+            System.out.println("chiu roi");
         }
-        return new DatPhongModel(txtDP.getText(), txtMaphong.getText(), txtMaKH.getText(), date1, date2, gia);//        return new DatPhongModel(txtDP.getText(), txtMaphong.getText(), txtMaKH.getText(), date1,date2, txtGiaPhong.getText());
+        if (!checkn2 && !checkn1) {
+            int comparison = (date1).compareTo(date2);
+            if (comparison > 0) {
+                checkOld = true;
+            }
+        }
+        return new DatPhongModel(txtDP.getText(), txtMaphong.getText(), txtMaKH.getText(), date1, date2, gia);
     }
 
     public ArrayList<DatPhongModel> getDatPhongQL() {
@@ -321,6 +357,14 @@ public class QLDatPhong extends javax.swing.JPanel {
         txtNgayBatDau.setText(ngayBatDau);
     }
 
+    public void reset() {
+        txtDP.setText("");
+        txtMaphong.setText("");
+        txtMaKH.setText("");
+        txtGiaPhong.setText("");
+        txtNgayDat.setText("");
+        txtNgayBatDau.setText("");
+    }
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
         txtDP.setText("");
@@ -356,6 +400,10 @@ public class QLDatPhong extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
