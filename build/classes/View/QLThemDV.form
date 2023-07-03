@@ -259,9 +259,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_r">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="."/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_rActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -279,24 +279,12 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_sl">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="."/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txt_MDV">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="."/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txt_p">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="."/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txt_tdv">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="."/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_add">
           <Properties>

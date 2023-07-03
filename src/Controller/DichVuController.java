@@ -181,21 +181,39 @@ public class DichVuController {
         String gia = String.valueOf(dv.getServicePrice());
         String sl = String.valueOf(dv.getSoLuong());
         // Kiểm tra điều kiện trước khi thêm dịch vụ
-        if (dv.getServiceId().isEmpty()) {
-            JOptionPane.showMessageDialog(QLTDV, "ID không được bỏ trống.");
+        if (dv.getServiceId() == null || dv.getServiceId().isEmpty()) {
+            QLTDV.showMessage("Mã Dịch Vụ không được bỏ trống");
             return;
         }
-        if (!dv.getServiceId().matches(regexTDV)) {
-            JOptionPane.showMessageDialog(QLTDV, "ID phải có định dạng DVxxx.");
+        if (QLThemDV.TestGia) {
+            JOptionPane.showMessageDialog(QLTDV, "giá không được bỏ trống và đúng định dạng.");
+            QLThemDV.TestGia = false;
             return;
         }
-        if (dv.getServiceName().isEmpty()) {
-            JOptionPane.showMessageDialog(QLTDV, "Tên không được bỏ trống.");
+        if (QLThemDV.Testsl) {
+            JOptionPane.showMessageDialog(QLTDV, "số lượng không được bỏ trống và đúng định dạng.");
+            QLThemDV.Testsl = false;
+            return;
+        }
+        if (dv.getIdR() == null || dv.getIdR().isEmpty()) {
+            QLTDV.showMessage("mã phòng không được bỏ trống");
             return;
         }
 
+        if (!dv.getIdR().matches(regexDP)) {
+            JOptionPane.showMessageDialog(QLTDV, "Mã Phòng phải có định dạng DPxxx.");
+            return;
+        }
+        if (Float.parseFloat(gia) < 0) {
+            JOptionPane.showMessageDialog(QLTDV, "Giá không được âm.");
+            return;
+        }
         if (sl == null || sl.isEmpty()) {
             JOptionPane.showMessageDialog(QLTDV, "Số lượng không được rỗng.");
+            return;
+        }
+        if (Integer.parseInt(sl) < 0) {
+            JOptionPane.showMessageDialog(QLTDV, "Số lượng không được âm.");
             return;
         }
         boolean edit = new DichVuModel().suaDV(dv);

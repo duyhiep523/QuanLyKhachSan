@@ -79,12 +79,28 @@ public class QLThemDV extends javax.swing.JPanel {
 
     }
 
+    public static boolean TestGia = false;
+    public static boolean Testsl = false;
+
     public DichVuModel getDV() {
         String maDichVu = txt_MDV.getText();
         String maPhong = txt_r.getText();
         String tenDichVu = txt_tdv.getText();
-        float gia = Float.parseFloat(txt_p.getText());
-        int sl = Integer.parseInt(txt_sl.getText());
+        float gia;
+        int sl;
+        try {
+            gia = Float.parseFloat(txt_p.getText());
+        } catch (NumberFormatException ex) {
+            gia = 0;
+            TestGia = true;
+        }
+
+        try {
+            sl = Integer.parseInt(txt_sl.getText());
+        } catch (NumberFormatException ex) {
+            sl = 0;
+            Testsl = true;
+        }
 
         return new DichVuModel(maDichVu, maPhong, tenDichVu, gia, sl);
 
@@ -175,21 +191,17 @@ public class QLThemDV extends javax.swing.JPanel {
 
         jLabel3.setText("Mã DP");
 
-        txt_r.setText(".");
+        txt_r.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_rActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Tên DV");
 
         jLabel5.setText("Giá tiền");
 
         jLabel6.setText("Số lượng");
-
-        txt_sl.setText(".");
-
-        txt_MDV.setText(".");
-
-        txt_p.setText(".");
-
-        txt_tdv.setText(".");
 
         btn_add.setBackground(new java.awt.Color(51, 204, 255));
         btn_add.setText("Thêm");
@@ -378,6 +390,10 @@ public class QLThemDV extends javax.swing.JPanel {
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         taiTrang1(layDVtheoYeuCau());        // TODO add your handling code here:
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void txt_rActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_rActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_rActionPerformed
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
     }

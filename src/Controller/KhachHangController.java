@@ -284,7 +284,7 @@ public class KhachHangController {
             JOptionPane.showMessageDialog(khach, "thêm khách hàng thành công.");
 
         } else {
-            JOptionPane.showMessageDialog(khach, "thêm khách hàng thất bại .");
+            JOptionPane.showMessageDialog(khach, "thêm khách hàng thất bại do trùng thông tin .");
         }
     }
 
@@ -318,7 +318,7 @@ public class KhachHangController {
             return;
         }
         if (QLKhach.gt) {
-            JOptionPane.showMessageDialog(khach, "gt không được để trống");
+            JOptionPane.showMessageDialog(khach, "gioi tinh không được để trống");
             QLKhach.gt = false;
             return;
         }
