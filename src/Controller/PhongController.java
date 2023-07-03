@@ -3,37 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
+
 import Model.PhongModel;
 import View.QLPhong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  *
  * @author hiep0
  */
 public class PhongController {
+
     public static PhongModel phong;
     private static QLPhong qlP;
-    
-   public int thongkePhong(){
-       return new PhongModel().CountPhong();
-   }
-   
+
+    public int thongkePhong() {
+        return new PhongModel().CountPhong();
+    }
+
     public PhongController(QLPhong room) {
         PhongController.qlP = room;
     }
 
     public PhongController() {
     }
-   public String regexMaPhong = "^P\\d{2,5}$";
-   
-    
+    public String regexMaPhong = "^P\\d{2,5}$";
+
     public boolean Regex(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
-    
+
     public void addRoom() {
         PhongModel phong = qlP.getPhong();
 
@@ -41,7 +43,7 @@ public class PhongController {
             qlP.showMessage("Ma phong bi trong. Vui long nhap ma phong!");
             return;
         }
-          if (!Regex(phong.getMaPhong(), regexMaPhong)) {
+        if (!Regex(phong.getMaPhong(), regexMaPhong)) {
             qlP.showMessage("Mã phòng phải đúng định dạng vd: P01");
             return;
         }
@@ -49,7 +51,7 @@ public class PhongController {
             qlP.showMessage("Ten phong bi trong. Vui long nhap ten phong!");
             return;
         }
-       
+
         if (QLPhong.chekgia) {
             qlP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
             QLPhong.chekgia = false;
@@ -60,7 +62,7 @@ public class PhongController {
             qlP.showMessage("Loai phong bi trong. Vui long nhap loai phong!");
             return;
         }
-       
+
         boolean test = new PhongModel().themPhong(phong);
         if (test) {
             qlP.showMessageOK("Them thanh cong");
@@ -103,20 +105,16 @@ public class PhongController {
 
         }
         if (QLPhong.chekgia) {
-            qlP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
+            qlP.showMessage("Gia phong không được trống và phải đúng định dạng!");
             QLPhong.chekgia = false;
             return;
         }
         if (phong.getLoaiPhong().equals("")) {
 
-            qlP.showMessage("Loai phong bi trong. Vui long nhap ma phong!");
+            qlP.showMessage("Loai phong bi trong. Vui long nhap loai phong!");
             return;
         }
-//        if (phong.getTinhTrang().equals("")) {
-//
-//            qlP.showMessage("Tinh trang phong bi trong. Vui long nhap ma phong!");
-//            return;
-//        }
+
         boolean test = new PhongModel().updateRoom(phong);
         if (test) {
             qlP.showMessageOK("Update phong thanh cong");
@@ -128,5 +126,5 @@ public class PhongController {
         }
 
     }
-   
+
 }

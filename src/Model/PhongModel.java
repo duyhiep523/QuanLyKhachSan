@@ -46,8 +46,24 @@ public class PhongModel extends CSDL {
         this.giaPhong = giaPhong;
     }
 
+    public boolean timmatrung(PhongModel phong) {
+        try {
+            Connection conn = this.getConnection();
+            String query = "select count(*) from phong where maPhong=?";
 
-    
+            PreparedStatement stm = conn.prepareStatement(query);
+            stm.setString(1, phong.getMaPhong());
+            ResultSet rs = stm.executeQuery();
+            int n = 0;
+            while (rs.next()) {
+                n = rs.getInt(1);
+            }
+            return n == 0;
+        } catch (SQLException ex) {
+//            Logger.getLogger(DatPhongModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public ArrayList<PhongModel> getPhong() {
         ArrayList<PhongModel> arr = new ArrayList<>();
@@ -69,14 +85,14 @@ public class PhongModel extends CSDL {
         }
         return arr;
     }
-    
-         public ArrayList<PhongModel> getPhongTheoLoaiPhong(String key) {
+
+    public ArrayList<PhongModel> getPhongTheoLoaiPhong(String key) {
         ArrayList<PhongModel> arr = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
 
-            String sql = "select *from phong where loaiPhong = '"+key+"'";
-            PreparedStatement stm = conn.prepareStatement(sql); 
+            String sql = "select *from phong where loaiPhong = '" + key + "'";
+            PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 PhongModel phong = new PhongModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4));
@@ -89,14 +105,14 @@ public class PhongModel extends CSDL {
         }
         return arr;
     }
-        
-        public ArrayList<PhongModel> getPhongTheoGiaPhong(Float key) {
+
+    public ArrayList<PhongModel> getPhongTheoGiaPhong(Float key) {
         ArrayList<PhongModel> arr = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
 
-            String sql = "select *from phong where giaPhong = '"+ key+"'";
-            PreparedStatement stm = conn.prepareStatement(sql); 
+            String sql = "select *from phong where giaPhong = '" + key + "'";
+            PreparedStatement stm = conn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 PhongModel phong = new PhongModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4));
@@ -109,10 +125,7 @@ public class PhongModel extends CSDL {
         }
         return arr;
     }
-        
 
-    
-        
     public ArrayList<PhongModel> getPhongTim(String key, int gioitinh) {
         ArrayList<PhongModel> arr = new ArrayList<>();
         String sql = "";
@@ -142,26 +155,24 @@ public class PhongModel extends CSDL {
         }
         return arr;
     }
-    
 
-    
-    public int CountPhong(){
+    public int CountPhong() {
         int i = 1;
-        try{
+        try {
             Connection conn = this.getConnection();
             String sql = "select count(maPhong) from phong";
             PreparedStatement stmm = conn.prepareStatement(sql);
             ResultSet rs = stmm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 i = rs.getInt(i);
             }
             return i;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Khong thong ke duoc phong");
         }
         return i;
     }
-    
+
     //Nhàn
     public ArrayList<PhongModel> getDulieu() {
         ArrayList<PhongModel> arr = new ArrayList<>();
@@ -183,12 +194,12 @@ public class PhongModel extends CSDL {
         }
         return arr;
     }
-    
-     public boolean themPhong(PhongModel phong) {
+
+    public boolean themPhong(PhongModel phong) {
         Connection conn = this.getConnection();
         try {
             Statement st = conn.createStatement();
-          
+
             boolean tinhTrang = false;
             String query = "insert into phong value ('" + phong.getMaPhong() + "','" + phong.getTenPhong() + "','" + phong.getLoaiPhong() + "'," + phong.getGiaPhong() + "," + tinhTrang + ")";
             st.executeUpdate(query);
@@ -198,14 +209,14 @@ public class PhongModel extends CSDL {
         }
         return false;
     }
-     
-     // Xóa phong
+
+    // Xóa phong
     public boolean xoaPhong(PhongModel phong) {
         Connection conn = this.getConnection();
 
         try {
             String sql0 = "SET FOREIGN_KEY_CHECKS=0;";
-            PreparedStatement stm0= conn.prepareStatement(sql0);
+            PreparedStatement stm0 = conn.prepareStatement(sql0);
             stm0.executeUpdate();
 
             String sql = "delete from phong where maPhong = ?";
@@ -214,7 +225,7 @@ public class PhongModel extends CSDL {
             pst.setString(1, phong.getMaPhong());
             pst.executeUpdate();
             String sql1 = "SET FOREIGN_KEY_CHECKS=1;";
-            PreparedStatement stm1= conn.prepareStatement(sql1);
+            PreparedStatement stm1 = conn.prepareStatement(sql1);
             stm1.executeUpdate();
             return true;
 
@@ -224,8 +235,8 @@ public class PhongModel extends CSDL {
         }
         return false;
     }
-    
-        public boolean updateRoom(PhongModel phong) {
+
+    public boolean updateRoom(PhongModel phong) {
         try {
             Connection conn = this.getConnection();
 
@@ -236,7 +247,7 @@ public class PhongModel extends CSDL {
             pst.setString(2, phong.getLoaiPhong());
             pst.setFloat(3, phong.getGiaPhong());
             pst.setBoolean(4, phong.getTinhTrang());
-             pst.setString(5, phong.getMaPhong());
+            pst.setString(5, phong.getMaPhong());
             pst.executeUpdate();
             return true;
 
@@ -246,7 +257,6 @@ public class PhongModel extends CSDL {
         return false;
     }
 
-    
     public String getMaPhong() {
         return maPhong;
     }
