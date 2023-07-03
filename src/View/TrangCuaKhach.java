@@ -936,12 +936,12 @@ public final class TrangCuaKhach extends javax.swing.JFrame {
             Date ngaySau = new Date(timeInMillis + addedTimeInMillis);
             int soSanh = thoiGianBatDau.compareTo(ngaySau);
             if (soSanh > 0) {
-                System.out.println(thoiGianBatDau + " lớn hơn" + ngaySau);
+                System.out.println(thoiGianBatDau + " > " + ngaySau);
                 checkNghiepVu = true;
             }
         } catch (ParseException ex) {
             ngaySD = true;
-            System.out.println("sai định dạng thôi mà");
+            System.out.println("wrong format");
         }
 
         return new DatPhongModel(txtMDP.getText(), txtMaPhong.getText(), KhachHangController.khOn.getMaKH(), date, thoiGianBatDau, Float.parseFloat(txtGiaPhong.getText()));

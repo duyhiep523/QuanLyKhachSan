@@ -55,13 +55,29 @@ public class QLDichVu extends javax.swing.JPanel {
         txt_Name.setText("");
         txt_price.setText("");
     }
+    public static boolean TestGia = false;
 
     public DichVuModel getDV() {
         String maDichVu = txt_Id.getText();
         String tenDichVu = txt_Name.getText();
-        float gia = Float.parseFloat(txt_price.getText());
+
+        float gia;
+        try {
+            gia = Float.parseFloat(txt_price.getText());
+        } catch (NumberFormatException ex) {
+            gia = 0;
+            TestGia = true;
+        }
         return new DichVuModel(maDichVu, tenDichVu, gia);
 
+    }
+
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showMessageOK(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     int result = 1;
@@ -298,7 +314,6 @@ public class QLDichVu extends javax.swing.JPanel {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         result = table.getSelectedRow();
         Display(result);
-        System.out.println("an roi");
         // TODO add your handling code here:
     }//GEN-LAST:event_tableMouseClicked
 
@@ -334,7 +349,7 @@ public class QLDichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_ADDActionPerformed
 
     private void txt_smdvKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_smdvKeyPressed
-     
+
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_smdvKeyPressed
 

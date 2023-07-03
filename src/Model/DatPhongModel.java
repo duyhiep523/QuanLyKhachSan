@@ -5,7 +5,7 @@
 package Model;
 
 import Controller.KhachHangController;
-import com.mysql.cj.jdbc.PreparedStatementWrapper;
+//import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

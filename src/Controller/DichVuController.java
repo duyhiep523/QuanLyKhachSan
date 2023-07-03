@@ -20,7 +20,6 @@ public class DichVuController {
     private static QLDichVu QLDV;
     private static QLThemDV QLTDV;
 
-
     public DichVuController(QLDichVu view) {
         DichVuController.QLDV = view;
 
@@ -30,7 +29,6 @@ public class DichVuController {
         DichVuController.QLTDV = view;
 
     }
-
     public String regexTDV = "^DV\\d+$";
     public String regexDP = "^DP\\d+$";
     public String regexPDV = "^\\d+$";
@@ -49,6 +47,10 @@ public class DichVuController {
 
         String gia = String.valueOf(dv.getServicePrice());
 
+        if (gia == null || gia.isEmpty()) {
+            QLDV.showMessage("Giá không được bỏ trống");
+        }
+
         if (dv.getServiceId().isEmpty()) {
             JOptionPane.showMessageDialog(QLDV, "ID không được bỏ trống.");
             return;
@@ -61,11 +63,15 @@ public class DichVuController {
             JOptionPane.showMessageDialog(QLDV, "Tên không được bỏ trống.");
             return;
         }
-
-        if (gia.isEmpty()) {
-            JOptionPane.showMessageDialog(QLDV, "Giá không được để trống.");
+        if(QLDichVu.TestGia){
+            JOptionPane.showMessageDialog(QLDV, "giá không được bỏ trống và đúng định dạng.");
+            QLDichVu.TestGia=false;
+            return;
         }
-
+        if (Float.parseFloat(gia) < 0) {
+            JOptionPane.showMessageDialog(QLDV, "Giá không được âm.");
+            return;
+        }
         boolean result = new DichVuModel().them(dv);
         if (result) {
             JOptionPane.showMessageDialog(QLDV, "Thêm dịch vụ thành công.");
@@ -83,13 +89,20 @@ public class DichVuController {
             QLTDV.showMessage("Mã Dịch Vụ không được bỏ trống");
             return;
         }
-        if (!dv.getIdR().matches(regexDP)) {
-            JOptionPane.showMessageDialog(QLTDV, "Mã Phòng phải có định dạng DPxxx.");
+        if (Float.parseFloat(gia) < 0) {
+            JOptionPane.showMessageDialog(QLTDV, "Giá không được âm.");
             return;
         }
-
         if (sl == null || sl.isEmpty()) {
-            QLTDV.showMessage("Số lượng không được bỏ trống");
+            JOptionPane.showMessageDialog(QLTDV, "Số lượng không được rỗng.");
+            return;
+        }
+        if (Integer.parseInt(sl) < 0) {
+            JOptionPane.showMessageDialog(QLTDV, "Số lượng không được âm.");
+            return;
+        }
+        if (!dv.getIdR().matches(regexDP)) {
+            JOptionPane.showMessageDialog(QLTDV, "Mã Phòng phải có định dạng DPxxx.");
             return;
         }
 
@@ -125,28 +138,32 @@ public class DichVuController {
     }
 
     public void suaDV() {
-        DichVuModel dv = QLTDV.getDV();
+        DichVuModel dv = QLDV.getDV();
         String gia = String.valueOf(dv.getServicePrice());
-        String sl = String.valueOf(dv.getSoLuong());
+
         if (dv.getServiceId() == null || dv.getServiceId().isEmpty()) {
-            QLTDV.showMessage("Mã Dịch Vụ không được bỏ trống");
+            QLDV.showMessage("Mã Dịch Vụ không được bỏ trống");
             return;
+
         }
-        if (!dv.getIdR().matches(regexDP)) {
-            JOptionPane.showMessageDialog(QLTDV, "Mã Phòng phải có định dạng DPxxx.");
+        if (dv.getServiceName() == null || dv.getServiceName().isEmpty()) {
+            QLDV.showMessage("Tên không được bỏ trống");
+            return;
+
+        }
+        if (gia == null || gia.isEmpty()) {
+            QLDV.showMessage("Giá không được bỏ trống");
+        }
+        if (Float.parseFloat(gia) < 0) {
+            JOptionPane.showMessageDialog(QLDV, "Giá không được âm.");
             return;
         }
 
-        if (sl == null || sl.isEmpty()) {
-            QLTDV.showMessage("Số lượng không được bỏ trống");
-            return;
-        }
-
-        boolean result = new DichVuModel().themDV(dv);
+        boolean result = new DichVuModel().sua(dv);
         if (result) {
-            JOptionPane.showMessageDialog(QLTDV, "Sửa dịch vụ thành công.");
+            JOptionPane.showMessageDialog(QLDV, "Sửa dịch vụ thành công.");
         } else {
-            JOptionPane.showMessageDialog(QLTDV, "lỗi");
+            JOptionPane.showMessageDialog(QLDV, "lỗi");
         }
 
     }
@@ -169,11 +186,9 @@ public class DichVuController {
             return;
         }
 
-        if (gia.isEmpty()) {
-            JOptionPane.showMessageDialog(QLTDV, "Giá không được bỏ trống.");
-        }
-        if (sl.isEmpty()) {
-            JOptionPane.showMessageDialog(QLTDV, "Số Lượng không được bỏ trống.");
+        if (sl == null || sl.isEmpty()) {
+            JOptionPane.showMessageDialog(QLTDV, "Số lượng không được rỗng.");
+            return;
         }
         boolean edit = new DichVuModel().suaDV(dv);
 

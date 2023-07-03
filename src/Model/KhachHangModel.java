@@ -326,12 +326,19 @@ public class KhachHangModel extends CSDL {
     public boolean deleteKH(KhachHangModel kh) {
         String sql = "";
         try {
+
             Connection conn = this.getConnection();
+            String re = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stm = conn.prepareStatement(re);
+            stm.executeUpdate();
             sql = "delete from khach_hang where maKhachHang =?";
             PreparedStatement st = conn.prepareStatement(sql);
-            st = conn.prepareStatement(sql);
+
             st.setString(1, kh.maKH);
             st.executeUpdate();
+            re = "SET FOREIGN_KEY_CHECKS=1;";
+            stm = conn.prepareStatement(re);
+            stm.executeUpdate();
             return true;
 
         } catch (SQLException ex) {

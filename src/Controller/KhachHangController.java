@@ -234,6 +234,7 @@ public class KhachHangController {
     public void themKH() {
 
         KhachHangModel kh = khach.getKH();
+        String gt = String.valueOf(kh.getGioiTinh());
         if (!Regex(kh.getMaKH(), regexKH)) {
             JOptionPane.showMessageDialog(khach, "Mã Khách Hàng phải có định dạng KHxxx.");
             return;
@@ -252,7 +253,18 @@ public class KhachHangController {
             JOptionPane.showMessageDialog(khach, "CMND không được để trống");
             return;
         }
-
+        if (kh.getTaiKhoan().equals("")) {
+            JOptionPane.showMessageDialog(khach, "TK không được để trống");
+            return;
+        }
+        if (kh.getMatKhau().equals("")) {
+            JOptionPane.showMessageDialog(khach, "MK không được để trống");
+            return;
+        }
+        if (gt == null || gt.isEmpty()||kh.getGioiTinh().equals("")) {
+            JOptionPane.showMessageDialog(khach, "Giới tính không được để trống");
+            return;
+        }
         boolean add = new KhachHangModel().them(kh);
         if (add) {
             JOptionPane.showMessageDialog(khach, "thêm dịch vụ thành công.");
@@ -276,7 +288,7 @@ public class KhachHangController {
     }
 
     public void suaKH() {
-           KhachHangModel kh = khach.getKH();
+        KhachHangModel kh = khach.getKH();
         if (!Regex(kh.getMaKH(), regexKH)) {
             JOptionPane.showMessageDialog(khach, "Mã Khách Hàng phải có định dạng KHxxx.");
             return;
@@ -288,6 +300,19 @@ public class KhachHangController {
         }
         if (kh.getSDT().equals("")) {
             JOptionPane.showMessageDialog(khach, "SĐT không được để trống");
+            return;
+        }
+        if (kh.getTaiKhoan().equals("")) {
+            JOptionPane.showMessageDialog(khach, "TK không được để trống");
+            return;
+        }
+        if (kh.getMatKhau().equals("")) {
+            JOptionPane.showMessageDialog(khach, "MK không được để trống");
+            return;
+        }
+        if (kh.getGioiTinh().equals("")) {
+
+            JOptionPane.showMessageDialog(khach,"gioi tinh khong duoc de trong");
             return;
         }
 

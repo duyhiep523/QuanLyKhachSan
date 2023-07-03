@@ -167,6 +167,7 @@ public class DichVuModel extends CSDL {
     }
 
     public boolean them(DichVuModel dv) {
+
         try {
             Connection conn = this.getConnection();
             String sql = "SELECT COUNT(*) FROM dich_vu WHERE maDichVu = ?";
@@ -217,11 +218,17 @@ public class DichVuModel extends CSDL {
         String sql = "";
         try {
             Connection conn = this.getConnection();
+            String re = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stm = conn.prepareStatement(re);
+            stm.executeUpdate();
             sql = "delete from dich_vu where maDichVu =?";
             PreparedStatement st = conn.prepareStatement(sql);
-            st = conn.prepareStatement(sql);
+
             st.setString(1, dv.serviceId);
             st.executeUpdate();
+            re = "SET FOREIGN_KEY_CHECKS=0;";
+            stm = conn.prepareStatement(re);
+            stm.executeUpdate();
             return true;
 
         } catch (SQLException ex) {
@@ -233,12 +240,19 @@ public class DichVuModel extends CSDL {
     public boolean deleteDV2(DichVuModel dv) {
         String sql = "";
         try {
+
             Connection conn = this.getConnection();
+            String re = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stm = conn.prepareStatement(re);
+            stm.executeUpdate();
             sql = "delete from chi_tiet_dich_vu where maDichVu =?";
             PreparedStatement st = conn.prepareStatement(sql);
-            st = conn.prepareStatement(sql);
+
             st.setString(1, dv.serviceId);
             st.executeUpdate();
+            re = "SET FOREIGN_KEY_CHECKS=1;";
+            stm = conn.prepareStatement(re);
+            stm.executeUpdate();
             return true;
 
         } catch (SQLException ex) {
@@ -294,7 +308,7 @@ public class DichVuModel extends CSDL {
         ArrayList<DichVuModel> arr1 = new ArrayList<>();
         try {
             Connection conn = this.getConnection();
-            String sql = "SELECT * FROM dich_vu WHERE maDichVu LIKE '%" + key + "%' or tenDichVu LIKE '%" + key + "%' or giaDichVu LIKE '%"+ key+"%'";
+            String sql = "SELECT * FROM dich_vu WHERE maDichVu LIKE '%" + key + "%' or tenDichVu LIKE '%" + key + "%' or giaDichVu LIKE '%" + key + "%'";
 //            System.out.println(sql);
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
