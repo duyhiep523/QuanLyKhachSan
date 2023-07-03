@@ -228,7 +228,7 @@ public class DichVuModel extends CSDL {
 
             st.setString(1, dv.serviceId);
             st.executeUpdate();
-            re = "SET FOREIGN_KEY_CHECKS=0;";
+            re = "SET FOREIGN_KEY_CHECKS=1;";
             stm = conn.prepareStatement(re);
             stm.executeUpdate();
             return true;

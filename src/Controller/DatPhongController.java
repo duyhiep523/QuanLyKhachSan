@@ -235,6 +235,11 @@ public class DatPhongController {
             qlDP.showMessage("Gia phong bi trong. Vui long nhap gia phong!");
             return;
         }
+        if (QLDatPhong.checkF2L) {
+            QLDatPhong.checkF2L = false;
+            qlDP.showMessage("giá phòng không được âm và phải đúng định dạng!");
+            return;
+        }
         if (QLDatPhong.checkn1) {
             qlDP.showMessage("Thời gian đặt phòng bị trống hoặc sai định dạng!");
             QLDatPhong.checkn1 = false;
