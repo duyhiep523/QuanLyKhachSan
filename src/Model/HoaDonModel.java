@@ -236,6 +236,9 @@ public class HoaDonModel extends CSDL {
     public boolean suaHoaDon(HoaDonModel hd) {
         try {
             Connection conn = this.getConnection();
+            String sql0 = "SET FOREIGN_KEY_CHECKS=0;";
+            PreparedStatement stm0 = conn.prepareStatement(sql0);
+            stm0.executeUpdate();
             String sql = "update hoa_don set maDatPhong = ?, ngayTao = ? where maHoaDon = '" + hd.getMaHoaDon() + "'";
             PreparedStatement stm = conn.prepareStatement(sql);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -248,10 +251,12 @@ public class HoaDonModel extends CSDL {
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery(query);
             int i = 0;
-            rs = s.executeQuery(query);
             while (rs.next()) {
                 i = rs.getInt(1);
             }
+                        sql = "SET FOREIGN_KEY_CHECKS=1;";
+            stm = conn.prepareStatement(sql);
+            stm.executeUpdate();
             if (i > 1) {
                 new QLHoaDon().showMessageFail("Mã Đặt Phòng đã tồn tại trong Hóa đơn");
                 return false;

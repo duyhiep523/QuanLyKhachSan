@@ -43,7 +43,7 @@ public class QLKhach extends javax.swing.JPanel {
     }
 
     public void Display(int i) {
-        KhachHangModel kh = layKHtheoYeuCau().get(i)  ;
+        KhachHangModel kh = layKHtheoYeuCau().get(i);
         txt_mkh.setText(kh.getMaKH());
         txt_tenkh.setText(kh.getTenKH());
         if (arr.get(i).getGioiTinh().equals(true)) {
@@ -67,16 +67,24 @@ public class QLKhach extends javax.swing.JPanel {
         txt_tk.setText("");
         txt_mk.setText("");
     }
+    public static boolean gt=false;
 
     public KhachHangModel getKH() {
         String maKH = txt_mkh.getText();
         String tenKH = txt_tenkh.getText();
-        boolean gioiTinh = Boolean.parseBoolean("true");
         String SDT = txt_sdt.getText();
         String CMND = txt_cmnd.getText();
         String TK = txt_tk.getText();
         String MK = txt_mk.getText();
+        boolean gioiTinh;
+        if (txt_gt.getSelectedIndex() == 0) {
+            gt = true;
+            gioiTinh = false;
+
+        }
+        gioiTinh = txt_gt.getSelectedIndex() == 1;
         return new KhachHangModel(maKH, tenKH, gioiTinh, SDT, CMND, TK, MK);
+
     }
 
     ArrayList<KhachHangModel> layKHtheoYeuCau() {
@@ -377,7 +385,7 @@ public class QLKhach extends javax.swing.JPanel {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         result = table.getSelectedRow();
         Display(result);
-      
+
         // TODO add your handling code here:
     }//GEN-LAST:event_tableMouseClicked
 

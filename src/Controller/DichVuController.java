@@ -63,9 +63,9 @@ public class DichVuController {
             JOptionPane.showMessageDialog(QLDV, "Tên không được bỏ trống.");
             return;
         }
-        if(QLDichVu.TestGia){
+        if (QLDichVu.TestGia) {
             JOptionPane.showMessageDialog(QLDV, "giá không được bỏ trống và đúng định dạng.");
-            QLDichVu.TestGia=false;
+            QLDichVu.TestGia = false;
             return;
         }
         if (Float.parseFloat(gia) < 0) {
@@ -141,29 +141,37 @@ public class DichVuController {
         DichVuModel dv = QLDV.getDV();
         String gia = String.valueOf(dv.getServicePrice());
 
-        if (dv.getServiceId() == null || dv.getServiceId().isEmpty()) {
-            QLDV.showMessage("Mã Dịch Vụ không được bỏ trống");
-            return;
-
-        }
-        if (dv.getServiceName() == null || dv.getServiceName().isEmpty()) {
-            QLDV.showMessage("Tên không được bỏ trống");
-            return;
-
-        }
         if (gia == null || gia.isEmpty()) {
             QLDV.showMessage("Giá không được bỏ trống");
+        }
+
+        if (dv.getServiceId().isEmpty()) {
+            JOptionPane.showMessageDialog(QLDV, "ID không được bỏ trống.");
+            return;
+        }
+        if (!dv.getServiceId().matches(regexTDV)) {
+            JOptionPane.showMessageDialog(QLDV, "ID phải có định dạng DVxxx.");
+            return;
+        }
+        if (dv.getServiceName().isEmpty()) {
+            JOptionPane.showMessageDialog(QLDV, "Tên không được bỏ trống.");
+            return;
+        }
+        if (QLDichVu.TestGia) {
+            JOptionPane.showMessageDialog(QLDV, "giá không được bỏ trống và đúng định dạng.");
+            QLDichVu.TestGia = false;
+            return;
         }
         if (Float.parseFloat(gia) < 0) {
             JOptionPane.showMessageDialog(QLDV, "Giá không được âm.");
             return;
         }
+        boolean edit = new DichVuModel().sua(dv);
 
-        boolean result = new DichVuModel().sua(dv);
-        if (result) {
-            JOptionPane.showMessageDialog(QLDV, "Sửa dịch vụ thành công.");
+        if (edit) {
+            JOptionPane.showMessageDialog(QLTDV, "Sửa dịch vụ thành công.");
         } else {
-            JOptionPane.showMessageDialog(QLDV, "lỗi");
+            JOptionPane.showMessageDialog(QLTDV, "Sửa dịch vụ thất bại.");
         }
 
     }

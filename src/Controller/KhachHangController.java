@@ -234,7 +234,11 @@ public class KhachHangController {
     public void themKH() {
 
         KhachHangModel kh = khach.getKH();
-        String gt = String.valueOf(kh.getGioiTinh());
+
+        if (kh.getMaKH().equals("")) {
+            JOptionPane.showMessageDialog(khach, "Mã Khách Hàng không được để trống.");
+            return;
+        }
         if (!Regex(kh.getMaKH(), regexKH)) {
             JOptionPane.showMessageDialog(khach, "Mã Khách Hàng phải có định dạng KHxxx.");
             return;
@@ -244,13 +248,26 @@ public class KhachHangController {
             JOptionPane.showMessageDialog(khach, "Tên không được để rỗng");
             return;
         }
+        if (QLKhach.gt) {
+            JOptionPane.showMessageDialog(khach, "gt không được để trống");
+            QLKhach.gt = false;
+            return;
+        }
         if (kh.getSDT().equals("")) {
             JOptionPane.showMessageDialog(khach, "SĐT không được để trống");
+            return;
+        }
+        if (!Regex(kh.getSDT(), regexSDT)) {
+            JOptionPane.showMessageDialog(khach, "SĐt  sai định dạng.");
             return;
         }
 
         if (kh.getCMND().equals("")) {
             JOptionPane.showMessageDialog(khach, "CMND không được để trống");
+            return;
+        }
+        if (!Regex(kh.getCMND(), regexSDT)) {
+            JOptionPane.showMessageDialog(khach, "CMND  sai định dạng.");
             return;
         }
         if (kh.getTaiKhoan().equals("")) {
@@ -261,16 +278,13 @@ public class KhachHangController {
             JOptionPane.showMessageDialog(khach, "MK không được để trống");
             return;
         }
-        if (gt == null || gt.isEmpty()||kh.getGioiTinh().equals("")) {
-            JOptionPane.showMessageDialog(khach, "Giới tính không được để trống");
-            return;
-        }
+
         boolean add = new KhachHangModel().them(kh);
         if (add) {
-            JOptionPane.showMessageDialog(khach, "thêm dịch vụ thành công.");
+            JOptionPane.showMessageDialog(khach, "thêm khách hàng thành công.");
 
         } else {
-            JOptionPane.showMessageDialog(khach, "thêm dịch vụ thất bại do đã trùng thông tin.");
+            JOptionPane.showMessageDialog(khach, "thêm khách hàng thất bại .");
         }
     }
 
@@ -278,17 +292,22 @@ public class KhachHangController {
         KhachHangModel kh = khach.getKH();
         boolean dele = new KhachHangModel().deleteKH(kh);
         if (dele) {
-            JOptionPane.showMessageDialog(khach, "xóa dịch vụ thành công.");
+            JOptionPane.showMessageDialog(khach, "xóa Khách hàng thành công.");
             khach.taiTrang(new KhachHangModel().getCustomer());
             khach.resetForm();
 
         } else {
-            JOptionPane.showMessageDialog(khach, "xóa dịch vụ thất bại.");
+            JOptionPane.showMessageDialog(khach, "xóa Khách hàng thất bại.");
         }
     }
 
     public void suaKH() {
         KhachHangModel kh = khach.getKH();
+
+        if (kh.getMaKH().equals("")) {
+            JOptionPane.showMessageDialog(khach, "Mã Khách Hàng không được để trống.");
+            return;
+        }
         if (!Regex(kh.getMaKH(), regexKH)) {
             JOptionPane.showMessageDialog(khach, "Mã Khách Hàng phải có định dạng KHxxx.");
             return;
@@ -298,8 +317,26 @@ public class KhachHangController {
             JOptionPane.showMessageDialog(khach, "Tên không được để rỗng");
             return;
         }
+        if (QLKhach.gt) {
+            JOptionPane.showMessageDialog(khach, "gt không được để trống");
+            QLKhach.gt = false;
+            return;
+        }
         if (kh.getSDT().equals("")) {
             JOptionPane.showMessageDialog(khach, "SĐT không được để trống");
+            return;
+        }
+        if (!Regex(kh.getSDT(), regexSDT)) {
+            JOptionPane.showMessageDialog(khach, "SĐT  sai định dạng.");
+            return;
+        }
+
+        if (kh.getCMND().equals("")) {
+            JOptionPane.showMessageDialog(khach, "CMND không được để trống");
+            return;
+        }
+        if (!Regex(kh.getCMND(), regexSDT)) {
+            JOptionPane.showMessageDialog(khach, "CMND  sai định dạng.");
             return;
         }
         if (kh.getTaiKhoan().equals("")) {
@@ -310,23 +347,12 @@ public class KhachHangController {
             JOptionPane.showMessageDialog(khach, "MK không được để trống");
             return;
         }
-        if (kh.getGioiTinh().equals("")) {
-
-            JOptionPane.showMessageDialog(khach,"gioi tinh khong duoc de trong");
-            return;
-        }
-
-        if (kh.getCMND().equals("")) {
-            JOptionPane.showMessageDialog(khach, "CMND không được để trống");
-            return;
-        }
-
         boolean add = new KhachHangModel().sua(kh);
         if (add) {
-            JOptionPane.showMessageDialog(khach, "Sửa dịch vụ thành công.");
+            JOptionPane.showMessageDialog(khach, "Sửa Khách thành công.");
 
         } else {
-            JOptionPane.showMessageDialog(khach, " Sửa dịch vụ thất bại do đã trùng thông tin.");
+            JOptionPane.showMessageDialog(khach, " Sửa Khách thất bại do đã trùng thông tin.");
         }
     }
 

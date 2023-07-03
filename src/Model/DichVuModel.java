@@ -197,10 +197,12 @@ public class DichVuModel extends CSDL {
     }
 
     public boolean themDV(DichVuModel dv) {
+        String sql;
         try {
             Connection conn = this.getConnection();
-            String sql = "INSERT INTO chi_tiet_dich_vu VALUES (?, ?, ?, ?, ?)";
+            sql = "INSERT INTO chi_tiet_dich_vu VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
+//            System.out.println(sql);
             stm.setString(1, dv.getServiceId());
             stm.setString(2, dv.getIdR());
             stm.setString(3, dv.getServiceName());
@@ -304,7 +306,7 @@ public class DichVuModel extends CSDL {
         return false;
     }
 
-    public ArrayList<DichVuModel> timkiem(String key) {// tuấn
+    public ArrayList<DichVuModel> timkiem(String key) {
         ArrayList<DichVuModel> arr1 = new ArrayList<>();
         try {
             Connection conn = this.getConnection();

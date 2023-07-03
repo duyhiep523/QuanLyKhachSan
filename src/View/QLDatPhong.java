@@ -6,8 +6,6 @@ package View;
 
 import Controller.DatPhongController;
 import Model.DatPhongModel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
